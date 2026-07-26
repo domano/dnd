@@ -24,9 +24,14 @@ export function loadSheetState(): StoredSheetState {
     if (!raw) return { ...EMPTY, characters: [] };
 
     const parsed = JSON.parse(raw) as Partial<StoredSheetState>;
-    const characters = Array.isArray(parsed.characters)
-      ? parsed.characters
-      : [];
+    const characters = (
+      Array.isArray(parsed.characters) ? parsed.characters : []
+    ).map((c) => ({
+      ...c,
+      weaponProficiencies: Array.isArray(c.weaponProficiencies)
+        ? c.weaponProficiencies
+        : [],
+    })) as Character[];
     const activeId =
       typeof parsed.activeId === "string" || parsed.activeId === null
         ? parsed.activeId
