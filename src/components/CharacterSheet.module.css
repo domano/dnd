@@ -251,7 +251,7 @@
   max-height: 58svh;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: var(--space-4) var(--space-4) var(--space-5);
+  padding: var(--space-3) var(--space-4) var(--space-5);
   border: 1px solid color-mix(in srgb, var(--brass) 30%, var(--line-strong));
   border-bottom: none;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
@@ -269,6 +269,27 @@
   transform: translateY(0);
   opacity: 1;
   pointer-events: auto;
+}
+
+.combatTrayHandle {
+  width: 2.5rem;
+  height: 4px;
+  margin: 0.15rem auto 0.65rem;
+  border-radius: 999px;
+  background: var(--line-strong);
+}
+
+.combatTrayHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: 0.35rem;
+}
+
+.combatTrayHeader h2 {
+  font-size: 1.05rem;
+  margin: 0;
 }
 
 .combatTraySection {
@@ -323,6 +344,18 @@
   border: none;
   padding: 0;
   cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 200ms ease,
+    visibility 200ms ease;
+}
+
+.combatTrayScrimOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .empty {
@@ -502,6 +535,11 @@
     justify-content: flex-start;
   }
 
+  .actions .btn {
+    padding-inline: 0.65rem;
+    font-size: 0.8rem;
+  }
+
   .currencyRow {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -538,8 +576,18 @@
   }
 }
 
-/* Tablet: useful two-column sheet (was single-column until 980px). */
-@media (min-width: 720px) and (max-width: 959px) {
+/* Tablet+: multi-column sheet; combat chrome lives in the Combat panel. */
+@media (min-width: 720px) {
+  .page {
+    padding-bottom: var(--space-6);
+  }
+
+  .combatBar,
+  .combatTray,
+  .combatTrayScrim {
+    display: none;
+  }
+
   .layout {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-areas:
@@ -567,10 +615,6 @@
 }
 
 @media (min-width: 960px) {
-  .page {
-    padding-bottom: var(--space-6);
-  }
-
   .layout {
     grid-template-columns: 220px minmax(0, 1.1fr) minmax(0, 1fr);
     grid-template-areas:
@@ -594,12 +638,6 @@
 
   .abilities {
     grid-template-columns: 1fr;
-  }
-
-  .combatBar,
-  .combatTray,
-  .combatTrayScrim {
-    display: none;
   }
 }
 

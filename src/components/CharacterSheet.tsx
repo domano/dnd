@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type {
   Character,
   CharacterFeatRef,
@@ -194,6 +194,8 @@ export function CharacterSheet({
   const character = characterProp ?? storeCharacter;
 
   const toast = useToast();
+  const combatTrayRef = useRef<HTMLDivElement>(null);
+  const combatTriggerRef = useRef<HTMLButtonElement>(null);
   const [spellBrowserOpen, setSpellBrowserOpen] = useState(false);
   const [equipmentBrowserOpen, setEquipmentBrowserOpen] = useState(false);
   const [featBrowserOpen, setFeatBrowserOpen] = useState(false);
@@ -222,11 +224,38 @@ export function CharacterSheet({
 
   useEffect(() => {
     if (!combatTrayOpen) return;
+    const trayEl = combatTrayRef.current;
+    const triggerEl = combatTriggerRef.current;
+    const focusableSelector =
+      'button:not(:disabled), [href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])';
+    const first = trayEl?.querySelector<HTMLElement>(focusableSelector);
+    first?.focus();
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setCombatTrayOpen(false);
+      if (e.key === 'Escape') {
+        setCombatTrayOpen(false);
+        return;
+      }
+      if (e.key !== 'Tab' || !trayEl) return;
+      const focusable = Array.from(
+        trayEl.querySelectorAll<HTMLElement>(focusableSelector),
+      ).filter((el) => !el.closest('[hidden]'));
+      if (focusable.length === 0) return;
+      const head = focusable[0];
+      const tail = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === head) {
+        e.preventDefault();
+        tail?.focus();
+      } else if (!e.shiftKey && document.activeElement === tail) {
+        e.preventDefault();
+        head?.focus();
+      }
     };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      triggerEl?.focus();
+    };
   }, [combatTrayOpen]);
 
   const derived = useMemo(() => {
@@ -636,10 +665,10 @@ export function CharacterSheet({
             Level Up
           </button>
           <button type="button" className="btn btn-sm" onClick={handleShortRest}>
-            Short Rest
+            Short
           </button>
           <button type="button" className="btn btn-sm" onClick={handleLongRest}>
-            Long Rest
+            Long
           </button>
           <button type="button" className="btn btn-sm btn-ghost" onClick={onHome}>
             Home
@@ -1570,22 +1599,34 @@ export function CharacterSheet({
         </section>
       </div>
 
-      {combatTrayOpen ? (
-        <button
-          type="button"
-          className={styles.combatTrayScrim}
-          aria-label="Close combat tray"
-          onClick={() => setCombatTrayOpen(false)}
-        />
-      ) : null}
+      <button
+        type="button"
+        className={`${styles.combatTrayScrim} ${combatTrayOpen ? styles.combatTrayScrimOpen : ''}`}
+        aria-label="Close combat tray"
+        tabIndex={combatTrayOpen ? 0 : -1}
+        onClick={() => setCombatTrayOpen(false)}
+      />
 
       <div
+        ref={combatTrayRef}
         id="combat-tray"
         className={`${styles.combatTray} ${combatTrayOpen ? styles.combatTrayOpen : ''}`}
-        role="region"
+        role="dialog"
+        aria-modal={combatTrayOpen}
         aria-label="Combat controls"
         aria-hidden={!combatTrayOpen}
       >
+        <div className={styles.combatTrayHandle} aria-hidden="true" />
+        <div className={styles.combatTrayHeader}>
+          <h2>Combat</h2>
+          <button
+            type="button"
+            className="btn btn-ghost btn-sm"
+            onClick={() => setCombatTrayOpen(false)}
+          >
+            Close
+          </button>
+        </div>
         <div className={styles.combatTraySection}>
           <h3>Hit points</h3>
           <HpTracker
@@ -1701,6 +1742,7 @@ export function CharacterSheet({
           <span className={styles.combatValue}>{ac}</span>
         </div>
         <button
+          ref={combatTriggerRef}
           type="button"
           className={styles.combatHpCell}
           aria-expanded={combatTrayOpen}

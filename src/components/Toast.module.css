@@ -59,7 +59,7 @@
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 720px) {
   .stack {
     bottom: calc(1.5rem + env(safe-area-inset-bottom));
   }

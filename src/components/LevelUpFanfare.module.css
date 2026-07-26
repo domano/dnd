@@ -63,9 +63,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .particle,
-  .label {
+  .particle {
     animation: none;
     opacity: 0;
+  }
+
+  .label {
+    animation: none;
+    opacity: 1;
   }
 }

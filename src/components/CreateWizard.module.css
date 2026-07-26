@@ -409,7 +409,7 @@
   position: sticky;
   bottom: 0;
   background: linear-gradient(180deg, transparent, var(--moss-mist) 28%, var(--paper) 55%);
-  padding-bottom: 0.25rem;
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
 }
 
 .footerRight {
