@@ -36,10 +36,20 @@
   color: var(--teal);
 }
 
+.brand::after {
+  content: '';
+  display: block;
+  width: 3.2rem;
+  height: 3px;
+  margin-top: 0.35rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brass), color-mix(in srgb, var(--teal) 50%, transparent), transparent);
+}
+
 .subtitle {
   color: var(--ink-soft);
   font-size: 0.95rem;
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
 }
 
 .progress {
@@ -146,10 +156,10 @@
   gap: 0.35rem;
   padding: 0.85rem 0.9rem;
   text-align: left;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--teal) 12%, var(--line));
+  border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--paper-lift) 92%, white);
-  transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
+  transition: border-color 140ms ease, background 140ms ease, transform 140ms ease, box-shadow 140ms ease;
 }
 
 .option:hover {
@@ -193,13 +203,13 @@
 .chip {
   display: inline-flex;
   align-items: center;
-  padding: 0.2rem 0.55rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.6rem;
+  border: 1px solid color-mix(in srgb, var(--teal) 16%, var(--line));
+  border-radius: 999px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink-soft);
-  background: color-mix(in srgb, var(--paper-deep) 40%, transparent);
+  background: color-mix(in srgb, var(--moss-mist) 55%, transparent);
 }
 
 .chipAccent {
@@ -242,9 +252,9 @@
   flex-wrap: wrap;
   gap: 0.4rem;
   padding: 0.3rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  background: color-mix(in srgb, var(--paper-deep) 35%, transparent);
+  border: 1px solid color-mix(in srgb, var(--teal) 14%, var(--line));
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--moss-mist) 45%, transparent);
   width: fit-content;
 }
 
@@ -254,7 +264,7 @@
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
   background: transparent;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink-soft);
 }
 
@@ -275,8 +285,8 @@
   gap: 0.75rem;
   align-items: center;
   padding: 0.7rem 0.85rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--teal) 12%, var(--line));
+  border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--paper-lift) 94%, white);
 }
 
@@ -330,7 +340,7 @@
   padding-top: var(--space-2);
   position: sticky;
   bottom: 0;
-  background: linear-gradient(180deg, transparent, var(--paper) 30%);
+  background: linear-gradient(180deg, transparent, var(--moss-mist) 28%, var(--paper) 55%);
   padding-bottom: 0.25rem;
 }
 
@@ -381,8 +391,8 @@
 
 .summaryBlock {
   padding: 0.85rem 0.95rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--brass) 22%, var(--line));
+  border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--paper-lift) 94%, white);
 }
 

@@ -19,14 +19,15 @@ export function Home({
   return (
     <main className={`${styles.page} anim-fade-rise`}>
       <section className={styles.hero} aria-label="Welcome">
-        <div className={styles.heroPlane} aria-hidden="true" />
+        <div className={`${styles.heroPlane} anim-mist-shimmer`} aria-hidden="true" />
+        <div className={`${styles.heroGlow} anim-leaf-float`} aria-hidden="true" />
         <div className={styles.content}>
           <h1 className={styles.brand}>
             {lead}
             {trail ? <span className={styles.brandAccent}>{trail}</span> : null}
           </h1>
-          <hr className={styles.rule} />
-          <p className={styles.headline}>An expedition ledger for fifth-edition adventurers.</p>
+          <span className="flourish flourish-shimmer" aria-hidden="true" />
+          <p className={styles.headline}>Ink your legend among the leaves.</p>
           <p className={styles.lede}>
             Build, level, and play SRD 5.1 characters with spells, skills, and gear at hand.
           </p>

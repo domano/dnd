@@ -15,10 +15,14 @@
   max-height: min(90svh, 920px);
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--line-strong);
+  border: 1px solid color-mix(in srgb, var(--brass) 28%, var(--line-strong));
   border-radius: var(--radius-lg) var(--radius-lg) var(--radius-md) var(--radius-md);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--paper-lift) 96%, white), var(--paper));
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--paper-lift) 96%, white),
+      color-mix(in srgb, var(--moss-mist) 60%, var(--paper))
+    );
   box-shadow: var(--shadow-soft);
   overflow: hidden;
 }
@@ -36,8 +40,18 @@
   font-size: 1.35rem;
 }
 
+.header h2::after {
+  content: '';
+  display: block;
+  width: 2.6rem;
+  height: 3px;
+  margin-top: 0.3rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brass), color-mix(in srgb, var(--teal) 50%, transparent), transparent);
+}
+
 .subtitle {
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
   color: var(--ink-soft);
   font-size: 0.9rem;
 }
@@ -47,17 +61,17 @@
   flex-wrap: wrap;
   gap: 0.35rem;
   padding: var(--space-3) var(--space-4);
-  border-bottom: 1px solid var(--line);
-  background: color-mix(in srgb, var(--paper-deep) 40%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--brass) 18%, var(--line));
+  background: color-mix(in srgb, var(--moss-mist) 55%, transparent);
 }
 
 .stepChip {
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  padding: 0.25rem 0.55rem;
-  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
   border: 1px solid transparent;
   color: var(--ink-soft);
 }
@@ -117,8 +131,8 @@
   gap: 0.3rem;
   padding: 0.8rem 0.9rem;
   text-align: left;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--teal) 12%, var(--line));
+  border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--paper-lift) 92%, white);
 }
 
@@ -160,9 +174,9 @@
   flex-wrap: wrap;
   gap: 0.4rem;
   padding: 0.3rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  background: color-mix(in srgb, var(--paper-deep) 35%, transparent);
+  border: 1px solid color-mix(in srgb, var(--teal) 14%, var(--line));
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--moss-mist) 45%, transparent);
   width: fit-content;
 }
 
@@ -172,7 +186,7 @@
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
   background: transparent;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink-soft);
 }
 

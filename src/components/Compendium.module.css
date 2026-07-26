@@ -19,7 +19,7 @@
   margin: 0;
   color: var(--teal);
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -31,6 +31,16 @@
   font-weight: 650;
 }
 
+.title::after {
+  content: '';
+  display: block;
+  width: 3.4rem;
+  height: 3px;
+  margin-top: 0.35rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brass), color-mix(in srgb, var(--teal) 50%, transparent), transparent);
+}
+
 .tabs {
   display: flex;
   flex-wrap: wrap;
@@ -39,14 +49,14 @@
 
 .tab,
 .tabActive {
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--teal) 12%, var(--line));
   background: color-mix(in srgb, var(--paper-lift) 90%, white);
   color: var(--ink-soft);
-  border-radius: var(--radius-sm);
-  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  padding: 0.4rem 0.8rem;
   font: inherit;
   font-size: 0.88rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -91,9 +101,9 @@
 .itemActive {
   width: 100%;
   text-align: left;
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--teal) 12%, var(--line));
   background: color-mix(in srgb, var(--paper-lift) 92%, white);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   padding: 0.65rem 0.75rem;
   display: grid;
   gap: 0.15rem;
@@ -103,7 +113,7 @@
 
 .itemActive {
   border-color: color-mix(in srgb, var(--brass) 55%, var(--line));
-  background: color-mix(in srgb, var(--brass) 12%, var(--paper-lift));
+  background: color-mix(in srgb, var(--brass) 14%, var(--paper-lift));
 }
 
 .itemTitle {
