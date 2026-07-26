@@ -98,6 +98,12 @@
           "summary": "At 2nd level, you gain an uncanny sense of when things nearby aren't as they should be, giving you an edge when you dodge away from danger. You have advantage on Dexterity saving throws against effects that you can see, such as traps and spells. To gain this benefit, you can't be blinded, deafened, or incapacitated."
         }
       ],
+      "3": [
+        {
+          "name": "Primal Path",
+          "summary": "At 3rd level, you choose a path that shapes the nature of your rage. Choose the Path of the Berserker or the Path of the Totem Warrior, both detailed at the end of the class description. Your choice grants you features at 3rd level and again at 6th, 10th, and 14th levels."
+        }
+      ],
       "5": [
         {
           "name": "Extra Attack",
@@ -418,6 +424,10 @@
     "features_by_level": {
       "1": [
         {
+          "name": "Spellcasting: Bard",
+          "summary": "You have learned to untangle and reshape the fabric of reality in harmony with your wishes and music. Your spells are part of your vast repertoire, magic that you can tune to different situations."
+        },
+        {
           "name": "Bardic Inspiration (d6)",
           "summary": "You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6."
         }
@@ -436,6 +446,10 @@
         {
           "name": "Expertise",
           "summary": "At 3rd level, choose two of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies. At 10th level, you can choose another two skill proficiencies to gain this benefit."
+        },
+        {
+          "name": "Bard College",
+          "summary": "At 3rd level, you delve into the advanced techniques of a bard college of your choice, such as the College of Lore. Your choice grants you features at 3rd level and again at 6th and 14th level."
         }
       ],
       "5": [
@@ -1039,6 +1053,14 @@
     "features_by_level": {
       "1": [
         {
+          "name": "Spellcasting: Cleric",
+          "summary": "As a conduit for divine power, you can cast cleric spells."
+        },
+        {
+          "name": "Divine Domain",
+          "summary": "Choose one domain related to your deity, such as Knowledge, Life, Light, Nature, Tempest, Trickery, or War. Only the Life domain is detailed in the Open Game Licensed SRD. Additional Domains are described in the official rulebooks or products from other publishers."
+        },
+        {
           "name": "Domain Spells",
           "summary": "Each domain has a list of spells--its domain spells--that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day."
         }
@@ -1571,6 +1593,10 @@
     "features_by_level": {
       "1": [
         {
+          "name": "Spellcasting: Druid",
+          "summary": "Drawing on the divine essence of nature itself, you can cast spells to shape that essence to your will."
+        },
+        {
           "name": "Druidic",
           "summary": "You know Druidic, the secret language of druids. You can speak the language and use it to leave hidden messages. You and others who know this language automatically spot such a message. Others spot the message's presence with a successful DC 15 Wisdom (Perception) check but can't decipher it without magic."
         }
@@ -1579,6 +1605,10 @@
         {
           "name": "Wild Shape (CR 1/4 or below, no flying or swim speed)",
           "summary": "Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before. You can use this feature twice. You regain expended uses when you finish a short or long rest. Your druid level determines the beasts you can transform into, as shown in the Beast Shapes table."
+        },
+        {
+          "name": "Druid Circle",
+          "summary": "At 2nd level, you choose to identify with a circle of druids, such as the Circle of the Land. Your choice grants you features at 2nd level and again at 6th, 10th, and 14th level."
         }
       ],
       "4": [
@@ -2083,6 +2113,12 @@
           "summary": "Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action on top of your regular action and a possible bonus action. Once you use this feature, you must finish a short or long rest before you can use it again."
         }
       ],
+      "3": [
+        {
+          "name": "Martial Archetype",
+          "summary": "At 3rd level, you choose an archetype that you strive to emulate in your combat styles and techniques, such as Champion. The archetype you choose grants you features at 3rd level and again at 7th, 10th, 15th, and 18th level."
+        }
+      ],
       "5": [
         {
           "name": "Extra Attack",
@@ -2282,7 +2318,7 @@
       "tool_choices": [
         {
           "choose": 1,
-          "desc": "Choose one type of artisan’s tools or one musical instrument",
+          "desc": "Choose one type of artisan\u2019s tools or one musical instrument",
           "options": [
             {
               "label": "artisan's tools",
@@ -2406,6 +2442,10 @@
         }
       ],
       "3": [
+        {
+          "name": "Monastic Tradition",
+          "summary": "When you reach 3rd level, you commit yourself to a monastic tradition, such as the Way of the Open Hand. Your tradition grants you features at 3rd level and again at 6th, 11th, and 17th level."
+        },
         {
           "name": "Deflect Missiles",
           "summary": "Starting at 3rd level, you can use your reaction to deflect or catch the missile when you are hit by a ranged weapon attack. When you do so, the damage you take from the attack is reduced by 1d10 + your Dexterity modifier + your monk level."
@@ -2778,6 +2818,10 @@
           "summary": "At 2nd level, you adopt a style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again."
         },
         {
+          "name": "Spellcasting: Paladin",
+          "summary": "By 2nd level, you have learned to draw on divine magic through meditation and prayer to cast spells as a cleric does."
+        },
+        {
           "name": "Divine Smite",
           "summary": "Starting at 2nd level, when you hit a creature with a melee weapon attack, you can expend one spell slot to deal radiant damage to the target, in addition to the weapon's damage. The extra damage is 2d8 for a 1st-level spell slot, plus 1d8 for each spell level higher than 1st, to a maximum of 5d8."
         }
@@ -2786,6 +2830,10 @@
         {
           "name": "Divine Health",
           "summary": "By 3rd level, the divine magic flowing through you makes you immune to disease."
+        },
+        {
+          "name": "Sacred Oath",
+          "summary": "When you reach 3rd level, you swear the oath that binds you as a paladin forever. Up to this time you have been in a preparatory stage, committed to the path but not yet sworn to it. Now you choose an oath, such as the Oath of Devotion."
         },
         {
           "name": "Oath Spells",
@@ -3158,9 +3206,17 @@
         {
           "name": "Fighting Style",
           "summary": "At 2nd level, you adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again."
+        },
+        {
+          "name": "Spellcasting: Ranger",
+          "summary": "By the time you reach 2nd level, you have learned to use the magical essence of nature to cast spells, much as a druid does."
         }
       ],
       "3": [
+        {
+          "name": "Ranger Archetype",
+          "summary": "At 3rd level, you choose an archetype that you strive to emulate, such as the Hunter. Your choice grants you features at 3rd level and again at 7th, 11th, and 15th level."
+        },
         {
           "name": "Primeval Awareness",
           "summary": "Beginning at 3rd level, you can use your action and expend one ranger spell slot to focus your awareness on the region around you."
@@ -3601,6 +3657,12 @@
           "summary": "Starting at 2nd level, your quick thinking and agility allow you to move and act quickly. You can take a bonus action on each of your turns in combat. This action can be used only to take the Dash, Disengage, or Hide action."
         }
       ],
+      "3": [
+        {
+          "name": "Roguish Archetype",
+          "summary": "At 3rd level, you choose an archetype that you emulate in the exercise of your rogue abilities, such as Thief. Additional archetypes are available in the original source material. Your archetype choice grants you features at 3rd level and then again at 9th, 13th, and 17th level."
+        }
+      ],
       "5": [
         {
           "name": "Uncanny Dodge",
@@ -3882,6 +3944,16 @@
       19
     ],
     "features_by_level": {
+      "1": [
+        {
+          "name": "Spellcasting: Sorcerer",
+          "summary": "An event in your past, or in the life of a parent or ancestor, left an indelible mark on you, infusing you with arcane magic. This font of magic, whatever its origin, fuels your spells."
+        },
+        {
+          "name": "Sorcerous Origin",
+          "summary": "Choose a sorcerous origin, which describes the source of your innate magical power, such as Draconic Bloodline. Your choice grants you features when you choose it at 1st level and again at 6th, 14th, and 18th level."
+        }
+      ],
       "2": [
         {
           "name": "Font of Magic",
@@ -4401,6 +4473,10 @@
     "features_by_level": {
       "1": [
         {
+          "name": "Otherworldly Patron",
+          "summary": "At 1st level, you have struck a bargain with an otherworldly being of your choice, such as the Fiend. Your choice grants you features at 1st level and again at 6th, 10th, and 14th level."
+        },
+        {
           "name": "Pact Magic",
           "summary": "Your arcane research and the magic bestowed on you by your patron have given you facility with spells."
         }
@@ -4828,8 +4904,18 @@
     "features_by_level": {
       "1": [
         {
+          "name": "Spellcasting: Wizard",
+          "summary": "As a student of arcane magic, you have a spellbook containing spells that show the first glimmerings of your true power."
+        },
+        {
           "name": "Arcane Recovery",
           "summary": "You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover."
+        }
+      ],
+      "2": [
+        {
+          "name": "Arcane Tradition",
+          "summary": "When you reach 2nd level, you choose an arcane tradition, shaping your practice of magic through one of eight schools, such as Evocation. Your choice grants you features at 2nd level and again at 6th, 10th, and 14th level."
         }
       ],
       "18": [

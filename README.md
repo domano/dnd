@@ -34,12 +34,14 @@ Characters are saved in **localStorage** on this device.
 
 ## Features
 
-- **Home** — Create Character or Open Saved
+- **Home** — Create Character, Open Saved, or browse the Compendium
 - **Creation wizard** — Identity → Race → Class → Background → Abilities → Details → Spells (casters) → Review
   - Ability methods: Standard Array, Point Buy (27), Manual
   - Spell step respects known / prepared / spellbook rules at level 1
-- **Character sheet** — abilities, combat (AC, HP, death saves), skills, features, spells, equipment, feats, notes
+- **Character sheet** — abilities, combat (AC, HP, death saves), skills (+ expertise), features, spells (slots, attack, save DC), equipment, feats, notes
 - **Level-up wizard** — new features, subclass unlock, ASI or feat, spell progression, average or rolled HP
+- **Compendium** — searchable SRD classes, races, spells, skills, feats, conditions, equipment, backgrounds
+- **Import / export** — JSON backup of saved characters (from Open Saved)
 - **Rests** — short rest (pact slots) and long rest (HP, slots, hit dice recovery)
 
 ## Data sources

@@ -24,6 +24,8 @@ import {
   getClassHitDie,
   getFeaturesForCharacter,
   getFinalAbilityScores,
+  getSpellAttackBonus,
+  getSpellSaveDC,
   getSpellSlots,
   primaryClass,
   proficiencyBonus,
@@ -74,6 +76,7 @@ export function CharacterSheet({
   );
   const setAbility = useCharacterStore((s) => s.setAbility);
   const toggleSkill = useCharacterStore((s) => s.toggleSkill);
+  const toggleExpertise = useCharacterStore((s) => s.toggleExpertise);
   const updateCharacter = useCharacterStore((s) => s.updateCharacter);
   const addSpellStore = useCharacterStore((s) => s.addSpell);
   const removeSpellStore = useCharacterStore((s) => s.removeSpell);
@@ -146,6 +149,8 @@ export function CharacterSheet({
       initiative: computeInitiative(character),
       speed: computeSpeed(character),
       slotState: slotsUsedToState(slotInfo.slots, character.spells.slotsUsed),
+      spellAttack: getSpellAttackBonus(character),
+      spellSaveDC: getSpellSaveDC(character),
       features,
       featRows,
       knownSpells,
@@ -190,6 +195,8 @@ export function CharacterSheet({
     initiative,
     speed,
     slotState,
+    spellAttack,
+    spellSaveDC,
     features,
     featRows,
     knownSpells,
@@ -275,6 +282,28 @@ export function CharacterSheet({
       return;
     }
     toggleSkill(skillName);
+  }
+
+  function handleToggleExpertise(skillName: string) {
+    if (controlled && onChange) {
+      onChange((prev) => {
+        const proficient = prev.skillProficiencies.some(
+          (s) => s.toLowerCase() === skillName.toLowerCase(),
+        );
+        if (!proficient) return prev;
+        const has = prev.expertise.some(
+          (s) => s.toLowerCase() === skillName.toLowerCase(),
+        );
+        return {
+          ...prev,
+          expertise: has
+            ? prev.expertise.filter((s) => s.toLowerCase() !== skillName.toLowerCase())
+            : [...prev.expertise, skillName],
+        };
+      });
+      return;
+    }
+    toggleExpertise(skillName);
   }
 
   return (
@@ -385,6 +414,7 @@ export function CharacterSheet({
               character={character}
               skills={skills}
               onToggleSkill={handleToggleSkill}
+              onToggleExpertise={handleToggleExpertise}
             />
           </div>
         </section>
@@ -410,6 +440,16 @@ export function CharacterSheet({
             </button>
           </div>
           <div className="panel-body">
+            {spellAttack != null || spellSaveDC != null ? (
+              <div className={styles.statsGrid} style={{ marginBottom: '0.85rem' }}>
+                {spellAttack != null ? (
+                  <StatChip label="Spell attack" value={formatModifier(spellAttack)} accent />
+                ) : null}
+                {spellSaveDC != null ? (
+                  <StatChip label="Save DC" value={spellSaveDC} accent />
+                ) : null}
+              </div>
+            ) : null}
             <h3 style={{ fontSize: '0.95rem', marginBottom: '0.6rem' }}>Slots</h3>
             <SpellSlots
               slots={slotState}

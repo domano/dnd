@@ -12,6 +12,7 @@ export interface SkillListProps {
   character: Character;
   skills: Skill[];
   onToggleSkill?: (skillName: string) => void;
+  onToggleExpertise?: (skillName: string) => void;
   showSaves?: boolean;
 }
 
@@ -19,6 +20,7 @@ export function SkillList({
   character,
   skills,
   onToggleSkill,
+  onToggleExpertise,
   showSaves = true,
 }: SkillListProps) {
   const saves = getSavingThrows(character);
@@ -32,7 +34,7 @@ export function SkillList({
         <>
           <div className={styles.sectionTitle}>Saving throws</div>
           {saves.map((row) => (
-            <label key={row.ability} className={styles.row}>
+            <div key={row.ability} className={styles.row}>
               <input
                 type="checkbox"
                 checked={row.proficient}
@@ -42,15 +44,16 @@ export function SkillList({
               />
               <span className={styles.ability}>{ABILITY_SCORE_SHORT[row.ability]}</span>
               <span className={styles.name}>Saving throw</span>
+              <span />
               <span className={styles.bonus}>{formatModifier(row.modifier)}</span>
-            </label>
+            </div>
           ))}
           <div className={styles.sectionTitle}>Skills</div>
         </>
       ) : null}
 
       {rows.map((row) => (
-        <label key={row.index} className={styles.row}>
+        <div key={row.index} className={styles.row}>
           <input
             type="checkbox"
             checked={row.proficient}
@@ -59,12 +62,23 @@ export function SkillList({
             aria-label={`${row.name} proficiency`}
           />
           <span className={styles.ability}>{ABILITY_SCORE_SHORT[row.ability]}</span>
-          <span className={styles.name}>
-            {row.name}
-            {row.expertise ? ' (expertise)' : ''}
-          </span>
+          <span className={styles.name}>{row.name}</span>
+          {onToggleExpertise ? (
+            <button
+              type="button"
+              className={row.expertise ? styles.expOn : styles.expOff}
+              disabled={!row.proficient}
+              onClick={() => onToggleExpertise(row.name)}
+              title="Toggle expertise"
+              aria-pressed={row.expertise}
+            >
+              Exp
+            </button>
+          ) : row.expertise ? (
+            <span className={styles.expOn}>Exp</span>
+          ) : null}
           <span className={styles.bonus}>{formatModifier(row.modifier)}</span>
-        </label>
+        </div>
       ))}
     </div>
   );

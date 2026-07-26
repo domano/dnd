@@ -3,12 +3,14 @@ import styles from './Home.module.css';
 export interface HomeProps {
   onCreateCharacter?: () => void;
   onOpenSaved?: () => void;
+  onOpenCompendium?: () => void;
   brandName?: string;
 }
 
 export function Home({
   onCreateCharacter,
   onOpenSaved,
+  onOpenCompendium,
   brandName = 'SRD LEDGER',
 }: HomeProps) {
   const [lead, ...rest] = brandName.split(' ');
@@ -26,8 +28,7 @@ export function Home({
           <hr className={styles.rule} />
           <p className={styles.headline}>An expedition ledger for fifth-edition adventurers.</p>
           <p className={styles.lede}>
-            Track ability scores, spells, gear, and rests in one ink-and-brass sheet built for the
-            table.
+            Build, level, and play SRD 5.1 characters with spells, skills, and gear at hand.
           </p>
           <div className={styles.ctaRow}>
             <button type="button" className="btn btn-primary" onClick={onCreateCharacter}>
@@ -35,6 +36,9 @@ export function Home({
             </button>
             <button type="button" className="btn btn-brass" onClick={onOpenSaved}>
               Open Saved
+            </button>
+            <button type="button" className="btn btn-ghost" onClick={onOpenCompendium}>
+              Compendium
             </button>
           </div>
         </div>

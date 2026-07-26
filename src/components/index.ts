@@ -10,6 +10,9 @@ export type { LevelUpWizardProps } from './LevelUpWizard';
 export { CharacterSheet } from './CharacterSheet';
 export type { CharacterSheetProps } from './CharacterSheet';
 
+export { Compendium } from './Compendium';
+export type { CompendiumProps } from './Compendium';
+
 export { SpellBrowser } from './SpellBrowser';
 export type { SpellBrowserProps } from './SpellBrowser';
 

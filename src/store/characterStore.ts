@@ -50,6 +50,8 @@ export interface CharacterStore {
 
   setAbility: (ability: AbilityScore, score: number) => void;
   toggleSkill: (skillName: string) => void;
+  toggleExpertise: (skillName: string) => void;
+  importCharacters: (incoming: Character[], mode?: "merge" | "replace") => void;
   addSpell: (spellIndex: string) => void;
   removeSpell: (spellIndex: string) => void;
   prepareSpell: (spellIndex: string, prepared?: boolean) => void;
@@ -157,6 +159,48 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
       });
       persist(characters, state.activeId);
       return { characters };
+    });
+  },
+
+  toggleExpertise: (skillName) => {
+    set((state) => {
+      const characters = mapActive(state.characters, state.activeId, (c) => {
+        const proficient = c.skillProficiencies.some(
+          (s) => s.toLowerCase() === skillName.toLowerCase(),
+        );
+        if (!proficient) return c;
+        const has = c.expertise.some(
+          (s) => s.toLowerCase() === skillName.toLowerCase(),
+        );
+        const expertise = has
+          ? c.expertise.filter(
+              (s) => s.toLowerCase() !== skillName.toLowerCase(),
+            )
+          : [...c.expertise, skillName];
+        return touch(c, { expertise });
+      });
+      persist(characters, state.activeId);
+      return { characters };
+    });
+  },
+
+  importCharacters: (incoming, mode = "merge") => {
+    set((state) => {
+      const cleaned = incoming.filter((c) => c && typeof c.id === "string");
+      let characters: Character[];
+      if (mode === "replace") {
+        characters = cleaned;
+      } else {
+        const byId = new Map(state.characters.map((c) => [c.id, c]));
+        for (const c of cleaned) byId.set(c.id, c);
+        characters = [...byId.values()];
+      }
+      const activeId =
+        state.activeId && characters.some((c) => c.id === state.activeId)
+          ? state.activeId
+          : (characters[0]?.id ?? null);
+      persist(characters, activeId);
+      return { characters, activeId };
     });
   },
 

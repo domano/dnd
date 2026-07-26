@@ -1,23 +1,27 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   CharacterSheet,
+  Compendium,
   CreateWizard,
   Home,
   LevelUpWizard,
 } from "./components";
 import { getClass, getRace } from "./data";
 import { totalLevel } from "./lib/rules";
+import type { Character } from "./types/character";
 import { useCharacterStore } from "./store/characterStore";
 
-type View = "home" | "create" | "sheet";
+type View = "home" | "create" | "sheet" | "compendium";
 
 function App() {
   const [view, setView] = useState<View>("home");
   const [pickerOpen, setPickerOpen] = useState(false);
   const [levelUpOpen, setLevelUpOpen] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const setActive = useCharacterStore((s) => s.setActive);
   const deleteCharacter = useCharacterStore((s) => s.deleteCharacter);
+  const importCharacters = useCharacterStore((s) => s.importCharacters);
   const activeId = useCharacterStore((s) => s.activeId);
   const characters = useCharacterStore((s) => s.characters);
 
@@ -25,6 +29,42 @@ function App() {
     () => characters.find((c) => c.id === activeId),
     [characters, activeId],
   );
+
+  function exportAll() {
+    const payload = {
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      characters,
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `srd-ledger-characters-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  async function onImportFile(file: File | null) {
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text) as { characters?: Character[] } | Character[];
+      const list = Array.isArray(data) ? data : (data.characters ?? []);
+      if (!Array.isArray(list) || list.length === 0) {
+        window.alert("No characters found in that file.");
+        return;
+      }
+      importCharacters(list, "merge");
+      setPickerOpen(true);
+    } catch {
+      window.alert("Could not import that file. Expect JSON from Export.");
+    } finally {
+      if (fileRef.current) fileRef.current.value = "";
+    }
+  }
 
   if (view === "create") {
     return (
@@ -36,6 +76,10 @@ function App() {
         }}
       />
     );
+  }
+
+  if (view === "compendium") {
+    return <Compendium onBack={() => setView("home")} />;
   }
 
   if (view === "sheet") {
@@ -69,6 +113,15 @@ function App() {
         brandName="SRD LEDGER"
         onCreateCharacter={() => setView("create")}
         onOpenSaved={() => setPickerOpen(true)}
+        onOpenCompendium={() => setView("compendium")}
+      />
+
+      <input
+        ref={fileRef}
+        type="file"
+        accept="application/json,.json"
+        hidden
+        onChange={(e) => onImportFile(e.target.files?.[0] ?? null)}
       />
 
       {pickerOpen ? (
@@ -116,6 +169,19 @@ function App() {
               className="panel-body"
               style={{ overflow: "auto", display: "grid", gap: "0.55rem" }}
             >
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem" }}>
+                <button type="button" className="btn btn-sm" onClick={exportAll}>
+                  Export JSON
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-sm btn-brass"
+                  onClick={() => fileRef.current?.click()}
+                >
+                  Import JSON
+                </button>
+              </div>
+
               {characters.length === 0 ? (
                 <p style={{ color: "var(--ink-soft)" }}>
                   No saved adventurers yet. Create one to begin the ledger.

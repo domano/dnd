@@ -113,20 +113,20 @@ SPELLCASTING_META = {
 
 SKIP_FEATURE_NAME_RE = re.compile(
     r"^(Ability Score Improvement|"
-    r".* Archetype( feature)?|"
-    r"Primal Path( feature)?|"
-    r"Bard College( feature)?|"
-    r"Divine Domain( feature)?|"
-    r"Druid Circle( feature)?|"
-    r"Monastic Tradition( feature)?|"
-    r"Sacred Oath( feature)?|"
-    r"Ranger Archetype( feature)?|"
-    r"Roguish Archetype( feature)?|"
-    r"Sorcerous Origin( feature)?|"
-    r"Otherworldly Patron( feature)?|"
-    r"Arcane Tradition( feature)?|"
-    r".* improvement.*|"
-    r"Spellcasting: .*)$",
+    r".* Archetype feature|"
+    r"Primal Path feature|"
+    r"Bard College feature|"
+    r"Divine Domain feature|"
+    r"Druid Circle feature|"
+    r"Martial Archetype feature|"
+    r"Monastic Tradition feature|"
+    r"Sacred Oath feature|"
+    r"Ranger Archetype feature|"
+    r"Roguish Archetype feature|"
+    r"Sorcerous Origin feature|"
+    r"Otherworldly Patron feature|"
+    r"Arcane Tradition feature|"
+    r".* improvement.*)$",
     re.I,
 )
 
