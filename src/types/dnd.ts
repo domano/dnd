@@ -1,13 +1,42 @@
 /** D&D 5e 2014 SRD types for character sheet data files. */
 
-export type AbilityIndex = "STR" | "DEX" | "CON" | "INT" | "WIS" | "CHA";
-export type AbilityName =
+export type AbilityScore =
   | "strength"
   | "dexterity"
   | "constitution"
   | "intelligence"
   | "wisdom"
   | "charisma";
+
+export type AbilityIndex = "STR" | "DEX" | "CON" | "INT" | "WIS" | "CHA";
+
+export const ABILITY_SCORES: readonly AbilityScore[] = [
+  "strength",
+  "dexterity",
+  "constitution",
+  "intelligence",
+  "wisdom",
+  "charisma",
+] as const;
+
+export const ABILITY_INDEX_TO_SCORE: Record<AbilityIndex, AbilityScore> = {
+  STR: "strength",
+  DEX: "dexterity",
+  CON: "constitution",
+  INT: "intelligence",
+  WIS: "wisdom",
+  CHA: "charisma",
+};
+
+export type CasterType = "full" | "half" | "third" | "pact";
+export type SpellPreparation = "known" | "prepared";
+export type CreatureSize =
+  | "Tiny"
+  | "Small"
+  | "Medium"
+  | "Large"
+  | "Huge"
+  | "Gargantuan";
 
 // --- Spells ---
 
@@ -107,41 +136,12 @@ export interface EquipmentItem {
   bundle_quantity?: number;
 }
 
-// --- Reference ---
-
-export interface SpellSlotTable {
-  classes: string[];
-  slots_by_level: Record<string, number[]>;
-  slot_levels: number[];
-  notes?: string;
-}
-
-export interface WarlockPactLevel {
-  pact_slots: number;
-  slot_level: number;
-  cantrips_known?: number;
-  spells_known?: number;
-  invocations_known?: number;
-  mystic_arcanum?: Record<string, number>;
-}
-
-/* --- Classes / races / backgrounds (src/data/{classes,races,backgrounds}.json) --- */
-
-export type AbilityScore =
-  | "strength"
-  | "dexterity"
-  | "constitution"
-  | "intelligence"
-  | "wisdom"
-  | "charisma";
-
-export type CasterType = "full" | "half" | "third" | "pact";
-export type SpellPreparation = "known" | "prepared";
-export type CreatureSize = "Tiny" | "Small" | "Medium" | "Large" | "Huge" | "Gargantuan";
+// --- Shared choice / feature shapes ---
 
 export interface FeatureSummary {
   name: string;
   summary: string;
+  proficiencies?: string[];
 }
 
 export interface SkillChoice {
@@ -162,6 +162,28 @@ export interface ToolChoice {
   desc?: string;
   options: Array<string | NestedToolOption>;
 }
+
+export interface AbilityBonus {
+  ability: AbilityScore;
+  bonus: number;
+}
+
+export interface AbilityBonusOptions {
+  choose: number;
+  options: AbilityBonus[];
+}
+
+export interface LanguageOptions {
+  choose: number;
+  options: string[] | "any";
+}
+
+export interface StringChoiceList {
+  choose: number;
+  options: string[];
+}
+
+// --- Classes ---
 
 export interface ClassProficiencies {
   armor: string[];
@@ -184,7 +206,9 @@ export interface SpellcastingInfo {
 }
 
 /** Full/half/third: number[]; pact: { slot_level, slot_count }. Index 0 = level 1. */
-export type SpellSlotsByLevel = number[] | { slot_level: number; slot_count: number };
+export type SpellSlotsByLevel =
+  | number[]
+  | { slot_level: number; slot_count: number };
 
 export interface Subclass {
   id: string;
@@ -215,24 +239,14 @@ export interface DnDClass {
   spell_slots?: SpellSlotsByLevel[];
   cantrips_known?: number[];
   spells_known?: number[];
-  sorcery_point_slot_costs?: Array<{ spell_slot_level: number; sorcery_point_cost: number }>;
+  sorcery_point_slot_costs?: Array<{
+    spell_slot_level: number;
+    sorcery_point_cost: number;
+  }>;
   source: string;
 }
 
-export interface AbilityBonus {
-  ability: AbilityScore;
-  bonus: number;
-}
-
-export interface AbilityBonusOptions {
-  choose: number;
-  options: AbilityBonus[];
-}
-
-export interface LanguageOptions {
-  choose: number;
-  options: string[] | "any";
-}
+// --- Races ---
 
 export interface RacialTrait {
   id: string;
@@ -268,9 +282,15 @@ export interface DnDRace {
   alignment?: string;
   size_description?: string;
   subraces: Subrace[];
-  draconic_ancestry_options?: Array<{ id: string; name: string; summary: string }>;
+  draconic_ancestry_options?: Array<{
+    id: string;
+    name: string;
+    summary: string;
+  }>;
   source: string;
 }
+
+// --- Backgrounds ---
 
 export interface BackgroundFeature {
   name: string;
@@ -288,11 +308,6 @@ export interface BackgroundEquipmentChoice {
   options?: string[];
 }
 
-export interface StringChoiceList {
-  choose: number;
-  options: string[];
-}
-
 export interface DnDBackground {
   id: string;
   name: string;
@@ -302,12 +317,30 @@ export interface DnDBackground {
   feature: BackgroundFeature;
   equipment: BackgroundEquipmentItem[];
   equipment_choices?: BackgroundEquipmentChoice[] | null;
-  starting_gold?: number;
+  starting_gold?: { quantity: number; unit: string } | number;
   personality_traits?: StringChoiceList | null;
   ideals?: StringChoiceList | null;
   bonds?: StringChoiceList | null;
   flaws?: StringChoiceList | null;
   source: string;
+}
+
+// --- Reference ---
+
+export interface SpellSlotTable {
+  classes: string[];
+  slots_by_level: Record<string, number[]>;
+  slot_levels: number[];
+  notes?: string;
+}
+
+export interface WarlockPactLevel {
+  pact_slots: number;
+  slot_level: number;
+  cantrips_known?: number;
+  spells_known?: number;
+  invocations_known?: number;
+  mystic_arcanum?: Record<string, number>;
 }
 
 export interface ReferenceData {
@@ -327,121 +360,4 @@ export interface ReferenceData {
     };
     multiclass_caster_levels: Record<string, string>;
   };
-}
-
-// --- Classes / races / backgrounds (from parallel SRD data) ---
-
-export interface FeatureSummary {
-  name: string;
-  summary: string;
-  proficiencies?: string[];
-}
-
-export interface SkillChoice {
-  choose: number;
-  options: string[];
-  desc?: string;
-}
-
-export interface ClassProficiencies {
-  armor: string[];
-  weapons: string[];
-  tools: string[];
-  skills: SkillChoice;
-}
-
-export interface ClassSpellcasting {
-  ability: AbilityName | string;
-  caster_type: "full" | "half" | "third" | "pact" | string;
-  preparation?: string;
-  ritual?: boolean;
-  spell_list?: string;
-  starts_at_level?: number;
-  spellbook?: boolean;
-  focus?: string;
-}
-
-export interface Subclass {
-  id: string;
-  name: string;
-  flavor?: string;
-  summary?: string;
-  features_by_level: Record<string, FeatureSummary[]>;
-}
-
-export interface CharacterClass {
-  id: string;
-  name: string;
-  hit_die: number;
-  primary_abilities: string[];
-  saving_throws: string[];
-  proficiencies: ClassProficiencies;
-  spellcasting: ClassSpellcasting | null;
-  subclass_unlock_level: number;
-  subclasses: Subclass[];
-  asi_levels: number[];
-  features_by_level: Record<string, FeatureSummary[]>;
-  resources_by_level?: Record<string, unknown>;
-  spell_slots?: Record<string, number[] | unknown>;
-  cantrips_known?: Record<string, number> | number[];
-  source?: string;
-}
-
-export interface AbilityBonus {
-  ability: AbilityName | string;
-  bonus: number;
-}
-
-export interface Trait {
-  id: string;
-  name: string;
-  summary: string;
-  proficiencies?: string[];
-}
-
-export interface Subrace {
-  id: string;
-  name: string;
-  summary?: string;
-  ability_bonuses?: AbilityBonus[];
-  traits?: Trait[];
-}
-
-export interface Race {
-  id: string;
-  name: string;
-  size: string;
-  speed: number;
-  ability_bonuses: AbilityBonus[];
-  languages: string[];
-  traits: Trait[];
-  age?: string;
-  alignment?: string;
-  size_description?: string;
-  darkvision?: number;
-  subraces: Subrace[];
-  source?: string;
-  draconic_ancestry_options?: Trait[];
-}
-
-export interface ChoiceBlock {
-  choose: number;
-  options: string[] | string;
-}
-
-export interface Background {
-  id: string;
-  name: string;
-  skills: string[];
-  tools?: string[] | null;
-  language_options?: ChoiceBlock;
-  feature: { name: string; summary: string };
-  equipment: { name: string; quantity: number }[];
-  equipment_choices?: { choose: number; from_category: string }[];
-  starting_gold?: { quantity: number; unit: string };
-  personality_traits?: ChoiceBlock;
-  ideals?: ChoiceBlock;
-  bonds?: ChoiceBlock;
-  flaws?: ChoiceBlock;
-  source?: string;
 }

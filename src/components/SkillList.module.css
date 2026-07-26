@@ -1,0 +1,47 @@
+.wrap {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1.1rem 2.4rem 1fr auto;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.28rem 0.15rem;
+  border-radius: var(--radius-sm);
+}
+
+.row:nth-child(even) {
+  background: color-mix(in srgb, var(--ink) 3.5%, transparent);
+}
+
+.ability {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+.name {
+  font-size: 0.92rem;
+  text-align: left;
+}
+
+.bonus {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--teal);
+  min-width: 2.2rem;
+  text-align: right;
+}
+
+.sectionTitle {
+  margin: 0.4rem 0 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
