@@ -1,0 +1,666 @@
+[
+  {
+    "id": "dragonborn",
+    "name": "Dragonborn",
+    "size": "Medium",
+    "speed": 30,
+    "ability_bonuses": [
+      {
+        "ability": "strength",
+        "bonus": 2
+      },
+      {
+        "ability": "charisma",
+        "bonus": 1
+      }
+    ],
+    "languages": [
+      "Common",
+      "Draconic"
+    ],
+    "traits": [
+      {
+        "id": "draconic-ancestry",
+        "name": "Draconic Ancestry",
+        "summary": "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table."
+      },
+      {
+        "id": "breath-weapon",
+        "name": "Breath Weapon",
+        "summary": "You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation. When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus."
+      },
+      {
+        "id": "damage-resistance",
+        "name": "Damage Resistance",
+        "summary": "You have resistance to the damage type associated with your draconic ancestry."
+      }
+    ],
+    "age": "Young dragonborn grow quickly. They walk hours after hatching, attain the size and development of a 10-year-old human child by the age of 3, and reach adulthood…",
+    "alignment": "Dragonborn tend to extremes, making a conscious choice for one side or the other in the cosmic war between good and evil.",
+    "size_description": "Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds.",
+    "subraces": [],
+    "source": "SRD 5.1 (2014)",
+    "draconic_ancestry_options": [
+      {
+        "id": "draconic-ancestry-black",
+        "name": "Black",
+        "summary": "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table."
+      },
+      {
+        "id": "draconic-ancestry-blue",
+        "name": "Blue",
+        "summary": "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table."
+      },
+      {
+        "id": "draconic-ancestry-brass",
+        "name": "Brass",
+        "summary": "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table."
+      },
+      {
+        "id": "draconic-ancestry-bronze",
+        "name": "Bronze",
+        "summary": "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table."
+      },
+      {
+        "id": "draconic-ancestry-copper",
+        "name": "Copper",
+        "summary": "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table."
+      },
+      {
+        "id": "draconic-ancestry-gold",
+        "name": "Gold",
+        "summary": "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table."
+      },
+      {
+        "id": "draconic-ancestry-green",
+        "name": "Green",
+        "summary": "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table."
+      },
+      {
+        "id": "draconic-ancestry-red",
+        "name": "Red",
+        "summary": "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table."
+      },
+      {
+        "id": "draconic-ancestry-silver",
+        "name": "Silver",
+        "summary": "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table."
+      },
+      {
+        "id": "draconic-ancestry-white",
+        "name": "White",
+        "summary": "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table."
+      }
+    ]
+  },
+  {
+    "id": "dwarf",
+    "name": "Dwarf",
+    "size": "Medium",
+    "speed": 25,
+    "ability_bonuses": [
+      {
+        "ability": "constitution",
+        "bonus": 2
+      }
+    ],
+    "languages": [
+      "Common",
+      "Dwarvish"
+    ],
+    "darkvision": 60,
+    "traits": [
+      {
+        "id": "darkvision",
+        "name": "Darkvision",
+        "summary": "You have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You cannot discern color in darkness, only shades of gray."
+      },
+      {
+        "id": "dwarven-resilience",
+        "name": "Dwarven Resilience",
+        "summary": "You have advantage on saving throws against poison, and you have resistance against poison damage."
+      },
+      {
+        "id": "stonecunning",
+        "name": "Stonecunning",
+        "summary": "Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus."
+      },
+      {
+        "id": "dwarven-combat-training",
+        "name": "Dwarven Combat Training",
+        "summary": "You have proficiency with the battleaxe, handaxe, light hammer, and warhammer.",
+        "proficiencies": [
+          "Battleaxes",
+          "Handaxes",
+          "Light hammers",
+          "Warhammers"
+        ]
+      },
+      {
+        "id": "tool-proficiency",
+        "name": "Tool Proficiency",
+        "summary": "You gain proficiency with the artisan's tools of your choice: smith's tools, brewer's supplies, or mason's tools.",
+        "proficiency_choices": {
+          "choose": 1,
+          "options": [
+            "Smith's Tools",
+            "Brewer's Supplies",
+            "Mason's Tools"
+          ]
+        }
+      }
+    ],
+    "age": "Dwarves mature at the same rate as humans, but they're considered young until they reach the age of 50. On average, they live about 350 years.",
+    "alignment": "Most dwarves are lawful, believing firmly in the benefits of a well-ordered society.",
+    "size_description": "Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.",
+    "subraces": [
+      {
+        "id": "hill-dwarf",
+        "name": "Hill Dwarf",
+        "summary": "As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience.",
+        "ability_bonuses": [
+          {
+            "ability": "wisdom",
+            "bonus": 1
+          }
+        ],
+        "traits": [
+          {
+            "id": "dwarven-toughness",
+            "name": "Dwarven Toughness",
+            "summary": "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level."
+          }
+        ],
+        "source": "SRD 5.1 (2014)"
+      }
+    ],
+    "source": "SRD 5.1 (2014)"
+  },
+  {
+    "id": "elf",
+    "name": "Elf",
+    "size": "Medium",
+    "speed": 30,
+    "ability_bonuses": [
+      {
+        "ability": "dexterity",
+        "bonus": 2
+      }
+    ],
+    "languages": [
+      "Common",
+      "Elvish"
+    ],
+    "darkvision": 60,
+    "traits": [
+      {
+        "id": "darkvision",
+        "name": "Darkvision",
+        "summary": "You have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You cannot discern color in darkness, only shades of gray."
+      },
+      {
+        "id": "fey-ancestry",
+        "name": "Fey Ancestry",
+        "summary": "You have advantage on saving throws against being charmed, and magic cannot put you to sleep."
+      },
+      {
+        "id": "trance",
+        "name": "Trance",
+        "summary": "Elves do not need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting this way, you gain the same benefit that a human does from 8 hours of sleep."
+      },
+      {
+        "id": "keen-senses",
+        "name": "Keen Senses",
+        "summary": "You have proficiency in the Perception skill.",
+        "proficiencies": [
+          "Perception"
+        ]
+      }
+    ],
+    "age": "Although elves reach physical maturity at about the same age as humans, the elven understanding of adulthood goes beyond physical growth to encompass worldly…",
+    "alignment": "Elves love freedom, variety, and self-expression, so they lean strongly toward the gentler aspects of chaos.",
+    "size_description": "Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.",
+    "subraces": [
+      {
+        "id": "high-elf",
+        "name": "High Elf",
+        "summary": "As a high elf, you have a keen mind and a mastery of at least the basics of magic. In many fantasy gaming worlds, there are two kinds of high elves.",
+        "ability_bonuses": [
+          {
+            "ability": "intelligence",
+            "bonus": 1
+          }
+        ],
+        "traits": [
+          {
+            "id": "elf-weapon-training",
+            "name": "Elf Weapon Training",
+            "summary": "You have proficiency with the longsword, shortsword, shortbow, and longbow.",
+            "proficiencies": [
+              "Longswords",
+              "Shortswords",
+              "Shortbows",
+              "Longbows"
+            ]
+          },
+          {
+            "id": "high-elf-cantrip",
+            "name": "High Elf Cantrip",
+            "summary": "You know one cantrip of your choice form the wizard spell list. Intelligence is your spellcasting ability for it."
+          },
+          {
+            "id": "extra-language",
+            "name": "Extra Language",
+            "summary": "You can speak, read, and write one extra language of your choice."
+          }
+        ],
+        "source": "SRD 5.1 (2014)"
+      }
+    ],
+    "source": "SRD 5.1 (2014)"
+  },
+  {
+    "id": "gnome",
+    "name": "Gnome",
+    "size": "Small",
+    "speed": 25,
+    "ability_bonuses": [
+      {
+        "ability": "intelligence",
+        "bonus": 2
+      }
+    ],
+    "languages": [
+      "Common",
+      "Gnomish"
+    ],
+    "darkvision": 60,
+    "traits": [
+      {
+        "id": "darkvision",
+        "name": "Darkvision",
+        "summary": "You have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You cannot discern color in darkness, only shades of gray."
+      },
+      {
+        "id": "gnome-cunning",
+        "name": "Gnome Cunning",
+        "summary": "You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic."
+      }
+    ],
+    "age": "Gnomes mature at the same rate humans do, and most are expected to settle down into an adult life by around age 40. They can live 350 to almost 500 years.",
+    "alignment": "Gnomes are most often good. Those who tend toward law are sages, engineers, researchers, scholars, investigators, or inventors.",
+    "size_description": "Gnomes are between 3 and 4 feet tall and average about 40 pounds. Your size is Small.",
+    "subraces": [
+      {
+        "id": "rock-gnome",
+        "name": "Rock Gnome",
+        "summary": "As a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes.",
+        "ability_bonuses": [
+          {
+            "ability": "constitution",
+            "bonus": 1
+          }
+        ],
+        "traits": [
+          {
+            "id": "artificers-lore",
+            "name": "Artificer's Lore",
+            "summary": "Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply."
+          },
+          {
+            "id": "tinker",
+            "name": "Tinker",
+            "summary": "You have proficiency with artisan's tools (tinker's tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp).",
+            "proficiencies": [
+              "Tinker's Tools"
+            ]
+          }
+        ],
+        "source": "SRD 5.1 (2014)"
+      }
+    ],
+    "source": "SRD 5.1 (2014)"
+  },
+  {
+    "id": "half-elf",
+    "name": "Half-Elf",
+    "size": "Medium",
+    "speed": 30,
+    "ability_bonuses": [
+      {
+        "ability": "charisma",
+        "bonus": 2
+      }
+    ],
+    "ability_bonus_options": {
+      "choose": 2,
+      "options": [
+        {
+          "ability": "strength",
+          "bonus": 1
+        },
+        {
+          "ability": "dexterity",
+          "bonus": 1
+        },
+        {
+          "ability": "constitution",
+          "bonus": 1
+        },
+        {
+          "ability": "intelligence",
+          "bonus": 1
+        },
+        {
+          "ability": "wisdom",
+          "bonus": 1
+        }
+      ]
+    },
+    "languages": [
+      "Common",
+      "Elvish"
+    ],
+    "language_options": {
+      "choose": 1,
+      "options": [
+        "Dwarvish",
+        "Giant",
+        "Gnomish",
+        "Goblin",
+        "Halfling",
+        "Orc",
+        "Abyssal",
+        "Celestial",
+        "Draconic",
+        "Deep Speech",
+        "Infernal",
+        "Primordial",
+        "Sylvan",
+        "Undercommon"
+      ]
+    },
+    "darkvision": 60,
+    "traits": [
+      {
+        "id": "darkvision",
+        "name": "Darkvision",
+        "summary": "You have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You cannot discern color in darkness, only shades of gray."
+      },
+      {
+        "id": "fey-ancestry",
+        "name": "Fey Ancestry",
+        "summary": "You have advantage on saving throws against being charmed, and magic cannot put you to sleep."
+      },
+      {
+        "id": "skill-versatility",
+        "name": "Skill Versatility",
+        "summary": "You gain proficiency in two skills of your choice.",
+        "proficiency_choices": {
+          "choose": 2,
+          "options": [
+            "Acrobatics",
+            "Animal Handling",
+            "Arcana",
+            "Athletics",
+            "Deception",
+            "History",
+            "Insight",
+            "Intimidation",
+            "Investigation",
+            "Medicine",
+            "Nature",
+            "Perception",
+            "Performance",
+            "Persuasion",
+            "Religion",
+            "Sleight of Hand",
+            "Stealth",
+            "Survival"
+          ]
+        }
+      }
+    ],
+    "skill_choices": {
+      "choose": 2,
+      "options": [
+        "Acrobatics",
+        "Animal Handling",
+        "Arcana",
+        "Athletics",
+        "Deception",
+        "History",
+        "Insight",
+        "Intimidation",
+        "Investigation",
+        "Medicine",
+        "Nature",
+        "Perception",
+        "Performance",
+        "Persuasion",
+        "Religion",
+        "Sleight of Hand",
+        "Stealth",
+        "Survival"
+      ]
+    },
+    "age": "Half-elves mature at the same rate humans do and reach adulthood around the age of 20. They live much longer than humans, however, often exceeding 180 years.",
+    "alignment": "Half-elves share the chaotic bent of their elven heritage. They value both personal freedom and creative expression, demonstrating neither love of leaders nor…",
+    "size_description": "Half-elves are about the same size as humans, ranging from 5 to 6 feet tall. Your size is Medium.",
+    "subraces": [],
+    "source": "SRD 5.1 (2014)"
+  },
+  {
+    "id": "half-orc",
+    "name": "Half-Orc",
+    "size": "Medium",
+    "speed": 30,
+    "ability_bonuses": [
+      {
+        "ability": "strength",
+        "bonus": 2
+      },
+      {
+        "ability": "constitution",
+        "bonus": 1
+      }
+    ],
+    "languages": [
+      "Common",
+      "Orc"
+    ],
+    "darkvision": 60,
+    "traits": [
+      {
+        "id": "darkvision",
+        "name": "Darkvision",
+        "summary": "You have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You cannot discern color in darkness, only shades of gray."
+      },
+      {
+        "id": "savage-attacks",
+        "name": "Savage Attacks",
+        "summary": "When you score a critical hit with a melee weapon attack, you can roll one of the weapon's damage dice one additional time and add it to the extra damage of the critical hit."
+      },
+      {
+        "id": "relentless-endurance",
+        "name": "Relentless Endurance",
+        "summary": "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. you cannot use this feature again until you finish a long rest."
+      },
+      {
+        "id": "menacing",
+        "name": "Menacing",
+        "summary": "You gain proficiency in the Intimidation skill.",
+        "proficiencies": [
+          "Intimidation"
+        ]
+      }
+    ],
+    "age": "Half-orcs mature a little faster than humans, reaching adulthood around age 14. They age noticeably faster and rarely live longer than 75 years.",
+    "alignment": "Half-orcs inherit a tendency toward chaos from their orc parents and are not strongly inclined toward good.",
+    "size_description": "Half-orcs are somewhat larger and bulkier than humans, and they range from 5 to well over 6 feet tall.",
+    "subraces": [],
+    "source": "SRD 5.1 (2014)"
+  },
+  {
+    "id": "halfling",
+    "name": "Halfling",
+    "size": "Small",
+    "speed": 25,
+    "ability_bonuses": [
+      {
+        "ability": "dexterity",
+        "bonus": 2
+      }
+    ],
+    "languages": [
+      "Common",
+      "Halfling"
+    ],
+    "traits": [
+      {
+        "id": "brave",
+        "name": "Brave",
+        "summary": "You have advantage on saving throw against being frightened."
+      },
+      {
+        "id": "halfling-nimbleness",
+        "name": "Halfling Nimbleness",
+        "summary": "You can move through the space of any creature that is of a size larger than yours."
+      },
+      {
+        "id": "lucky",
+        "name": "Lucky",
+        "summary": "When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll."
+      }
+    ],
+    "age": "A halfling reaches adulthood at the age of 20 and generally lives into the middle of his or her second century.",
+    "alignment": "Most halflings are lawful good. As a rule, they are good-hearted and kind, hate to see others in pain, and have no tolerance for oppression.",
+    "size_description": "Halflings average about 3 feet tall and weigh about 40 pounds. Your size is Small.",
+    "subraces": [
+      {
+        "id": "lightfoot-halfling",
+        "name": "Lightfoot Halfling",
+        "summary": "As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You're inclined to be affable and get along well with others.",
+        "ability_bonuses": [
+          {
+            "ability": "charisma",
+            "bonus": 1
+          }
+        ],
+        "traits": [
+          {
+            "id": "naturally-stealthy",
+            "name": "Naturally Stealthy",
+            "summary": "You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you."
+          }
+        ],
+        "source": "SRD 5.1 (2014)"
+      }
+    ],
+    "source": "SRD 5.1 (2014)"
+  },
+  {
+    "id": "human",
+    "name": "Human",
+    "size": "Medium",
+    "speed": 30,
+    "ability_bonuses": [
+      {
+        "ability": "strength",
+        "bonus": 1
+      },
+      {
+        "ability": "dexterity",
+        "bonus": 1
+      },
+      {
+        "ability": "constitution",
+        "bonus": 1
+      },
+      {
+        "ability": "intelligence",
+        "bonus": 1
+      },
+      {
+        "ability": "wisdom",
+        "bonus": 1
+      },
+      {
+        "ability": "charisma",
+        "bonus": 1
+      }
+    ],
+    "languages": [
+      "Common"
+    ],
+    "language_options": {
+      "choose": 1,
+      "options": [
+        "Dwarvish",
+        "Elvish",
+        "Giant",
+        "Gnomish",
+        "Goblin",
+        "Halfling",
+        "Orc",
+        "Abyssal",
+        "Celestial",
+        "Draconic",
+        "Deep Speech",
+        "Infernal",
+        "Primordial",
+        "Sylvan",
+        "Undercommon"
+      ]
+    },
+    "traits": [],
+    "age": "Humans reach adulthood in their late teens and live less than a century.",
+    "alignment": "Humans tend toward no particular alignment. The best and the worst are found among them.",
+    "size_description": "Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall.",
+    "subraces": [],
+    "source": "SRD 5.1 (2014)"
+  },
+  {
+    "id": "tiefling",
+    "name": "Tiefling",
+    "size": "Medium",
+    "speed": 30,
+    "ability_bonuses": [
+      {
+        "ability": "intelligence",
+        "bonus": 1
+      },
+      {
+        "ability": "charisma",
+        "bonus": 2
+      }
+    ],
+    "languages": [
+      "Common",
+      "Infernal"
+    ],
+    "darkvision": 60,
+    "traits": [
+      {
+        "id": "darkvision",
+        "name": "Darkvision",
+        "summary": "You have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You cannot discern color in darkness, only shades of gray."
+      },
+      {
+        "id": "hellish-resistance",
+        "name": "Hellish Resistance",
+        "summary": "You have resistance to fire damage."
+      },
+      {
+        "id": "infernal-legacy",
+        "name": "Infernal Legacy",
+        "summary": "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the hellish rebuke spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells."
+      }
+    ],
+    "age": "Tieflings mature at the same rate as humans but live a few years longer.",
+    "alignment": "Tieflings might not have an innate tendency toward evil, but many of them end up there.",
+    "size_description": "Tieflings are about the same size and build as humans. Your size is Medium.",
+    "subraces": [],
+    "source": "SRD 5.1 (2014)"
+  }
+]

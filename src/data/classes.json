@@ -1,0 +1,5176 @@
+[
+  {
+    "id": "barbarian",
+    "name": "Barbarian",
+    "hit_die": 12,
+    "primary_abilities": [
+      "strength"
+    ],
+    "saving_throws": [
+      "strength",
+      "constitution"
+    ],
+    "proficiencies": {
+      "armor": [
+        "Light Armor",
+        "Medium Armor",
+        "Shields"
+      ],
+      "weapons": [
+        "Simple Weapons",
+        "Martial Weapons"
+      ],
+      "tools": [],
+      "skills": {
+        "choose": 2,
+        "options": [
+          "Animal Handling",
+          "Athletics",
+          "Intimidation",
+          "Nature",
+          "Perception",
+          "Survival"
+        ],
+        "desc": "Choose two from Animal Handling, Athletics, Intimidation, Nature, Perception, and Survival"
+      }
+    },
+    "spellcasting": null,
+    "subclass_unlock_level": 3,
+    "subclasses": [
+      {
+        "id": "berserker",
+        "name": "Berserker",
+        "flavor": "Primal Path",
+        "summary": "For some barbarians, rage is a means to an end--that end being violence. The Path of the Berserker is a path of untrammeled fury, slick with blood. As you enter the berserker's rage, you thrill in the chaos of battle, heedless of your own health or well-being.",
+        "features_by_level": {
+          "3": [
+            {
+              "name": "Frenzy",
+              "summary": "Starting when you choose this path at 3rd level, you can go into a frenzy when you rage. If you do so, for the duration of your rage you can make a single melee weapon attack as a bonus action on each of your turns after this one. When your rage ends, you suffer one level of exhaustion (as described in appendix A)."
+            }
+          ],
+          "6": [
+            {
+              "name": "Mindless Rage",
+              "summary": "Beginning at 6th level, you can't be charmed or frightened while raging. If you are charmed or frightened when you enter your rage, the effect is suspended for the duration of the rage."
+            }
+          ],
+          "10": [
+            {
+              "name": "Intimidating Presence",
+              "summary": "Beginning at 10th level, you can use your action to frighten someone with your menacing presence. When you do so, choose one creature that you can see within 30 feet of you."
+            }
+          ],
+          "14": [
+            {
+              "name": "Retaliation",
+              "summary": "Starting at 14th level, when you take damage from a creature that is within 5 feet of you, you can use your reaction to make a melee weapon Attack against that creature."
+            }
+          ]
+        }
+      }
+    ],
+    "asi_levels": [
+      4,
+      8,
+      12,
+      16,
+      19
+    ],
+    "features_by_level": {
+      "1": [
+        {
+          "name": "Rage",
+          "summary": "In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain the following benefits if you aren't wearing heavy armor: - You have advantage on Strength checks and Strength saving throws."
+        },
+        {
+          "name": "Unarmored Defense",
+          "summary": "While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit."
+        }
+      ],
+      "2": [
+        {
+          "name": "Reckless Attack",
+          "summary": "Starting at 2nd level, you can throw aside all concern for defense to attack with fierce desperation. When you make your first attack on your turn, you can decide to attack recklessly."
+        },
+        {
+          "name": "Danger Sense",
+          "summary": "At 2nd level, you gain an uncanny sense of when things nearby aren't as they should be, giving you an edge when you dodge away from danger. You have advantage on Dexterity saving throws against effects that you can see, such as traps and spells. To gain this benefit, you can't be blinded, deafened, or incapacitated."
+        }
+      ],
+      "5": [
+        {
+          "name": "Extra Attack",
+          "summary": "Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn."
+        },
+        {
+          "name": "Fast Movement",
+          "summary": "Starting at 5th level, your speed increases by 10 feet while you aren't wearing heavy armor."
+        }
+      ],
+      "6": [
+        {
+          "name": "Path feature",
+          "summary": "At 3rd level, you choose a path that shapes the nature of your rage. Choose the Path of the Berserker or the Path of the Totem Warrior, both detailed at the end of the class description. Your choice grants you features at 3rd level and again at 6th, 10th, and 14th levels."
+        }
+      ],
+      "7": [
+        {
+          "name": "Feral Instinct",
+          "summary": "By 7th level, your instincts are so honed that you have advantage on initiative rolls. Additionally, if you are surprised at the beginning of combat and aren't incapacitated, you can act normally on your first turn, but only if you enter your rage before doing anything else on that turn."
+        }
+      ],
+      "9": [
+        {
+          "name": "Brutal Critical (1 die)",
+          "summary": "Beginning at 9th level, you can roll one additional weapon damage die when determining the extra damage for a critical hit with a melee attack. This increases to two additional dice at 13th level and three additional dice at 17th level."
+        }
+      ],
+      "10": [
+        {
+          "name": "Path feature",
+          "summary": "At 3rd level, you choose a path that shapes the nature of your rage. Choose the Path of the Berserker or the Path of the Totem Warrior, both detailed at the end of the class description. Your choice grants you features at 3rd level and again at 6th, 10th, and 14th levels."
+        }
+      ],
+      "11": [
+        {
+          "name": "Relentless Rage",
+          "summary": "Starting at 11th level, your rage can keep you fighting despite grievous wounds. If you drop to 0 hit points while you're raging and don't die outright, you can make a DC 10 Constitution saving throw. If you succeed, you drop to 1 hit point instead. Each time you use this feature after the first, the DC increases by 5."
+        }
+      ],
+      "13": [
+        {
+          "name": "Brutal Critical (2 dice)",
+          "summary": "Beginning at 9th level, you can roll one additional weapon damage die when determining the extra damage for a critical hit with a melee attack. This increases to two additional dice at 13th level and three additional dice at 17th level."
+        }
+      ],
+      "14": [
+        {
+          "name": "Path feature",
+          "summary": "At 3rd level, you choose a path that shapes the nature of your rage. Choose the Path of the Berserker or the Path of the Totem Warrior, both detailed at the end of the class description. Your choice grants you features at 3rd level and again at 6th, 10th, and 14th levels."
+        }
+      ],
+      "15": [
+        {
+          "name": "Persistent Rage",
+          "summary": "Beginning at 15th level, your rage is so fierce that it ends early only if you fall unconscious or if you choose to end it."
+        }
+      ],
+      "17": [
+        {
+          "name": "Brutal Critical (3 dice)",
+          "summary": "Beginning at 9th level, you can roll one additional weapon damage die when determining the extra damage for a critical hit with a melee attack. This increases to two additional dice at 13th level and three additional dice at 17th level."
+        }
+      ],
+      "18": [
+        {
+          "name": "Indomitable Might",
+          "summary": "Beginning at 18th level, if your total for a Strength check is less than your Strength score, you can use that score in place of the total."
+        }
+      ],
+      "20": [
+        {
+          "name": "Primal Champion",
+          "summary": "At 20th level, you embody the power of the wilds. Your Strength and Constitution scores increase by 4. Your maximum for those scores is now 24."
+        }
+      ]
+    },
+    "resources_by_level": [
+      {
+        "level": 1,
+        "rage_count": 2,
+        "rage_damage_bonus": 2,
+        "brutal_critical_dice": 0
+      },
+      {
+        "level": 2,
+        "rage_count": 2,
+        "rage_damage_bonus": 2,
+        "brutal_critical_dice": 0
+      },
+      {
+        "level": 3,
+        "rage_count": 3,
+        "rage_damage_bonus": 2,
+        "brutal_critical_dice": 0
+      },
+      {
+        "level": 4,
+        "rage_count": 3,
+        "rage_damage_bonus": 2,
+        "brutal_critical_dice": 0
+      },
+      {
+        "level": 5,
+        "rage_count": 3,
+        "rage_damage_bonus": 2,
+        "brutal_critical_dice": 0
+      },
+      {
+        "level": 6,
+        "rage_count": 4,
+        "rage_damage_bonus": 2,
+        "brutal_critical_dice": 0
+      },
+      {
+        "level": 7,
+        "rage_count": 4,
+        "rage_damage_bonus": 2,
+        "brutal_critical_dice": 0
+      },
+      {
+        "level": 8,
+        "rage_count": 4,
+        "rage_damage_bonus": 2,
+        "brutal_critical_dice": 0
+      },
+      {
+        "level": 9,
+        "rage_count": 4,
+        "rage_damage_bonus": 3,
+        "brutal_critical_dice": 1
+      },
+      {
+        "level": 10,
+        "rage_count": 4,
+        "rage_damage_bonus": 3,
+        "brutal_critical_dice": 1
+      },
+      {
+        "level": 11,
+        "rage_count": 4,
+        "rage_damage_bonus": 3,
+        "brutal_critical_dice": 1
+      },
+      {
+        "level": 12,
+        "rage_count": 5,
+        "rage_damage_bonus": 3,
+        "brutal_critical_dice": 1
+      },
+      {
+        "level": 13,
+        "rage_count": 5,
+        "rage_damage_bonus": 3,
+        "brutal_critical_dice": 2
+      },
+      {
+        "level": 14,
+        "rage_count": 5,
+        "rage_damage_bonus": 3,
+        "brutal_critical_dice": 2
+      },
+      {
+        "level": 15,
+        "rage_count": 5,
+        "rage_damage_bonus": 3,
+        "brutal_critical_dice": 2
+      },
+      {
+        "level": 16,
+        "rage_count": 5,
+        "rage_damage_bonus": 4,
+        "brutal_critical_dice": 2
+      },
+      {
+        "level": 17,
+        "rage_count": 6,
+        "rage_damage_bonus": 4,
+        "brutal_critical_dice": 3
+      },
+      {
+        "level": 18,
+        "rage_count": 6,
+        "rage_damage_bonus": 4,
+        "brutal_critical_dice": 3
+      },
+      {
+        "level": 19,
+        "rage_count": 6,
+        "rage_damage_bonus": 4,
+        "brutal_critical_dice": 3
+      },
+      {
+        "level": 20,
+        "rage_count": 9999,
+        "rage_damage_bonus": 4,
+        "brutal_critical_dice": 3
+      }
+    ],
+    "source": "SRD 5.1 (2014)"
+  },
+  {
+    "id": "bard",
+    "name": "Bard",
+    "hit_die": 8,
+    "primary_abilities": [
+      "charisma"
+    ],
+    "saving_throws": [
+      "dexterity",
+      "charisma"
+    ],
+    "proficiencies": {
+      "armor": [
+        "Light Armor"
+      ],
+      "weapons": [
+        "Simple Weapons",
+        "Longswords",
+        "Rapiers",
+        "Shortswords",
+        "Hand crossbows"
+      ],
+      "tools": [],
+      "skills": {
+        "choose": 3,
+        "options": [
+          "Acrobatics",
+          "Animal Handling",
+          "Arcana",
+          "Athletics",
+          "Deception",
+          "History",
+          "Insight",
+          "Intimidation",
+          "Investigation",
+          "Medicine",
+          "Nature",
+          "Perception",
+          "Performance",
+          "Persuasion",
+          "Religion",
+          "Sleight of Hand",
+          "Stealth",
+          "Survival"
+        ],
+        "desc": "Choose any three"
+      },
+      "tool_choices": [
+        {
+          "choose": 3,
+          "desc": "Three musical instruments of your choice",
+          "options": [
+            "Bagpipes",
+            "Drum",
+            "Dulcimer",
+            "Flute",
+            "Lute",
+            "Lyre",
+            "Horn",
+            "Pan flute",
+            "Shawm",
+            "Viol"
+          ]
+        }
+      ]
+    },
+    "spellcasting": {
+      "ability": "charisma",
+      "caster_type": "full",
+      "preparation": "known",
+      "ritual": true,
+      "spell_list": "bard",
+      "starts_at_level": 1,
+      "spellbook": false,
+      "focus": "musical instrument or arcane focus (component pouch also ok)"
+    },
+    "subclass_unlock_level": 3,
+    "subclasses": [
+      {
+        "id": "lore",
+        "name": "Lore",
+        "flavor": "Bard College",
+        "summary": "Bards of the College of Lore know something about most things, collecting bits of knowledge from sources as diverse as scholarly tomes and peasant tales.",
+        "features_by_level": {
+          "3": [
+            {
+              "name": "Bonus Proficiencies",
+              "summary": "When you join the College of Lore at 3rd level, you gain proficiency with three skills of your choice."
+            },
+            {
+              "name": "Cutting Words",
+              "summary": "Also at 3rd level, you learn how to use your wit to distract, confuse, and otherwise sap the confidence and competence of others."
+            }
+          ],
+          "6": [
+            {
+              "name": "Additional Magical Secrets",
+              "summary": "At 6th level, you learn two spells of your choice from any class. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip. The chosen spells count as bard spells for you but don't count against the number of bard spells you know."
+            }
+          ],
+          "14": [
+            {
+              "name": "Peerless Skill",
+              "summary": "Starting at 14th level, when you make an ability check, you can expend one use of Bardic Inspiration. Roll a Bardic Inspiration die and add the number rolled to your ability check. You can choose to do so after you roll the die for the ability check, but before the GM tells you whether you succeed or fail."
+            }
+          ]
+        }
+      }
+    ],
+    "asi_levels": [
+      4,
+      8,
+      12,
+      16,
+      19
+    ],
+    "features_by_level": {
+      "1": [
+        {
+          "name": "Bardic Inspiration (d6)",
+          "summary": "You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6."
+        }
+      ],
+      "2": [
+        {
+          "name": "Jack of All Trades",
+          "summary": "Starting at 2nd level, you can add half your proficiency bonus, rounded down, to any ability check you make that doesn't already include your proficiency bonus."
+        },
+        {
+          "name": "Song of Rest (d6)",
+          "summary": "Beginning at 2nd level, you can use soothing music or oration to help revitalize your wounded allies during a short rest."
+        }
+      ],
+      "3": [
+        {
+          "name": "Expertise",
+          "summary": "At 3rd level, choose two of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies. At 10th level, you can choose another two skill proficiencies to gain this benefit."
+        }
+      ],
+      "5": [
+        {
+          "name": "Bardic Inspiration (d8)",
+          "summary": "You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6."
+        },
+        {
+          "name": "Font of Inspiration",
+          "summary": "Beginning when you reach 5th level, you regain all of your expended uses of Bardic Inspiration when you finish a short or long rest."
+        }
+      ],
+      "6": [
+        {
+          "name": "Countercharm",
+          "summary": "At 6th level, you gain the ability to use musical notes or words of power to disrupt mind-influencing effects. As an action, you can start a performance that lasts until the end of your next turn."
+        }
+      ],
+      "9": [
+        {
+          "name": "Song of Rest (d8)",
+          "summary": "Beginning at 2nd level, you can use soothing music or oration to help revitalize your wounded allies during a short rest."
+        }
+      ],
+      "10": [
+        {
+          "name": "Expertise",
+          "summary": "At 3rd level, choose two of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies. At 10th level, you can choose another two skill proficiencies to gain this benefit."
+        },
+        {
+          "name": "Bardic Inspiration (d10)",
+          "summary": "You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6."
+        },
+        {
+          "name": "Magical Secrets",
+          "summary": "By 10th level, you have plundered magical knowledge from a wide spectrum of disciplines. Choose two spells from any class, including this one. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip."
+        }
+      ],
+      "13": [
+        {
+          "name": "Song of Rest (d10)",
+          "summary": "Beginning at 2nd level, you can use soothing music or oration to help revitalize your wounded allies during a short rest."
+        }
+      ],
+      "14": [
+        {
+          "name": "Magical Secrets",
+          "summary": "By 10th level, you have plundered magical knowledge from a wide spectrum of disciplines. Choose two spells from any class, including this one. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip."
+        }
+      ],
+      "15": [
+        {
+          "name": "Bardic Inspiration (d12)",
+          "summary": "You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6."
+        }
+      ],
+      "17": [
+        {
+          "name": "Song of Rest (d12)",
+          "summary": "Beginning at 2nd level, you can use soothing music or oration to help revitalize your wounded allies during a short rest."
+        }
+      ],
+      "18": [
+        {
+          "name": "Magical Secrets",
+          "summary": "By 10th level, you have plundered magical knowledge from a wide spectrum of disciplines. Choose two spells from any class, including this one. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip."
+        }
+      ],
+      "20": [
+        {
+          "name": "Superior Inspiration",
+          "summary": "At 20th level, when you roll initiative and have no uses of Bardic Inspiration left, you regain one use."
+        }
+      ]
+    },
+    "resources_by_level": [
+      {
+        "level": 1,
+        "bardic_inspiration_die": 6,
+        "song_of_rest_die": 0,
+        "magical_secrets_max_5": 0,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 2,
+        "bardic_inspiration_die": 6,
+        "song_of_rest_die": 6,
+        "magical_secrets_max_5": 0,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 3,
+        "bardic_inspiration_die": 6,
+        "song_of_rest_die": 6,
+        "magical_secrets_max_5": 0,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 4,
+        "bardic_inspiration_die": 6,
+        "song_of_rest_die": 6,
+        "magical_secrets_max_5": 0,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 5,
+        "bardic_inspiration_die": 8,
+        "song_of_rest_die": 6,
+        "magical_secrets_max_5": 0,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 6,
+        "bardic_inspiration_die": 8,
+        "song_of_rest_die": 6,
+        "magical_secrets_max_5": 0,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 7,
+        "bardic_inspiration_die": 8,
+        "song_of_rest_die": 6,
+        "magical_secrets_max_5": 0,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 8,
+        "bardic_inspiration_die": 8,
+        "song_of_rest_die": 6,
+        "magical_secrets_max_5": 0,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 9,
+        "bardic_inspiration_die": 8,
+        "song_of_rest_die": 8,
+        "magical_secrets_max_5": 0,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 10,
+        "bardic_inspiration_die": 10,
+        "song_of_rest_die": 8,
+        "magical_secrets_max_5": 2,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 11,
+        "bardic_inspiration_die": 10,
+        "song_of_rest_die": 8,
+        "magical_secrets_max_5": 2,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 12,
+        "bardic_inspiration_die": 10,
+        "song_of_rest_die": 8,
+        "magical_secrets_max_5": 2,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 13,
+        "bardic_inspiration_die": 10,
+        "song_of_rest_die": 10,
+        "magical_secrets_max_5": 2,
+        "magical_secrets_max_7": 0,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 14,
+        "bardic_inspiration_die": 10,
+        "song_of_rest_die": 10,
+        "magical_secrets_max_5": 2,
+        "magical_secrets_max_7": 2,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 15,
+        "bardic_inspiration_die": 12,
+        "song_of_rest_die": 10,
+        "magical_secrets_max_5": 2,
+        "magical_secrets_max_7": 2,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 16,
+        "bardic_inspiration_die": 12,
+        "song_of_rest_die": 10,
+        "magical_secrets_max_5": 2,
+        "magical_secrets_max_7": 2,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 17,
+        "bardic_inspiration_die": 12,
+        "song_of_rest_die": 12,
+        "magical_secrets_max_5": 2,
+        "magical_secrets_max_7": 2,
+        "magical_secrets_max_9": 0
+      },
+      {
+        "level": 18,
+        "bardic_inspiration_die": 12,
+        "song_of_rest_die": 12,
+        "magical_secrets_max_5": 2,
+        "magical_secrets_max_7": 2,
+        "magical_secrets_max_9": 2
+      },
+      {
+        "level": 19,
+        "bardic_inspiration_die": 12,
+        "song_of_rest_die": 12,
+        "magical_secrets_max_5": 2,
+        "magical_secrets_max_7": 2,
+        "magical_secrets_max_9": 2
+      },
+      {
+        "level": 20,
+        "bardic_inspiration_die": 12,
+        "song_of_rest_die": 12,
+        "magical_secrets_max_5": 2,
+        "magical_secrets_max_7": 2,
+        "magical_secrets_max_9": 2
+      }
+    ],
+    "source": "SRD 5.1 (2014)",
+    "spell_slots": [
+      [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        1,
+        1
+      ]
+    ],
+    "cantrips_known": [
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "spells_known": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15,
+      15,
+      16,
+      18,
+      19,
+      19,
+      20,
+      22,
+      22,
+      22
+    ]
+  },
+  {
+    "id": "cleric",
+    "name": "Cleric",
+    "hit_die": 8,
+    "primary_abilities": [
+      "wisdom"
+    ],
+    "saving_throws": [
+      "wisdom",
+      "charisma"
+    ],
+    "proficiencies": {
+      "armor": [
+        "Light Armor",
+        "Medium Armor",
+        "Shields"
+      ],
+      "weapons": [
+        "Simple Weapons"
+      ],
+      "tools": [],
+      "skills": {
+        "choose": 2,
+        "options": [
+          "History",
+          "Insight",
+          "Medicine",
+          "Persuasion",
+          "Religion"
+        ],
+        "desc": "Choose two from History, Insight, Medicine, Persuasion, and Religion"
+      }
+    },
+    "spellcasting": {
+      "ability": "wisdom",
+      "caster_type": "full",
+      "preparation": "prepared",
+      "ritual": true,
+      "spell_list": "cleric",
+      "starts_at_level": 1,
+      "spellbook": false,
+      "focus": "holy symbol"
+    },
+    "subclass_unlock_level": 1,
+    "subclasses": [
+      {
+        "id": "life",
+        "name": "Life",
+        "flavor": "Divine Domain",
+        "summary": "The Life domain focuses on the vibrant positive energy--one of the fundamental forces of the universe--that sustains all life.",
+        "features_by_level": {
+          "1": [
+            {
+              "name": "Bonus Proficiency",
+              "summary": "When you choose this domain at 1st level, you gain proficiency with heavy armor."
+            },
+            {
+              "name": "Disciple of Life",
+              "summary": "Also starting at 1st level, your healing spells are more effective. Whenever you use a spell of 1st level or higher to restore hit points to a creature, the creature regains additional hit points equal to 2 + the spell's level."
+            }
+          ],
+          "2": [
+            {
+              "name": "Channel Divinity: Preserve Life",
+              "summary": "Starting at 2nd level, you can use your Channel Divinity to heal the badly injured. As an action, you present your holy symbol and evoke healing energy that can restore a number of hit points equal to five times your cleric level. Choose any creatures within 30 feet of you, and divide those hit points among them."
+            }
+          ],
+          "6": [
+            {
+              "name": "Blessed Healer",
+              "summary": "Beginning at 6th level, the healing spells you cast on others heal you as well. When you cast a spell of 1st level or higher that restores hit points to a creature other than you, you regain hit points equal to 2 + the spell's level."
+            }
+          ],
+          "8": [
+            {
+              "name": "Divine Strike",
+              "summary": "At 8th level, you gain the ability to infuse your weapon strikes with divine energy. Once on each of your turns when you hit a creature with a weapon attack, you can cause the attack to deal an extra 1d8 radiant damage to the target. When you reach 14th level, the extra damage increases to 2d8."
+            }
+          ],
+          "17": [
+            {
+              "name": "Supreme Healing",
+              "summary": "Starting at 17th level, when you would normally roll one or more dice to restore hit points with a spell, you instead use the highest number possible for each die. For example, instead of restoring 2d6 hit points to a creature, you restore 12."
+            }
+          ]
+        }
+      }
+    ],
+    "asi_levels": [
+      4,
+      8,
+      12,
+      16,
+      19
+    ],
+    "features_by_level": {
+      "1": [
+        {
+          "name": "Domain Spells",
+          "summary": "Each domain has a list of spells--its domain spells--that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day."
+        }
+      ],
+      "2": [
+        {
+          "name": "Channel Divinity (1/rest)",
+          "summary": "At 2nd level, you gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects. You start with two such effects: Turn Undead and an effect determined by your domain. Some domains grant you additional effects as you advance in levels, as noted in the domain description."
+        },
+        {
+          "name": "Channel Divinity: Turn Undead",
+          "summary": "As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage."
+        }
+      ],
+      "3": [
+        {
+          "name": "Domain Spells",
+          "summary": "Each domain has a list of spells--its domain spells--that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day."
+        }
+      ],
+      "5": [
+        {
+          "name": "Domain Spells",
+          "summary": "Each domain has a list of spells--its domain spells--that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day."
+        },
+        {
+          "name": "Destroy Undead (CR 1/2 or below)",
+          "summary": "Starting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the creature is instantly destroyed if its challenge rating is at or below a certain threshold."
+        }
+      ],
+      "6": [
+        {
+          "name": "Channel Divinity (2/rest)",
+          "summary": "Beginning at 6th level, you can use your Channel Divinity twice between rests, and beginning at 18th level, you can use it three times between rests. When you finish a short or long rest, you regain your expended uses."
+        }
+      ],
+      "7": [
+        {
+          "name": "Domain Spells",
+          "summary": "Each domain has a list of spells--its domain spells--that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day."
+        }
+      ],
+      "8": [
+        {
+          "name": "Destroy Undead (CR 1 or below)",
+          "summary": "Starting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the creature is instantly destroyed if its challenge rating is at or below a certain threshold."
+        }
+      ],
+      "9": [
+        {
+          "name": "Domain Spells",
+          "summary": "Each domain has a list of spells--its domain spells--that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day."
+        }
+      ],
+      "10": [
+        {
+          "name": "Divine Intervention",
+          "summary": "Beginning at 10th level, you can call on your deity to intervene on your behalf when your need is great. Imploring your deity's aid requires you to use your action. Describe the assistance you seek, and roll percentile dice. If you roll a number equal to or lower than your cleric level, your deity intervenes."
+        }
+      ],
+      "11": [
+        {
+          "name": "Destroy Undead (CR 2 or below)",
+          "summary": "Starting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the creature is instantly destroyed if its challenge rating is at or below a certain threshold."
+        }
+      ],
+      "14": [
+        {
+          "name": "Destroy Undead (CR 3 or below)",
+          "summary": "Starting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the creature is instantly destroyed if its challenge rating is at or below a certain threshold."
+        }
+      ],
+      "17": [
+        {
+          "name": "Destroy Undead (CR 4 or below)",
+          "summary": "Starting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the creature is instantly destroyed if its challenge rating is at or below a certain threshold."
+        }
+      ],
+      "18": [
+        {
+          "name": "Channel Divinity (3/rest)",
+          "summary": "Beginning at 6th level, you can use your Channel Divinity twice between rests, and beginning at 18th level, you can use it three times between rests. When you finish a short or long rest, you regain your expended uses."
+        }
+      ]
+    },
+    "resources_by_level": [
+      {
+        "level": 1,
+        "channel_divinity_charges": 0,
+        "destroy_undead_cr": 0
+      },
+      {
+        "level": 2,
+        "channel_divinity_charges": 1,
+        "destroy_undead_cr": 0
+      },
+      {
+        "level": 3,
+        "channel_divinity_charges": 1,
+        "destroy_undead_cr": 0
+      },
+      {
+        "level": 4,
+        "channel_divinity_charges": 1,
+        "destroy_undead_cr": 0
+      },
+      {
+        "level": 5,
+        "channel_divinity_charges": 1,
+        "destroy_undead_cr": 0.5
+      },
+      {
+        "level": 6,
+        "channel_divinity_charges": 2,
+        "destroy_undead_cr": 0.5
+      },
+      {
+        "level": 7,
+        "channel_divinity_charges": 2,
+        "destroy_undead_cr": 0.5
+      },
+      {
+        "level": 8,
+        "channel_divinity_charges": 2,
+        "destroy_undead_cr": 1
+      },
+      {
+        "level": 9,
+        "channel_divinity_charges": 2,
+        "destroy_undead_cr": 1
+      },
+      {
+        "level": 10,
+        "channel_divinity_charges": 2,
+        "destroy_undead_cr": 1
+      },
+      {
+        "level": 11,
+        "channel_divinity_charges": 2,
+        "destroy_undead_cr": 2
+      },
+      {
+        "level": 12,
+        "channel_divinity_charges": 2,
+        "destroy_undead_cr": 2
+      },
+      {
+        "level": 13,
+        "channel_divinity_charges": 2,
+        "destroy_undead_cr": 2
+      },
+      {
+        "level": 14,
+        "channel_divinity_charges": 2,
+        "destroy_undead_cr": 3
+      },
+      {
+        "level": 15,
+        "channel_divinity_charges": 2,
+        "destroy_undead_cr": 3
+      },
+      {
+        "level": 16,
+        "channel_divinity_charges": 2,
+        "destroy_undead_cr": 3
+      },
+      {
+        "level": 17,
+        "channel_divinity_charges": 2,
+        "destroy_undead_cr": 4
+      },
+      {
+        "level": 18,
+        "channel_divinity_charges": 3,
+        "destroy_undead_cr": 4
+      },
+      {
+        "level": 19,
+        "channel_divinity_charges": 3,
+        "destroy_undead_cr": 4
+      },
+      {
+        "level": 20,
+        "channel_divinity_charges": 3,
+        "destroy_undead_cr": 4
+      }
+    ],
+    "source": "SRD 5.1 (2014)",
+    "spell_slots": [
+      [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        1,
+        1
+      ]
+    ],
+    "cantrips_known": [
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ]
+  },
+  {
+    "id": "druid",
+    "name": "Druid",
+    "hit_die": 8,
+    "primary_abilities": [
+      "wisdom"
+    ],
+    "saving_throws": [
+      "intelligence",
+      "wisdom"
+    ],
+    "proficiencies": {
+      "armor": [
+        "Light Armor",
+        "Medium Armor",
+        "Shields"
+      ],
+      "weapons": [
+        "Daggers",
+        "Javelins",
+        "Maces"
+      ],
+      "tools": [
+        "Herbalism Kit"
+      ],
+      "skills": {
+        "choose": 2,
+        "options": [
+          "Arcana",
+          "Animal Handling",
+          "Insight",
+          "Medicine",
+          "Nature",
+          "Perception",
+          "Religion",
+          "Survival"
+        ],
+        "desc": "Choose two from Arcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival"
+      }
+    },
+    "spellcasting": {
+      "ability": "wisdom",
+      "caster_type": "full",
+      "preparation": "prepared",
+      "ritual": true,
+      "spell_list": "druid",
+      "starts_at_level": 1,
+      "spellbook": false,
+      "focus": "druidic focus"
+    },
+    "subclass_unlock_level": 2,
+    "subclasses": [
+      {
+        "id": "land",
+        "name": "Land",
+        "flavor": "Druid Circle",
+        "summary": "The Circle of the Land is made up of mystics and sages who safeguard ancient knowledge and rites through a vast oral tradition. These druids meet within sacred circles of trees or standing stones to whisper primal secrets in Druidic.",
+        "features_by_level": {
+          "2": [
+            {
+              "name": "Bonus Cantrip",
+              "summary": "When you choose this circle at 2nd level, you learn one additional druid cantrip of your choice."
+            },
+            {
+              "name": "Natural Recovery",
+              "summary": "Starting at 2nd level, you can regain some of your magical energy by sitting in meditation and communing with nature. During a short rest, you choose expended spell slots to recover."
+            }
+          ],
+          "6": [
+            {
+              "name": "Land's Stride",
+              "summary": "Starting at 6th level, moving through nonmagical difficult terrain costs you no extra movement. You can also pass through nonmagical plants without being slowed by them and without taking damage from them if they have thorns, spines, or a similar hazard."
+            }
+          ],
+          "10": [
+            {
+              "name": "Nature's Ward",
+              "summary": "When you reach 10th level, you can't be charmed or frightened by elementals or fey, and you are immune to poison and disease."
+            }
+          ],
+          "14": [
+            {
+              "name": "Nature's Sanctuary",
+              "summary": "When you reach 14th level, creatures of the natural world sense your connection to nature and become hesitant to attack you. When a beast or plant creature attacks you, that creature must make a Wisdom saving throw against your druid spell save DC."
+            }
+          ]
+        }
+      }
+    ],
+    "asi_levels": [
+      4,
+      8,
+      12,
+      16,
+      19
+    ],
+    "features_by_level": {
+      "1": [
+        {
+          "name": "Druidic",
+          "summary": "You know Druidic, the secret language of druids. You can speak the language and use it to leave hidden messages. You and others who know this language automatically spot such a message. Others spot the message's presence with a successful DC 15 Wisdom (Perception) check but can't decipher it without magic."
+        }
+      ],
+      "2": [
+        {
+          "name": "Wild Shape (CR 1/4 or below, no flying or swim speed)",
+          "summary": "Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before. You can use this feature twice. You regain expended uses when you finish a short or long rest. Your druid level determines the beasts you can transform into, as shown in the Beast Shapes table."
+        }
+      ],
+      "4": [
+        {
+          "name": "Wild Shape (CR 1/2 or below, no flying speed)",
+          "summary": "Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before. You can use this feature twice. You regain expended uses when you finish a short or long rest. Your druid level determines the beasts you can transform into, as shown in the Beast Shapes table."
+        }
+      ],
+      "8": [
+        {
+          "name": "Wild Shape (CR 1 or below)",
+          "summary": "Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before. You can use this feature twice. You regain expended uses when you finish a short or long rest. Your druid level determines the beasts you can transform into, as shown in the Beast Shapes table."
+        }
+      ],
+      "18": [
+        {
+          "name": "Timeless Body",
+          "summary": "Starting at 18th level, the primal magic that you wield causes you to age more slowly. For every 10 years that pass, your body ages only 1 year."
+        },
+        {
+          "name": "Beast Spells",
+          "summary": "Beginning at 18th level, you can cast many of your druid spells in any shape you assume using Wild Shape. You can perform the somatic and verbal components of a druid spell while in a beast shape, but you aren't able to provide material components."
+        }
+      ],
+      "20": [
+        {
+          "name": "Archdruid",
+          "summary": "At 20th level, you can use your Wild Shape an unlimited number of times. Additionally, you can ignore the verbal and somatic components of your druid spells, as well as any material components that lack a cost and aren't consumed by a spell."
+        }
+      ]
+    },
+    "resources_by_level": [
+      {
+        "level": 1,
+        "wild_shape_max_cr": 0,
+        "wild_shape_swim": false,
+        "wild_shape_fly": false
+      },
+      {
+        "level": 2,
+        "wild_shape_max_cr": 0.25,
+        "wild_shape_swim": false,
+        "wild_shape_fly": false
+      },
+      {
+        "level": 3,
+        "wild_shape_max_cr": 0.25,
+        "wild_shape_swim": false,
+        "wild_shape_fly": false
+      },
+      {
+        "level": 4,
+        "wild_shape_max_cr": 0.5,
+        "wild_shape_swim": true,
+        "wild_shape_fly": false
+      },
+      {
+        "level": 5,
+        "wild_shape_max_cr": 0.5,
+        "wild_shape_swim": true,
+        "wild_shape_fly": false
+      },
+      {
+        "level": 6,
+        "wild_shape_max_cr": 0.5,
+        "wild_shape_swim": true,
+        "wild_shape_fly": false
+      },
+      {
+        "level": 7,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": false
+      },
+      {
+        "level": 8,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      },
+      {
+        "level": 9,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      },
+      {
+        "level": 10,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      },
+      {
+        "level": 11,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      },
+      {
+        "level": 12,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      },
+      {
+        "level": 13,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      },
+      {
+        "level": 14,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      },
+      {
+        "level": 15,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      },
+      {
+        "level": 16,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      },
+      {
+        "level": 17,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      },
+      {
+        "level": 18,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      },
+      {
+        "level": 19,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      },
+      {
+        "level": 20,
+        "wild_shape_max_cr": 1,
+        "wild_shape_swim": true,
+        "wild_shape_fly": true
+      }
+    ],
+    "source": "SRD 5.1 (2014)",
+    "spell_slots": [
+      [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        1,
+        1
+      ]
+    ],
+    "cantrips_known": [
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ]
+  },
+  {
+    "id": "fighter",
+    "name": "Fighter",
+    "hit_die": 10,
+    "primary_abilities": [
+      "strength",
+      "dexterity"
+    ],
+    "saving_throws": [
+      "strength",
+      "constitution"
+    ],
+    "proficiencies": {
+      "armor": [
+        "All armor",
+        "Shields"
+      ],
+      "weapons": [
+        "Simple Weapons",
+        "Martial Weapons"
+      ],
+      "tools": [],
+      "skills": {
+        "choose": 2,
+        "options": [
+          "Acrobatics",
+          "Animal Handling",
+          "Athletics",
+          "History",
+          "Insight",
+          "Intimidation",
+          "Perception",
+          "Survival"
+        ],
+        "desc": "Choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival"
+      }
+    },
+    "spellcasting": null,
+    "subclass_unlock_level": 3,
+    "subclasses": [
+      {
+        "id": "champion",
+        "name": "Champion",
+        "flavor": "Martial Archetype",
+        "summary": "The archetypal Champion focuses on the development of raw physical power honed to deadly perfection. Those who model themselves on this archetype combine rigorous training with physical excellence to deal devastating blows.",
+        "features_by_level": {
+          "3": [
+            {
+              "name": "Improved Critical",
+              "summary": "Beginning when you choose this archetype at 3rd level, your weapon attacks score a critical hit on a roll of 19 or 20."
+            }
+          ],
+          "7": [
+            {
+              "name": "Remarkable Athlete",
+              "summary": "Starting at 7th level, you can add half your proficiency bonus (round up) to any Strength, Dexterity, or Constitution check you make that doesn't already use your proficiency bonus. In addition, when you make a running long jump, the distance you can cover increases by a number of feet equal to your Strength modifier."
+            }
+          ],
+          "10": [
+            {
+              "name": "Additional Fighting Style",
+              "summary": "At 10th level, you can choose a second option from the Fighting Style class feature."
+            }
+          ],
+          "15": [
+            {
+              "name": "Superior Critical",
+              "summary": "Starting at 15th level, your weapon attacks score a critical hit on a roll of 18-20."
+            }
+          ],
+          "18": [
+            {
+              "name": "Survivor",
+              "summary": "At 18th level, you attain the pinnacle of resilience in battle. At the start of each of your turns, you regain hit points equal to 5 + your Constitution modifier if you have no more than half of your hit points left. You don't gain this benefit if you have 0 hit points."
+            }
+          ]
+        }
+      }
+    ],
+    "asi_levels": [
+      4,
+      6,
+      8,
+      12,
+      14,
+      16,
+      19
+    ],
+    "features_by_level": {
+      "1": [
+        {
+          "name": "Fighting Style",
+          "summary": "You adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again."
+        },
+        {
+          "name": "Second Wind",
+          "summary": "You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again."
+        }
+      ],
+      "2": [
+        {
+          "name": "Action Surge (1 use)",
+          "summary": "Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action on top of your regular action and a possible bonus action. Once you use this feature, you must finish a short or long rest before you can use it again."
+        }
+      ],
+      "5": [
+        {
+          "name": "Extra Attack",
+          "summary": "Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn. The number of attacks increases to three when you reach 11th level in this class and to four when you reach 20th level in this class."
+        }
+      ],
+      "9": [
+        {
+          "name": "Indomitable (1 use)",
+          "summary": "Beginning at 9th level, you can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can't use this feature again until you finish a long rest. You can use this feature twice between long rests starting at 13th level and three times between long rests starting at 17th level."
+        }
+      ],
+      "11": [
+        {
+          "name": "Extra Attack (2)",
+          "summary": "Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn. The number of attacks increases to three when you reach 11th level in this class and to four when you reach 20th level in this class."
+        }
+      ],
+      "13": [
+        {
+          "name": "Indomitable (2 uses)",
+          "summary": "Beginning at 9th level, you can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can't use this feature again until you finish a long rest. You can use this feature twice between long rests starting at 13th level and three times between long rests starting at 17th level."
+        }
+      ],
+      "17": [
+        {
+          "name": "Action Surge (2 uses)",
+          "summary": "Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action on top of your regular action and a possible bonus action. Once you use this feature, you must finish a short or long rest before you can use it again."
+        },
+        {
+          "name": "Indomitable (3 uses)",
+          "summary": "Beginning at 9th level, you can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can't use this feature again until you finish a long rest. You can use this feature twice between long rests starting at 13th level and three times between long rests starting at 17th level."
+        }
+      ],
+      "20": [
+        {
+          "name": "Extra Attack (3)",
+          "summary": "Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn. The number of attacks increases to three when you reach 11th level in this class and to four when you reach 20th level in this class."
+        }
+      ]
+    },
+    "resources_by_level": [
+      {
+        "level": 1,
+        "action_surges": 0,
+        "indomitable_uses": 0,
+        "extra_attacks": 0
+      },
+      {
+        "level": 2,
+        "action_surges": 1,
+        "indomitable_uses": 0,
+        "extra_attacks": 0
+      },
+      {
+        "level": 3,
+        "action_surges": 1,
+        "indomitable_uses": 0,
+        "extra_attacks": 0
+      },
+      {
+        "level": 4,
+        "action_surges": 1,
+        "indomitable_uses": 0,
+        "extra_attacks": 0
+      },
+      {
+        "level": 5,
+        "action_surges": 1,
+        "indomitable_uses": 0,
+        "extra_attacks": 1
+      },
+      {
+        "level": 6,
+        "action_surges": 1,
+        "indomitable_uses": 0,
+        "extra_attacks": 1
+      },
+      {
+        "level": 7,
+        "action_surges": 1,
+        "indomitable_uses": 0,
+        "extra_attacks": 1
+      },
+      {
+        "level": 8,
+        "action_surges": 1,
+        "indomitable_uses": 0,
+        "extra_attacks": 1
+      },
+      {
+        "level": 9,
+        "action_surges": 1,
+        "indomitable_uses": 1,
+        "extra_attacks": 1
+      },
+      {
+        "level": 10,
+        "action_surges": 1,
+        "indomitable_uses": 1,
+        "extra_attacks": 1
+      },
+      {
+        "level": 11,
+        "action_surges": 1,
+        "indomitable_uses": 1,
+        "extra_attacks": 2
+      },
+      {
+        "level": 12,
+        "action_surges": 1,
+        "indomitable_uses": 1,
+        "extra_attacks": 2
+      },
+      {
+        "level": 13,
+        "action_surges": 1,
+        "indomitable_uses": 2,
+        "extra_attacks": 2
+      },
+      {
+        "level": 14,
+        "action_surges": 1,
+        "indomitable_uses": 2,
+        "extra_attacks": 2
+      },
+      {
+        "level": 15,
+        "action_surges": 1,
+        "indomitable_uses": 2,
+        "extra_attacks": 2
+      },
+      {
+        "level": 16,
+        "action_surges": 1,
+        "indomitable_uses": 2,
+        "extra_attacks": 2
+      },
+      {
+        "level": 17,
+        "action_surges": 2,
+        "indomitable_uses": 3,
+        "extra_attacks": 2
+      },
+      {
+        "level": 18,
+        "action_surges": 2,
+        "indomitable_uses": 3,
+        "extra_attacks": 2
+      },
+      {
+        "level": 19,
+        "action_surges": 2,
+        "indomitable_uses": 3,
+        "extra_attacks": 2
+      },
+      {
+        "level": 20,
+        "action_surges": 2,
+        "indomitable_uses": 3,
+        "extra_attacks": 3
+      }
+    ],
+    "source": "SRD 5.1 (2014)"
+  },
+  {
+    "id": "monk",
+    "name": "Monk",
+    "hit_die": 8,
+    "primary_abilities": [
+      "dexterity",
+      "wisdom"
+    ],
+    "saving_throws": [
+      "strength",
+      "dexterity"
+    ],
+    "proficiencies": {
+      "armor": [],
+      "weapons": [
+        "Simple Weapons",
+        "Shortswords"
+      ],
+      "tools": [],
+      "skills": {
+        "choose": 2,
+        "options": [
+          "Acrobatics",
+          "Athletics",
+          "History",
+          "Insight",
+          "Religion",
+          "Stealth"
+        ],
+        "desc": "Choose two from Acrobatics, Athletics, History, Insight, Religion, and Stealth"
+      },
+      "tool_choices": [
+        {
+          "choose": 1,
+          "desc": "Choose one type of artisan’s tools or one musical instrument",
+          "options": [
+            {
+              "label": "artisan's tools",
+              "choose": 1,
+              "options": [
+                "Alchemist's Supplies",
+                "Brewer's Supplies",
+                "Calligrapher's Supplies",
+                "Carpenter's Tools",
+                "Cartographer's Tools",
+                "Cobbler's Tools",
+                "Cook's utensils",
+                "Glassblower's Tools",
+                "Jeweler's Tools",
+                "Leatherworker's Tools",
+                "Mason's Tools",
+                "Painter's Supplies",
+                "Potter's Tools",
+                "Smith's Tools",
+                "Tinker's Tools",
+                "Weaver's Tools",
+                "Woodcarver's Tools"
+              ],
+              "from_category": null
+            },
+            {
+              "label": "musical instrument",
+              "choose": 1,
+              "options": [
+                "Bagpipes",
+                "Drum",
+                "Dulcimer",
+                "Flute",
+                "Lute",
+                "Lyre",
+                "Horn",
+                "Pan flute",
+                "Shawm",
+                "Viol"
+              ],
+              "from_category": null
+            }
+          ]
+        }
+      ]
+    },
+    "spellcasting": null,
+    "subclass_unlock_level": 3,
+    "subclasses": [
+      {
+        "id": "open-hand",
+        "name": "Open Hand",
+        "flavor": "Monastic Tradition",
+        "summary": "Monks of the Way of the Open Hand are the ultimate masters of martial arts combat, whether armed or unarmed. They learn techniques to push and trip their opponents, manipulate ki to heal damage to their bodies, and practice advanced meditation that can protect them from harm.",
+        "features_by_level": {
+          "3": [
+            {
+              "name": "Open Hand Technique",
+              "summary": "Starting when you choose this tradition at 3rd level, you can manipulate your enemy's ki when you harness your own."
+            }
+          ],
+          "6": [
+            {
+              "name": "Wholeness of Body",
+              "summary": "At 6th level, you gain the ability to heal yourself. As an action, you can regain hit points equal to three times your monk level. You must finish a long rest before you can use this feature again."
+            }
+          ],
+          "11": [
+            {
+              "name": "Tranquility",
+              "summary": "Beginning at 11th level, you can enter a special meditation that surrounds you with an aura of peace. At the end of a long rest, you gain the effect of a sanctuary spell that lasts until the start of your next long rest (the spell can end early as normal)."
+            }
+          ],
+          "17": [
+            {
+              "name": "Quivering Palm",
+              "summary": "At 17th level, you gain the ability to set up lethal vibrations in someone's body. When you hit a creature with an unarmed strike, you can spend 3 ki points to start these imperceptible vibrations, which last for a number of days equal to your monk level."
+            }
+          ]
+        }
+      }
+    ],
+    "asi_levels": [
+      4,
+      8,
+      12,
+      16,
+      19
+    ],
+    "features_by_level": {
+      "1": [
+        {
+          "name": "Unarmored Defense",
+          "summary": "Beginning at 1st level, while you are wearing no armor and not wielding a shield, your AC equals 10 + your Dexterity modifier + your Wisdom modifier."
+        },
+        {
+          "name": "Martial Arts",
+          "summary": "At 1st level, your practice of martial arts gives you mastery of combat styles that use unarmed strikes and monk weapons, which are shortswords and any simple melee weapons that don't have the two- handed or heavy property."
+        }
+      ],
+      "2": [
+        {
+          "name": "Ki",
+          "summary": "Starting at 2nd level, your training allows you to harness the mystic energy of ki. Your access to this energy is represented by a number of ki points. Your monk level determines the number of points you have, as shown in the Ki Points column of Table: The Monk. You can spend these points to fuel various ki features."
+        },
+        {
+          "name": "Flurry of Blows",
+          "summary": "Immediately after you take the Attack action on your turn, you can spend 1 ki point to make two unarmed strikes as a bonus action."
+        },
+        {
+          "name": "Patient Defense",
+          "summary": "You can spend 1 ki point to take the Dodge action as a bonus action on your turn."
+        },
+        {
+          "name": "Step of the Wind",
+          "summary": "You can spend 1 ki point to take the Disengage or Dash action as a bonus action on your turn, and your jump distance is doubled for the turn."
+        },
+        {
+          "name": "Unarmored Movement",
+          "summary": "Starting at 2nd level, your speed increases by 10 feet while you are not wearing armor or wielding a shield. This bonus increases when you reach certain monk levels, as shown in Table: The Monk."
+        }
+      ],
+      "3": [
+        {
+          "name": "Deflect Missiles",
+          "summary": "Starting at 3rd level, you can use your reaction to deflect or catch the missile when you are hit by a ranged weapon attack. When you do so, the damage you take from the attack is reduced by 1d10 + your Dexterity modifier + your monk level."
+        }
+      ],
+      "4": [
+        {
+          "name": "Slow Fall",
+          "summary": "Beginning at 4th level, you can use your reaction when you fall to reduce any falling damage you take by an amount equal to five times your monk level."
+        }
+      ],
+      "5": [
+        {
+          "name": "Extra Attack",
+          "summary": "Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn."
+        },
+        {
+          "name": "Stunning Strike",
+          "summary": "Starting at 5th level, you can interfere with the flow of ki in an opponent's body. When you hit another creature with a melee weapon attack, you can spend 1 ki point to attempt a stunning strike. The target must succeed on a Constitution saving throw or be stunned until the end of your next turn."
+        }
+      ],
+      "6": [
+        {
+          "name": "Ki Empowered Strikes",
+          "summary": "Starting at 6th level, your unarmed strikes count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage."
+        }
+      ],
+      "7": [
+        {
+          "name": "Evasion",
+          "summary": "At 7th level, your instinctive agility lets you dodge out of the way of certain area effects, such as a blue dragon's lightning breath or a fireball spell."
+        },
+        {
+          "name": "Stillness of Mind",
+          "summary": "Starting at 7th level, you can use your action to end one effect on yourself that is causing you to be charmed or frightened."
+        }
+      ],
+      "9": [
+        {
+          "name": "Unarmored Movement",
+          "summary": "Starting at 2nd level, your speed increases by 10 feet while you are not wearing armor or wielding a shield. This bonus increases when you reach certain monk levels, as shown in Table: The Monk."
+        }
+      ],
+      "10": [
+        {
+          "name": "Purity of Body",
+          "summary": "At 10th level, your mastery of the ki flowing through you makes you immune to disease and poison."
+        }
+      ],
+      "13": [
+        {
+          "name": "Tongue of the Sun and Moon",
+          "summary": "Starting at 13th level, you learn to touch the ki of other minds so that you understand all spoken languages. Moreover, any creature that can understand a language can understand what you say."
+        }
+      ],
+      "14": [
+        {
+          "name": "Diamond Soul",
+          "summary": "Beginning at 14th level, your mastery of ki grants you proficiency in all saving throws. Additionally, whenever you make a saving throw and fail, you can spend 1 ki point to reroll it and take the second result."
+        }
+      ],
+      "15": [
+        {
+          "name": "Timeless Body",
+          "summary": "At 15th level, your ki sustains you so that you suffer none of the frailty of old age, and you can't be aged magically. You can still die of old age, however. In addition, you no longer need food or water."
+        }
+      ],
+      "18": [
+        {
+          "name": "Empty Body",
+          "summary": "Beginning at 18th level, you can use your action to spend 4 ki points to become invisible for 1 minute. During that time, you also have resistance to all damage but force damage. Additionally, you can spend 8 ki points to cast the astral projection spell, without needing material components."
+        }
+      ],
+      "20": [
+        {
+          "name": "Perfect Self",
+          "summary": "At 20th level, when you roll for initiative and have no ki points remaining, you regain 4 ki points."
+        }
+      ]
+    },
+    "resources_by_level": [
+      {
+        "level": 1,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 4
+        },
+        "ki_points": 0,
+        "unarmored_movement": 0
+      },
+      {
+        "level": 2,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 4
+        },
+        "ki_points": 2,
+        "unarmored_movement": 10
+      },
+      {
+        "level": 3,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 4
+        },
+        "ki_points": 3,
+        "unarmored_movement": 10
+      },
+      {
+        "level": 4,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 4
+        },
+        "ki_points": 4,
+        "unarmored_movement": 10
+      },
+      {
+        "level": 5,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 6
+        },
+        "ki_points": 5,
+        "unarmored_movement": 10
+      },
+      {
+        "level": 6,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 6
+        },
+        "ki_points": 6,
+        "unarmored_movement": 15
+      },
+      {
+        "level": 7,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 6
+        },
+        "ki_points": 7,
+        "unarmored_movement": 15
+      },
+      {
+        "level": 8,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 6
+        },
+        "ki_points": 8,
+        "unarmored_movement": 15
+      },
+      {
+        "level": 9,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 6
+        },
+        "ki_points": 9,
+        "unarmored_movement": 15
+      },
+      {
+        "level": 10,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 6
+        },
+        "ki_points": 10,
+        "unarmored_movement": 20
+      },
+      {
+        "level": 11,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 8
+        },
+        "ki_points": 11,
+        "unarmored_movement": 20
+      },
+      {
+        "level": 12,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 8
+        },
+        "ki_points": 12,
+        "unarmored_movement": 20
+      },
+      {
+        "level": 13,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 8
+        },
+        "ki_points": 13,
+        "unarmored_movement": 20
+      },
+      {
+        "level": 14,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 8
+        },
+        "ki_points": 14,
+        "unarmored_movement": 25
+      },
+      {
+        "level": 15,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 8
+        },
+        "ki_points": 15,
+        "unarmored_movement": 25
+      },
+      {
+        "level": 16,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 8
+        },
+        "ki_points": 16,
+        "unarmored_movement": 25
+      },
+      {
+        "level": 17,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 10
+        },
+        "ki_points": 17,
+        "unarmored_movement": 25
+      },
+      {
+        "level": 18,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 10
+        },
+        "ki_points": 18,
+        "unarmored_movement": 30
+      },
+      {
+        "level": 19,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 10
+        },
+        "ki_points": 19,
+        "unarmored_movement": 30
+      },
+      {
+        "level": 20,
+        "martial_arts": {
+          "dice_count": 1,
+          "dice_value": 10
+        },
+        "ki_points": 20,
+        "unarmored_movement": 30
+      }
+    ],
+    "source": "SRD 5.1 (2014)"
+  },
+  {
+    "id": "paladin",
+    "name": "Paladin",
+    "hit_die": 10,
+    "primary_abilities": [
+      "strength",
+      "charisma"
+    ],
+    "saving_throws": [
+      "wisdom",
+      "charisma"
+    ],
+    "proficiencies": {
+      "armor": [
+        "All armor",
+        "Shields"
+      ],
+      "weapons": [
+        "Simple Weapons",
+        "Martial Weapons"
+      ],
+      "tools": [],
+      "skills": {
+        "choose": 2,
+        "options": [
+          "Athletics",
+          "Insight",
+          "Intimidation",
+          "Medicine",
+          "Persuasion",
+          "Religion"
+        ],
+        "desc": "Choose two from Athletics, Insight, Intimidation, Medicine, Persuasion, and Religion"
+      }
+    },
+    "spellcasting": {
+      "ability": "charisma",
+      "caster_type": "half",
+      "preparation": "prepared",
+      "ritual": false,
+      "spell_list": "paladin",
+      "starts_at_level": 2,
+      "spellbook": false,
+      "focus": "holy symbol"
+    },
+    "subclass_unlock_level": 3,
+    "subclasses": [
+      {
+        "id": "devotion",
+        "name": "Devotion",
+        "flavor": "Sacred Oath",
+        "summary": "The Oath of Devotion binds a paladin to the loftiest ideals of justice, virtue, and order. Sometimes called cavaliers, white knights, or holy warriors, these paladins meet the ideal of the knight in shining armor, acting with honor in pursuit of justice and the greater good.",
+        "features_by_level": {
+          "3": [
+            {
+              "name": "Channel Divinity: Sacred Weapon",
+              "summary": "As an action, you can imbue one weapon that you are holding with positive energy, using your Channel Divinity. For 1 minute, you add your Charisma modifier to attack rolls made with that weapon (with a minimum bonus of +1). The weapon also emits bright light in a 20-foot radius and dim light 20 feet beyond that."
+            },
+            {
+              "name": "Channel Divinity: Turn the Unholy",
+              "summary": "As an action, you present your holy symbol and speak a prayer censuring fiends and undead, using your Channel Divinity. Each fiend or undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes damage."
+            }
+          ],
+          "7": [
+            {
+              "name": "Aura of Devotion",
+              "summary": "Starting at 7th level, you and friendly creatures within 10 feet of you can't be charmed while you are conscious. At 18th level, the range of this aura increases to 30 feet."
+            }
+          ],
+          "15": [
+            {
+              "name": "Purity of Spirit",
+              "summary": "Beginning at 15th level, you are always under the effects of a protection from evil and good spell."
+            }
+          ],
+          "20": [
+            {
+              "name": "Holy Nimbus",
+              "summary": "At 20th level, as an action, you can emanate an aura of sunlight. For 1 minute, bright light shines from you in a 30-foot radius, and dim light shines 30 feet beyond that. Whenever an enemy creature starts its turn in the bright light, the creature takes 10 radiant damage."
+            }
+          ]
+        }
+      }
+    ],
+    "asi_levels": [
+      4,
+      8,
+      12,
+      16,
+      19
+    ],
+    "features_by_level": {
+      "1": [
+        {
+          "name": "Divine Sense",
+          "summary": "The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears. As an action, you can open your awareness to detect such forces."
+        },
+        {
+          "name": "Lay on Hands",
+          "summary": "Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest. With that pool, you can restore a total number of hit points equal to your paladin level x 5."
+        }
+      ],
+      "2": [
+        {
+          "name": "Fighting Style",
+          "summary": "At 2nd level, you adopt a style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again."
+        },
+        {
+          "name": "Divine Smite",
+          "summary": "Starting at 2nd level, when you hit a creature with a melee weapon attack, you can expend one spell slot to deal radiant damage to the target, in addition to the weapon's damage. The extra damage is 2d8 for a 1st-level spell slot, plus 1d8 for each spell level higher than 1st, to a maximum of 5d8."
+        }
+      ],
+      "3": [
+        {
+          "name": "Divine Health",
+          "summary": "By 3rd level, the divine magic flowing through you makes you immune to disease."
+        },
+        {
+          "name": "Oath Spells",
+          "summary": "Each oath has a list of associated spells. You gain access to these spells at the levels specified in the oath description. Once you gain access to an oath spell, you always have it prepared. Oath spells don't count against the number of spells you can prepare each day."
+        },
+        {
+          "name": "Channel Divinity",
+          "summary": "Your oath allows you to channel divine energy to fuel magical effects. Each Channel Divinity option provided by your oath explains how to use it. When you use your Channel Divinity, you choose which option to use. You must then finish a short or long rest to use your Channel Divinity again."
+        }
+      ],
+      "5": [
+        {
+          "name": "Extra Attack",
+          "summary": "Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn."
+        }
+      ],
+      "6": [
+        {
+          "name": "Aura of Protection",
+          "summary": "Starting at 6th level, whenever you or a friendly creature within 10 feet of you must make a saving throw, the creature gains a bonus to the saving throw equal to your Charisma modifier (with a minimum bonus of +1). You must be conscious to grant this bonus. At 18th level, the range of this aura increases to 30 feet."
+        }
+      ],
+      "10": [
+        {
+          "name": "Aura of Courage",
+          "summary": "Starting at 10th level, you and friendly creatures within 10 feet of you can't be frightened while you are conscious. At 18th level, the range of this aura increases to 30 feet."
+        }
+      ],
+      "11": [
+        {
+          "name": "Improved Divine Smite",
+          "summary": "By 11th level, you are so suffused with righteous might that all your melee weapon strikes carry divine power with them. Whenever you hit a creature with a melee weapon, the creature takes an extra 1d8 radiant damage."
+        }
+      ],
+      "14": [
+        {
+          "name": "Cleansing Touch",
+          "summary": "Beginning at 14th level, you can use your action to end one spell on yourself or on one willing creature that you touch. You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain expended uses when you finish a long rest."
+        }
+      ]
+    },
+    "resources_by_level": [
+      {
+        "level": 1,
+        "aura_range": 0
+      },
+      {
+        "level": 2,
+        "aura_range": 0
+      },
+      {
+        "level": 3,
+        "aura_range": 0
+      },
+      {
+        "level": 4,
+        "aura_range": 0
+      },
+      {
+        "level": 5,
+        "aura_range": 0
+      },
+      {
+        "level": 6,
+        "aura_range": 10
+      },
+      {
+        "level": 7,
+        "aura_range": 10
+      },
+      {
+        "level": 8,
+        "aura_range": 10
+      },
+      {
+        "level": 9,
+        "aura_range": 10
+      },
+      {
+        "level": 10,
+        "aura_range": 10
+      },
+      {
+        "level": 11,
+        "aura_range": 10
+      },
+      {
+        "level": 12,
+        "aura_range": 10
+      },
+      {
+        "level": 13,
+        "aura_range": 10
+      },
+      {
+        "level": 14,
+        "aura_range": 10
+      },
+      {
+        "level": 15,
+        "aura_range": 10
+      },
+      {
+        "level": 16,
+        "aura_range": 10
+      },
+      {
+        "level": 17,
+        "aura_range": 10
+      },
+      {
+        "level": 18,
+        "aura_range": 30
+      },
+      {
+        "level": 19,
+        "aura_range": 30
+      },
+      {
+        "level": 20,
+        "aura_range": 30
+      }
+    ],
+    "source": "SRD 5.1 (2014)",
+    "spell_slots": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        2,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        2,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        2,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        2,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2
+      ]
+    ]
+  },
+  {
+    "id": "ranger",
+    "name": "Ranger",
+    "hit_die": 10,
+    "primary_abilities": [
+      "dexterity",
+      "wisdom"
+    ],
+    "saving_throws": [
+      "strength",
+      "dexterity"
+    ],
+    "proficiencies": {
+      "armor": [
+        "Light Armor",
+        "Medium Armor",
+        "Shields"
+      ],
+      "weapons": [
+        "Simple Weapons",
+        "Martial Weapons"
+      ],
+      "tools": [],
+      "skills": {
+        "choose": 3,
+        "options": [
+          "Animal Handling",
+          "Athletics",
+          "Insight",
+          "Investigation",
+          "Nature",
+          "Perception",
+          "Stealth",
+          "Survival"
+        ],
+        "desc": "Choose three from Animal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival"
+      }
+    },
+    "spellcasting": {
+      "ability": "wisdom",
+      "caster_type": "half",
+      "preparation": "known",
+      "ritual": false,
+      "spell_list": "ranger",
+      "starts_at_level": 2,
+      "spellbook": false,
+      "focus": null
+    },
+    "subclass_unlock_level": 3,
+    "subclasses": [
+      {
+        "id": "hunter",
+        "name": "Hunter",
+        "flavor": "Ranger Archetype",
+        "summary": "Emulating the Hunter archetype means accepting your place as a bulwark between civilization and the terrors of the wilderness.",
+        "features_by_level": {
+          "3": [
+            {
+              "name": "Hunter's Prey",
+              "summary": "At 3rd level, you gain one of the following features of your choice. Colossus Slayer Giant Killer Horde Breaker"
+            }
+          ],
+          "7": [
+            {
+              "name": "Defensive Tactics",
+              "summary": "At 7th level, you gain one of the following features of your choice. Escape the Horde Multiattack Defense Steel Will"
+            }
+          ],
+          "11": [
+            {
+              "name": "Multiattack",
+              "summary": "At 11th level, you gain one of the following features of your choice. Volley Whirlwind Attack"
+            }
+          ],
+          "15": [
+            {
+              "name": "Superior Hunter's Defense",
+              "summary": "At 15th level, you gain one of the following features of your choice. Evasion Stand Against the Tide Uncanny Dodge"
+            }
+          ]
+        }
+      }
+    ],
+    "asi_levels": [
+      4,
+      8,
+      12,
+      16,
+      19
+    ],
+    "features_by_level": {
+      "1": [
+        {
+          "name": "Favored Enemy (1 type)",
+          "summary": "Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy. Choose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead."
+        },
+        {
+          "name": "Natural Explorer (1 terrain type)",
+          "summary": "You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions. Choose one type of favored terrain: arctic, coast, desert, forest, grassland, mountain, or swamp."
+        }
+      ],
+      "2": [
+        {
+          "name": "Fighting Style",
+          "summary": "At 2nd level, you adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again."
+        }
+      ],
+      "3": [
+        {
+          "name": "Primeval Awareness",
+          "summary": "Beginning at 3rd level, you can use your action and expend one ranger spell slot to focus your awareness on the region around you."
+        }
+      ],
+      "5": [
+        {
+          "name": "Extra Attack",
+          "summary": "Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn."
+        }
+      ],
+      "6": [
+        {
+          "name": "Favored Enemy (2 types)",
+          "summary": "Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy. Choose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead."
+        },
+        {
+          "name": "Natural Explorer (2 terrain types)",
+          "summary": "You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions. Choose one type of favored terrain: arctic, coast, desert, forest, grassland, mountain, or swamp."
+        }
+      ],
+      "8": [
+        {
+          "name": "Land's Stride",
+          "summary": "Starting at 8th level, moving through nonmagical difficult terrain costs you no extra movement. You can also pass through nonmagical plants without being slowed by them and without taking damage from them if they have thorns, spines, or a similar hazard."
+        }
+      ],
+      "10": [
+        {
+          "name": "Natural Explorer (3 terrain types)",
+          "summary": "You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions. Choose one type of favored terrain: arctic, coast, desert, forest, grassland, mountain, or swamp."
+        },
+        {
+          "name": "Hide in Plain Sight",
+          "summary": "Starting at 10th level, you can spend 1 minute creating camouflage for yourself. You must have access to fresh mud, dirt, plants, soot, and other naturally occurring materials with which to create your camouflage."
+        }
+      ],
+      "14": [
+        {
+          "name": "Favored Enemy (3 enemies)",
+          "summary": "Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy. Choose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead."
+        },
+        {
+          "name": "Vanish",
+          "summary": "Starting at 14th level, you can use the Hide action as a bonus action on your turn. Also, you can't be tracked by nonmagical means, unless you choose to leave a trail."
+        }
+      ],
+      "18": [
+        {
+          "name": "Feral Senses",
+          "summary": "At 18th level, you gain preternatural senses that help you fight creatures you can't see. When you attack a creature you can't see, your inability to see it doesn't impose disadvantage on your attack rolls against it."
+        }
+      ],
+      "20": [
+        {
+          "name": "Foe Slayer",
+          "summary": "At 20th level, you become an unparalleled hunter of your enemies. Once on each of your turns, you can add your Wisdom modifier to the attack roll or the damage roll of an attack you make against one of your favored enemies."
+        }
+      ]
+    },
+    "resources_by_level": [
+      {
+        "level": 1,
+        "favored_enemies": 1,
+        "favored_terrain": 1
+      },
+      {
+        "level": 2,
+        "favored_enemies": 1,
+        "favored_terrain": 1
+      },
+      {
+        "level": 3,
+        "favored_enemies": 1,
+        "favored_terrain": 1
+      },
+      {
+        "level": 4,
+        "favored_enemies": 1,
+        "favored_terrain": 1
+      },
+      {
+        "level": 5,
+        "favored_enemies": 1,
+        "favored_terrain": 1
+      },
+      {
+        "level": 6,
+        "favored_enemies": 2,
+        "favored_terrain": 2
+      },
+      {
+        "level": 7,
+        "favored_enemies": 2,
+        "favored_terrain": 2
+      },
+      {
+        "level": 8,
+        "favored_enemies": 2,
+        "favored_terrain": 2
+      },
+      {
+        "level": 9,
+        "favored_enemies": 2,
+        "favored_terrain": 2
+      },
+      {
+        "level": 10,
+        "favored_enemies": 2,
+        "favored_terrain": 3
+      },
+      {
+        "level": 11,
+        "favored_enemies": 2,
+        "favored_terrain": 3
+      },
+      {
+        "level": 12,
+        "favored_enemies": 2,
+        "favored_terrain": 3
+      },
+      {
+        "level": 13,
+        "favored_enemies": 2,
+        "favored_terrain": 3
+      },
+      {
+        "level": 14,
+        "favored_enemies": 3,
+        "favored_terrain": 3
+      },
+      {
+        "level": 15,
+        "favored_enemies": 3,
+        "favored_terrain": 3
+      },
+      {
+        "level": 16,
+        "favored_enemies": 3,
+        "favored_terrain": 3
+      },
+      {
+        "level": 17,
+        "favored_enemies": 3,
+        "favored_terrain": 3
+      },
+      {
+        "level": 18,
+        "favored_enemies": 3,
+        "favored_terrain": 3
+      },
+      {
+        "level": 19,
+        "favored_enemies": 3,
+        "favored_terrain": 3
+      },
+      {
+        "level": 20,
+        "favored_enemies": 3,
+        "favored_terrain": 3
+      }
+    ],
+    "source": "SRD 5.1 (2014)",
+    "spell_slots": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        2,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        2,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        2,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        2,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2
+      ]
+    ],
+    "spells_known": [
+      0,
+      2,
+      3,
+      3,
+      4,
+      4,
+      5,
+      5,
+      6,
+      6,
+      7,
+      7,
+      8,
+      8,
+      9,
+      9,
+      10,
+      10,
+      11,
+      11
+    ]
+  },
+  {
+    "id": "rogue",
+    "name": "Rogue",
+    "hit_die": 8,
+    "primary_abilities": [
+      "dexterity"
+    ],
+    "saving_throws": [
+      "dexterity",
+      "intelligence"
+    ],
+    "proficiencies": {
+      "armor": [
+        "Light Armor"
+      ],
+      "weapons": [
+        "Simple Weapons",
+        "Longswords",
+        "Rapiers",
+        "Shortswords",
+        "Hand crossbows"
+      ],
+      "tools": [
+        "Thieves' Tools"
+      ],
+      "skills": {
+        "choose": 4,
+        "options": [
+          "Acrobatics",
+          "Athletics",
+          "Deception",
+          "Insight",
+          "Intimidation",
+          "Investigation",
+          "Perception",
+          "Performance",
+          "Persuasion",
+          "Sleight of Hand",
+          "Stealth"
+        ],
+        "desc": "Choose four from Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, and Stealth"
+      }
+    },
+    "spellcasting": null,
+    "subclass_unlock_level": 3,
+    "subclasses": [
+      {
+        "id": "thief",
+        "name": "Thief",
+        "flavor": "Roguish Archetype",
+        "summary": "You hone your skills in the larcenous arts. Burglars, bandits, cutpurses, and other criminals typically follow this archetype, but so do rogues who prefer to think of themselves as professional treasure seekers, explorers, delvers, and investigators.",
+        "features_by_level": {
+          "3": [
+            {
+              "name": "Fast Hands",
+              "summary": "Starting at 3rd level, you can use the bonus action granted by your Cunning Action to make a Dexterity (Sleight of Hand) check, use your thieves' tools to disarm a trap or open a lock, or take the Use an Object action."
+            },
+            {
+              "name": "Second-Story Work",
+              "summary": "When you choose this archetype at 3rd level, you gain the ability to climb faster than normal; climbing no longer costs you extra movement. In addition, when you make a running jump, the distance you cover increases by a number of feet equal to your Dexterity modifier."
+            }
+          ],
+          "9": [
+            {
+              "name": "Supreme Sneak",
+              "summary": "Starting at 9th level, you have advantage on a Dexterity (Stealth) check if you move no more than half your speed on the same turn."
+            }
+          ],
+          "13": [
+            {
+              "name": "Use Magic Device",
+              "summary": "By 13th level, you have learned enough about the workings of magic that you can improvise the use of items even when they are not intended for you. You ignore all class, race, and level requirements on the use of magic items."
+            }
+          ],
+          "17": [
+            {
+              "name": "Thief's Reflexes",
+              "summary": "When you reach 17th level, you have become adept at laying ambushes and quickly escaping danger. You can take two turns during the first round of any combat. You take your first turn at your normal initiative and your second turn at your initiative minus 10. You can't use this feature when you are surprised."
+            }
+          ]
+        }
+      }
+    ],
+    "asi_levels": [
+      4,
+      8,
+      10,
+      12,
+      16,
+      19
+    ],
+    "features_by_level": {
+      "1": [
+        {
+          "name": "Expertise",
+          "summary": "At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with thieves' tools. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies."
+        },
+        {
+          "name": "Sneak Attack",
+          "summary": "Beginning at 1st level, you know how to strike subtly and exploit a foe's distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon."
+        },
+        {
+          "name": "Thieves' Cant",
+          "summary": "During your rogue training you learned thieves' cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves' cant understands such messages."
+        }
+      ],
+      "2": [
+        {
+          "name": "Cunning Action",
+          "summary": "Starting at 2nd level, your quick thinking and agility allow you to move and act quickly. You can take a bonus action on each of your turns in combat. This action can be used only to take the Dash, Disengage, or Hide action."
+        }
+      ],
+      "5": [
+        {
+          "name": "Uncanny Dodge",
+          "summary": "Starting at 5th level, when an attacker that you can see hits you with an attack, you can use your reaction to halve the attack's damage against you."
+        }
+      ],
+      "6": [
+        {
+          "name": "Expertise",
+          "summary": "At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with thieves' tools. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies."
+        }
+      ],
+      "7": [
+        {
+          "name": "Evasion",
+          "summary": "Beginning at 7th level, you can nimbly dodge out of the way of certain area effects, such as a red dragon's fiery breath or an ice storm spell."
+        }
+      ],
+      "11": [
+        {
+          "name": "Reliable Talent",
+          "summary": "By 11th level, you have refined your chosen skills until they approach perfection. Whenever you make an ability check that lets you add your proficiency bonus, you can treat a d20 roll of 9 or lower as a 10."
+        }
+      ],
+      "14": [
+        {
+          "name": "Blindsense",
+          "summary": "Starting at 14th level, if you are able to hear, you are aware of the location of any hidden or invisible creature within 10 feet of you."
+        }
+      ],
+      "15": [
+        {
+          "name": "Slippery Mind",
+          "summary": "By 15th level, you have acquired greater mental strength. You gain proficiency in Wisdom saving throws."
+        }
+      ],
+      "18": [
+        {
+          "name": "Elusive",
+          "summary": "Beginning at 18th level, you are so evasive that attackers rarely gain the upper hand against you. No attack roll has advantage against you while you aren't incapacitated."
+        }
+      ],
+      "20": [
+        {
+          "name": "Stroke of Luck",
+          "summary": "At 20th level, you have an uncanny knack for succeeding when you need to. If your attack misses a target within range, you can turn the miss into a hit. Alternatively, if you fail an ability check, you can treat the d20 roll as a 20."
+        }
+      ]
+    },
+    "resources_by_level": [
+      {
+        "level": 1,
+        "sneak_attack": {
+          "dice_count": 1,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 2,
+        "sneak_attack": {
+          "dice_count": 1,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 3,
+        "sneak_attack": {
+          "dice_count": 2,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 4,
+        "sneak_attack": {
+          "dice_count": 2,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 5,
+        "sneak_attack": {
+          "dice_count": 3,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 6,
+        "sneak_attack": {
+          "dice_count": 3,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 7,
+        "sneak_attack": {
+          "dice_count": 4,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 8,
+        "sneak_attack": {
+          "dice_count": 4,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 9,
+        "sneak_attack": {
+          "dice_count": 5,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 10,
+        "sneak_attack": {
+          "dice_count": 5,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 11,
+        "sneak_attack": {
+          "dice_count": 6,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 12,
+        "sneak_attack": {
+          "dice_count": 6,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 13,
+        "sneak_attack": {
+          "dice_count": 7,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 14,
+        "sneak_attack": {
+          "dice_count": 7,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 15,
+        "sneak_attack": {
+          "dice_count": 8,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 16,
+        "sneak_attack": {
+          "dice_count": 8,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 17,
+        "sneak_attack": {
+          "dice_count": 9,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 18,
+        "sneak_attack": {
+          "dice_count": 9,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 19,
+        "sneak_attack": {
+          "dice_count": 10,
+          "dice_value": 6
+        }
+      },
+      {
+        "level": 20,
+        "sneak_attack": {
+          "dice_count": 10,
+          "dice_value": 6
+        }
+      }
+    ],
+    "source": "SRD 5.1 (2014)"
+  },
+  {
+    "id": "sorcerer",
+    "name": "Sorcerer",
+    "hit_die": 6,
+    "primary_abilities": [
+      "charisma"
+    ],
+    "saving_throws": [
+      "constitution",
+      "charisma"
+    ],
+    "proficiencies": {
+      "armor": [],
+      "weapons": [
+        "Daggers",
+        "Crossbows, light"
+      ],
+      "tools": [],
+      "skills": {
+        "choose": 2,
+        "options": [
+          "Arcana",
+          "Deception",
+          "Insight",
+          "Intimidation",
+          "Persuasion",
+          "Religion"
+        ],
+        "desc": "Choose two from Arcana, Deception, Insight, Intimidation, Persuasion, and Religion"
+      }
+    },
+    "spellcasting": {
+      "ability": "charisma",
+      "caster_type": "full",
+      "preparation": "known",
+      "ritual": false,
+      "spell_list": "sorcerer",
+      "starts_at_level": 1,
+      "spellbook": false,
+      "focus": "arcane focus"
+    },
+    "subclass_unlock_level": 1,
+    "subclasses": [
+      {
+        "id": "draconic",
+        "name": "Draconic",
+        "flavor": "Sorcerous Origin",
+        "summary": "Your innate magic comes from draconic magic that was mingled with your blood or that of your ancestors.",
+        "features_by_level": {
+          "1": [
+            {
+              "name": "Dragon Ancestor",
+              "summary": "At 1st level, you choose one type of dragon as your ancestor. The damage type associated with each dragon is used by features you gain later. You can speak, read, and write Draconic."
+            },
+            {
+              "name": "Draconic Resilience",
+              "summary": "As magic flows through your body, it causes physical traits of your dragon ancestors to emerge. At 1st level, your hit point maximum increases by 1 and increases by 1 again whenever you gain a level in this class. Additionally, parts of your skin are covered by a thin sheen of dragon-like scales."
+            }
+          ],
+          "6": [
+            {
+              "name": "Elemental Affinity",
+              "summary": "Starting at 6th level, when you cast a spell that deals damage of the type associated with your draconic ancestry, you can add your Charisma modifier to one damage roll of that spell. At the same time, you can spend 1 sorcery point to gain resistance to that damage type for 1 hour."
+            }
+          ],
+          "14": [
+            {
+              "name": "Dragon Wings",
+              "summary": "At 14th level, you gain the ability to sprout a pair of dragon wings from your back, gaining a flying speed equal to your current speed. You can create these wings as a bonus action on your turn. They last until you dismiss them as a bonus action on your turn."
+            }
+          ],
+          "18": [
+            {
+              "name": "Draconic Presence",
+              "summary": "Beginning at 18th level, you can channel the dread presence of your dragon ancestor, causing those around you to become awestruck or frightened. As an action, you can spend 5 sorcery points to draw on this power and exude an aura of awe or fear (your choice) to a distance of 60 feet."
+            }
+          ]
+        }
+      }
+    ],
+    "asi_levels": [
+      4,
+      8,
+      12,
+      16,
+      19
+    ],
+    "features_by_level": {
+      "2": [
+        {
+          "name": "Font of Magic",
+          "summary": "At 2nd level, you tap into a deep wellspring of magic within yourself. This wellspring is represented by sorcery points, which allow you to create a variety of magical effects."
+        },
+        {
+          "name": "Flexible Casting: Creating Spell Slots",
+          "summary": "You can transform unexpended sorcery points into one spell slot as a bonus action on your turn. The Creating Spell Slots table shows the cost of creating a spell slot of a given level. You can create spell slots no higher in level than 5th."
+        },
+        {
+          "name": "Flexible Casting: Converting Spell Slot",
+          "summary": "As a bonus action on your turn, you can expend one spell slot and gain a number of sorcery points equal to the slot's level.."
+        }
+      ],
+      "3": [
+        {
+          "name": "Metamagic",
+          "summary": "At 3rd level, you gain the ability to twist your spells to suit your needs. You gain two of the following Metamagic options of your choice. You gain another one at 10th and 17th level. You can use only one Metamagic option on a spell when you cast it, unless otherwise noted."
+        }
+      ],
+      "10": [
+        {
+          "name": "Metamagic",
+          "summary": "At 3rd level, you gain the ability to twist your spells to suit your needs. You gain two of the following Metamagic options of your choice. You gain another one at 10th and 17th level. You can use only one Metamagic option on a spell when you cast it, unless otherwise noted."
+        }
+      ],
+      "17": [
+        {
+          "name": "Metamagic",
+          "summary": "At 3rd level, you gain the ability to twist your spells to suit your needs. You gain two of the following Metamagic options of your choice. You gain another one at 10th and 17th level. You can use only one Metamagic option on a spell when you cast it, unless otherwise noted."
+        }
+      ],
+      "20": [
+        {
+          "name": "Sorcerous Restoration",
+          "summary": "At 20th level, you regain 4 expended sorcery points whenever you finish a short rest."
+        }
+      ]
+    },
+    "resources_by_level": [
+      {
+        "level": 1,
+        "sorcery_points": 0,
+        "metamagic_known": 0
+      },
+      {
+        "level": 2,
+        "sorcery_points": 2,
+        "metamagic_known": 0
+      },
+      {
+        "level": 3,
+        "sorcery_points": 3,
+        "metamagic_known": 2
+      },
+      {
+        "level": 4,
+        "sorcery_points": 4,
+        "metamagic_known": 2
+      },
+      {
+        "level": 5,
+        "sorcery_points": 5,
+        "metamagic_known": 2
+      },
+      {
+        "level": 6,
+        "sorcery_points": 6,
+        "metamagic_known": 2
+      },
+      {
+        "level": 7,
+        "sorcery_points": 7,
+        "metamagic_known": 2
+      },
+      {
+        "level": 8,
+        "sorcery_points": 8,
+        "metamagic_known": 2
+      },
+      {
+        "level": 9,
+        "sorcery_points": 9,
+        "metamagic_known": 2
+      },
+      {
+        "level": 10,
+        "sorcery_points": 10,
+        "metamagic_known": 3
+      },
+      {
+        "level": 11,
+        "sorcery_points": 11,
+        "metamagic_known": 3
+      },
+      {
+        "level": 12,
+        "sorcery_points": 12,
+        "metamagic_known": 3
+      },
+      {
+        "level": 13,
+        "sorcery_points": 13,
+        "metamagic_known": 3
+      },
+      {
+        "level": 14,
+        "sorcery_points": 14,
+        "metamagic_known": 3
+      },
+      {
+        "level": 15,
+        "sorcery_points": 15,
+        "metamagic_known": 3
+      },
+      {
+        "level": 16,
+        "sorcery_points": 16,
+        "metamagic_known": 4
+      },
+      {
+        "level": 17,
+        "sorcery_points": 17,
+        "metamagic_known": 4
+      },
+      {
+        "level": 18,
+        "sorcery_points": 18,
+        "metamagic_known": 4
+      },
+      {
+        "level": 19,
+        "sorcery_points": 19,
+        "metamagic_known": 4
+      },
+      {
+        "level": 20,
+        "sorcery_points": 20,
+        "metamagic_known": 4
+      }
+    ],
+    "source": "SRD 5.1 (2014)",
+    "sorcery_point_slot_costs": [
+      {
+        "spell_slot_level": 1,
+        "sorcery_point_cost": 2
+      },
+      {
+        "spell_slot_level": 2,
+        "sorcery_point_cost": 3
+      },
+      {
+        "spell_slot_level": 3,
+        "sorcery_point_cost": 5
+      },
+      {
+        "spell_slot_level": 4,
+        "sorcery_point_cost": 6
+      },
+      {
+        "spell_slot_level": 5,
+        "sorcery_point_cost": 7
+      }
+    ],
+    "spell_slots": [
+      [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        1,
+        1
+      ]
+    ],
+    "cantrips_known": [
+      4,
+      4,
+      4,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ],
+    "spells_known": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      12,
+      13,
+      13,
+      14,
+      14,
+      15,
+      15,
+      15,
+      15
+    ]
+  },
+  {
+    "id": "warlock",
+    "name": "Warlock",
+    "hit_die": 8,
+    "primary_abilities": [
+      "charisma"
+    ],
+    "saving_throws": [
+      "wisdom",
+      "charisma"
+    ],
+    "proficiencies": {
+      "armor": [
+        "Light Armor"
+      ],
+      "weapons": [
+        "Simple Weapons"
+      ],
+      "tools": [],
+      "skills": {
+        "choose": 2,
+        "options": [
+          "Arcana",
+          "Deception",
+          "History",
+          "Intimidation",
+          "Investigation",
+          "Nature",
+          "Religion"
+        ],
+        "desc": "Choose two skills from Arcana, Deception, History, Intimidation, Investigation, Nature, and Religion"
+      }
+    },
+    "spellcasting": {
+      "ability": "charisma",
+      "caster_type": "pact",
+      "preparation": "known",
+      "ritual": false,
+      "spell_list": "warlock",
+      "starts_at_level": 1,
+      "spellbook": false,
+      "focus": "arcane focus"
+    },
+    "subclass_unlock_level": 1,
+    "subclasses": [
+      {
+        "id": "fiend",
+        "name": "Fiend",
+        "flavor": "Otherworldly Patron",
+        "summary": "You have made a pact with a fiend from the lower planes of existence, a being whose aims are evil, even if you strive against those aims. Such beings desire the corruption or destruction of all things, ultimately including you.",
+        "features_by_level": {
+          "1": [
+            {
+              "name": "Dark One's Blessing",
+              "summary": "Starting at 1st level, when you reduce a hostile creature to 0 hit points, you gain temporary hit points equal to your Charisma modifier + your warlock level (minimum of 1)."
+            }
+          ],
+          "6": [
+            {
+              "name": "Dark One's Own Luck",
+              "summary": "Starting at 6th level, you can call on your patron to alter fate in your favor. When you make an ability check or a saving throw, you can use this feature to add a d10 to your roll. You can do so after seeing the initial roll but before any of the roll's effects occur."
+            }
+          ],
+          "10": [
+            {
+              "name": "Fiendish Resilience",
+              "summary": "Starting at 10th level, you can choose one damage type when you finish a short or long rest. You gain resistance to that damage type until you choose a different one with this feature. Damage from magical weapons or silver weapons ignores this resistance."
+            }
+          ],
+          "14": [
+            {
+              "name": "Hurl Through Hell",
+              "summary": "Starting at 14th level, when you hit a creature with an attack, you can use this feature to instantly transport the target through the lower planes. The creature disappears and hurtles through a nightmare landscape."
+            }
+          ]
+        }
+      }
+    ],
+    "asi_levels": [
+      4,
+      8,
+      12,
+      16,
+      19
+    ],
+    "features_by_level": {
+      "1": [
+        {
+          "name": "Pact Magic",
+          "summary": "Your arcane research and the magic bestowed on you by your patron have given you facility with spells."
+        }
+      ],
+      "2": [
+        {
+          "name": "Eldritch Invocations",
+          "summary": "In your study of occult lore, you have unearthed eldritch invocations, fragments of forbidden knowledge that imbue you with an abiding magical ability. At 2nd level, you gain two eldritch invocations of your choice. Your invocation options are detailed at the end of the class description."
+        }
+      ],
+      "3": [
+        {
+          "name": "Pact Boon",
+          "summary": "At 3rd level, your otherworldly patron bestows a gift upon you for your loyal service. You gain one of the following features of your choice."
+        }
+      ],
+      "11": [
+        {
+          "name": "Mystic Arcanum (6th level)",
+          "summary": "At 11th level, your patron bestows upon you a magical secret called an arcanum. Choose one 6th- level spell from the warlock spell list as this arcanum. You can cast your arcanum spell once without expending a spell slot. You must finish a long rest before you can do so again."
+        }
+      ],
+      "13": [
+        {
+          "name": "Mystic Arcanum (7th level)",
+          "summary": "At 11th level, your patron bestows upon you a magical secret called an arcanum. Choose one 6th- level spell from the warlock spell list as this arcanum. You can cast your arcanum spell once without expending a spell slot. You must finish a long rest before you can do so again."
+        }
+      ],
+      "15": [
+        {
+          "name": "Mystic Arcanum (8th level)",
+          "summary": "At 11th level, your patron bestows upon you a magical secret called an arcanum. Choose one 6th- level spell from the warlock spell list as this arcanum. You can cast your arcanum spell once without expending a spell slot. You must finish a long rest before you can do so again."
+        }
+      ],
+      "17": [
+        {
+          "name": "Mystic Arcanum (9th level)",
+          "summary": "At 11th level, your patron bestows upon you a magical secret called an arcanum. Choose one 6th- level spell from the warlock spell list as this arcanum. You can cast your arcanum spell once without expending a spell slot. You must finish a long rest before you can do so again."
+        }
+      ],
+      "20": [
+        {
+          "name": "Eldritch Master",
+          "summary": "At 20th level, you can draw on your inner reserve of mystical power while entreating your patron to regain expended spell slots. You can spend 1 minute entreating your patron for aid to regain all your expended spell slots from your Pact Magic feature."
+        }
+      ]
+    },
+    "resources_by_level": [
+      {
+        "level": 1,
+        "invocations_known": 0,
+        "mystic_arcanum_level_6": 0,
+        "mystic_arcanum_level_7": 0,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 2,
+        "invocations_known": 2,
+        "mystic_arcanum_level_6": 0,
+        "mystic_arcanum_level_7": 0,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 3,
+        "invocations_known": 2,
+        "mystic_arcanum_level_6": 0,
+        "mystic_arcanum_level_7": 0,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 4,
+        "invocations_known": 3,
+        "mystic_arcanum_level_6": 0,
+        "mystic_arcanum_level_7": 0,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 5,
+        "invocations_known": 3,
+        "mystic_arcanum_level_6": 0,
+        "mystic_arcanum_level_7": 0,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 6,
+        "invocations_known": 4,
+        "mystic_arcanum_level_6": 0,
+        "mystic_arcanum_level_7": 0,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 7,
+        "invocations_known": 4,
+        "mystic_arcanum_level_6": 0,
+        "mystic_arcanum_level_7": 0,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 8,
+        "invocations_known": 4,
+        "mystic_arcanum_level_6": 0,
+        "mystic_arcanum_level_7": 0,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 9,
+        "invocations_known": 5,
+        "mystic_arcanum_level_6": 0,
+        "mystic_arcanum_level_7": 0,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 10,
+        "invocations_known": 5,
+        "mystic_arcanum_level_6": 0,
+        "mystic_arcanum_level_7": 0,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 11,
+        "invocations_known": 5,
+        "mystic_arcanum_level_6": 1,
+        "mystic_arcanum_level_7": 0,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 12,
+        "invocations_known": 6,
+        "mystic_arcanum_level_6": 1,
+        "mystic_arcanum_level_7": 0,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 13,
+        "invocations_known": 6,
+        "mystic_arcanum_level_6": 1,
+        "mystic_arcanum_level_7": 1,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 14,
+        "invocations_known": 6,
+        "mystic_arcanum_level_6": 1,
+        "mystic_arcanum_level_7": 1,
+        "mystic_arcanum_level_8": 0,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 15,
+        "invocations_known": 7,
+        "mystic_arcanum_level_6": 1,
+        "mystic_arcanum_level_7": 1,
+        "mystic_arcanum_level_8": 1,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 16,
+        "invocations_known": 7,
+        "mystic_arcanum_level_6": 1,
+        "mystic_arcanum_level_7": 1,
+        "mystic_arcanum_level_8": 1,
+        "mystic_arcanum_level_9": 0
+      },
+      {
+        "level": 17,
+        "invocations_known": 7,
+        "mystic_arcanum_level_6": 1,
+        "mystic_arcanum_level_7": 1,
+        "mystic_arcanum_level_8": 1,
+        "mystic_arcanum_level_9": 1
+      },
+      {
+        "level": 18,
+        "invocations_known": 8,
+        "mystic_arcanum_level_6": 1,
+        "mystic_arcanum_level_7": 1,
+        "mystic_arcanum_level_8": 1,
+        "mystic_arcanum_level_9": 1
+      },
+      {
+        "level": 19,
+        "invocations_known": 8,
+        "mystic_arcanum_level_6": 1,
+        "mystic_arcanum_level_7": 1,
+        "mystic_arcanum_level_8": 1,
+        "mystic_arcanum_level_9": 1
+      },
+      {
+        "level": 20,
+        "invocations_known": 8,
+        "mystic_arcanum_level_6": 1,
+        "mystic_arcanum_level_7": 1,
+        "mystic_arcanum_level_8": 1,
+        "mystic_arcanum_level_9": 1
+      }
+    ],
+    "source": "SRD 5.1 (2014)",
+    "spell_slots": [
+      {
+        "slot_level": 1,
+        "slot_count": 1
+      },
+      {
+        "slot_level": 1,
+        "slot_count": 2
+      },
+      {
+        "slot_level": 2,
+        "slot_count": 2
+      },
+      {
+        "slot_level": 2,
+        "slot_count": 2
+      },
+      {
+        "slot_level": 3,
+        "slot_count": 2
+      },
+      {
+        "slot_level": 3,
+        "slot_count": 2
+      },
+      {
+        "slot_level": 4,
+        "slot_count": 2
+      },
+      {
+        "slot_level": 4,
+        "slot_count": 2
+      },
+      {
+        "slot_level": 5,
+        "slot_count": 2
+      },
+      {
+        "slot_level": 5,
+        "slot_count": 2
+      },
+      {
+        "slot_level": 5,
+        "slot_count": 3
+      },
+      {
+        "slot_level": 5,
+        "slot_count": 3
+      },
+      {
+        "slot_level": 5,
+        "slot_count": 3
+      },
+      {
+        "slot_level": 5,
+        "slot_count": 3
+      },
+      {
+        "slot_level": 5,
+        "slot_count": 3
+      },
+      {
+        "slot_level": 5,
+        "slot_count": 3
+      },
+      {
+        "slot_level": 5,
+        "slot_count": 4
+      },
+      {
+        "slot_level": 5,
+        "slot_count": 4
+      },
+      {
+        "slot_level": 5,
+        "slot_count": 4
+      },
+      {
+        "slot_level": 5,
+        "slot_count": 4
+      }
+    ],
+    "cantrips_known": [
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "spells_known": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      10,
+      11,
+      11,
+      12,
+      12,
+      13,
+      13,
+      14,
+      14,
+      15,
+      15
+    ]
+  },
+  {
+    "id": "wizard",
+    "name": "Wizard",
+    "hit_die": 6,
+    "primary_abilities": [
+      "intelligence"
+    ],
+    "saving_throws": [
+      "intelligence",
+      "wisdom"
+    ],
+    "proficiencies": {
+      "armor": [],
+      "weapons": [
+        "Daggers",
+        "Crossbows, light"
+      ],
+      "tools": [],
+      "skills": {
+        "choose": 2,
+        "options": [
+          "Arcana",
+          "History",
+          "Insight",
+          "Investigation",
+          "Medicine",
+          "Religion"
+        ],
+        "desc": "Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion"
+      }
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "caster_type": "full",
+      "preparation": "prepared",
+      "ritual": true,
+      "spell_list": "wizard",
+      "starts_at_level": 1,
+      "spellbook": true,
+      "focus": "arcane focus"
+    },
+    "subclass_unlock_level": 2,
+    "subclasses": [
+      {
+        "id": "evocation",
+        "name": "Evocation",
+        "flavor": "Arcane Tradition",
+        "summary": "You focus your study on magic that creates powerful elemental effects such as bitter cold, searing flame, rolling thunder, crackling lightning, and burning acid. Some evokers find employment in military forces, serving as artillery to blast enemy armies from afar.",
+        "features_by_level": {
+          "2": [
+            {
+              "name": "Evocation Savant",
+              "summary": "Beginning when you select this school at 2nd level, the gold and time you must spend to copy an evocation spell into your spellbook is halved."
+            },
+            {
+              "name": "Sculpt Spells",
+              "summary": "Beginning at 2nd level, you can create pockets of relative safety within the effects of your evocation spells. When you cast an evocation spell that affects other creatures that you can see, you can choose a number of them equal to 1 + the spell's level."
+            }
+          ],
+          "6": [
+            {
+              "name": "Potent Cantrip",
+              "summary": "Starting at 6th level, your damaging cantrips affect even creatures that avoid the brunt of the effect. When a creature succeeds on a saving throw against your cantrip, the creature takes half the cantrip's damage (if any) but suffers no additional effect from the cantrip."
+            }
+          ],
+          "10": [
+            {
+              "name": "Empowered Evocation",
+              "summary": "Beginning at 10th level, you can add your Intelligence modifier to one damage roll of any wizard evocation spell you cast."
+            }
+          ],
+          "14": [
+            {
+              "name": "Overchannel",
+              "summary": "Starting at 14th level, you can increase the power of your simpler spells. When you cast a wizard spell of 1st through 5th level that deals damage, you can deal maximum damage with that spell. The first time you do so, you suffer no adverse effect."
+            }
+          ]
+        }
+      }
+    ],
+    "asi_levels": [
+      4,
+      8,
+      12,
+      16,
+      19
+    ],
+    "features_by_level": {
+      "1": [
+        {
+          "name": "Arcane Recovery",
+          "summary": "You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover."
+        }
+      ],
+      "18": [
+        {
+          "name": "Spell Mastery",
+          "summary": "At 18th level, you have achieved such mastery over certain spells that you can cast them at will. Choose a 1st-level wizard spell and a 2nd-level wizard spell that are in your spellbook. You can cast those spells at their lowest level without expending a spell slot when you have them prepared."
+        }
+      ],
+      "20": [
+        {
+          "name": "Signature Spell",
+          "summary": "When you reach 20th level, you gain mastery over two powerful spells and can cast them with little effort. Choose two 3rd-level wizard spells in your spellbook as your signature spells."
+        }
+      ]
+    },
+    "resources_by_level": [
+      {
+        "level": 1,
+        "arcane_recovery_levels": 1
+      },
+      {
+        "level": 2,
+        "arcane_recovery_levels": 1
+      },
+      {
+        "level": 3,
+        "arcane_recovery_levels": 2
+      },
+      {
+        "level": 4,
+        "arcane_recovery_levels": 2
+      },
+      {
+        "level": 5,
+        "arcane_recovery_levels": 3
+      },
+      {
+        "level": 6,
+        "arcane_recovery_levels": 3
+      },
+      {
+        "level": 7,
+        "arcane_recovery_levels": 4
+      },
+      {
+        "level": 8,
+        "arcane_recovery_levels": 4
+      },
+      {
+        "level": 9,
+        "arcane_recovery_levels": 5
+      },
+      {
+        "level": 10,
+        "arcane_recovery_levels": 5
+      },
+      {
+        "level": 11,
+        "arcane_recovery_levels": 6
+      },
+      {
+        "level": 12,
+        "arcane_recovery_levels": 6
+      },
+      {
+        "level": 13,
+        "arcane_recovery_levels": 7
+      },
+      {
+        "level": 14,
+        "arcane_recovery_levels": 7
+      },
+      {
+        "level": 15,
+        "arcane_recovery_levels": 8
+      },
+      {
+        "level": 16,
+        "arcane_recovery_levels": 8
+      },
+      {
+        "level": 17,
+        "arcane_recovery_levels": 9
+      },
+      {
+        "level": 18,
+        "arcane_recovery_levels": 9
+      },
+      {
+        "level": 19,
+        "arcane_recovery_levels": 10
+      },
+      {
+        "level": 20,
+        "arcane_recovery_levels": 10
+      }
+    ],
+    "source": "SRD 5.1 (2014)",
+    "spell_slots": [
+      [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        1,
+        1
+      ]
+    ],
+    "cantrips_known": [
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ]
+  }
+]
