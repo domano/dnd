@@ -1,0 +1,50 @@
+.wrap {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr auto;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.level {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.pips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.pip {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 3px;
+  border: 1.5px solid var(--brass);
+  background: transparent;
+  padding: 0;
+}
+
+.pipUsed {
+  background: color-mix(in srgb, var(--brass) 75%, var(--ink));
+  border-color: color-mix(in srgb, var(--brass) 60%, var(--ink));
+}
+
+.meta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  min-width: 3.2rem;
+  text-align: right;
+}
+
+.empty {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}

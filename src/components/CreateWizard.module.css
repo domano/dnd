@@ -1,0 +1,424 @@
+.page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding:
+    max(1rem, env(safe-area-inset-top))
+    max(1rem, env(safe-area-inset-right))
+    max(1rem, env(safe-area-inset-bottom))
+    max(1rem, env(safe-area-inset-left));
+}
+
+.shell {
+  width: min(52rem, 100%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  letter-spacing: 0.02em;
+}
+
+.brand span {
+  color: var(--teal);
+}
+
+.brand::after {
+  content: '';
+  display: block;
+  width: 3.2rem;
+  height: 3px;
+  margin-top: 0.35rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brass), color-mix(in srgb, var(--teal) 50%, transparent), transparent);
+}
+
+.subtitle {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin-top: 0.35rem;
+}
+
+.progress {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.progressItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.progressBar {
+  height: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--teal), var(--brass));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 280ms ease;
+}
+
+.progressItem[data-done='true'] .progressBarFill,
+.progressItem[data-current='true'] .progressBarFill {
+  transform: scaleX(1);
+}
+
+.progressLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progressItem[data-current='true'] .progressLabel {
+  color: var(--teal);
+}
+
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.panelBody {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.stepTitle {
+  font-size: clamp(1.35rem, 3vw, 1.7rem);
+}
+
+.stepLede {
+  color: var(--ink-soft);
+  max-width: 52ch;
+}
+
+.grid2 {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.grid3 {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 640px) {
+  .grid2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .grid3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.optionGrid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+}
+
+.option {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.85rem 0.9rem;
+  text-align: left;
+  border: 1px solid color-mix(in srgb, var(--teal) 12%, var(--line));
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--paper-lift) 92%, white);
+  transition: border-color 140ms ease, background 140ms ease, transform 140ms ease, box-shadow 140ms ease;
+}
+
+.option:hover {
+  border-color: var(--brass);
+  background: color-mix(in srgb, var(--brass) 8%, var(--paper-lift));
+}
+
+.option[data-selected='true'] {
+  border-color: var(--teal);
+  background: color-mix(in srgb, var(--teal) 10%, var(--paper-lift));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--teal) 35%, transparent);
+}
+
+.optionTitle {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.optionMeta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.optionDesc {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid color-mix(in srgb, var(--teal) 16%, var(--line));
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  background: color-mix(in srgb, var(--moss-mist) 55%, transparent);
+}
+
+.chipAccent {
+  color: var(--teal);
+  border-color: color-mix(in srgb, var(--teal) 40%, var(--line));
+  background: color-mix(in srgb, var(--teal) 10%, var(--paper-lift));
+}
+
+.traitList {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.trait {
+  padding: 0.7rem 0.8rem;
+  border-left: 3px solid var(--brass);
+  background: color-mix(in srgb, var(--brass) 6%, transparent);
+}
+
+.traitName {
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.traitSummary {
+  margin-top: 0.2rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.checkGrid {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+}
+
+.methodToggle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.3rem;
+  border: 1px solid color-mix(in srgb, var(--teal) 14%, var(--line));
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--moss-mist) 45%, transparent);
+  width: fit-content;
+}
+
+.methodBtn {
+  min-height: 2.1rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.methodBtn[data-active='true'] {
+  background: color-mix(in srgb, var(--teal) 14%, var(--paper-lift));
+  border-color: color-mix(in srgb, var(--teal) 40%, var(--line));
+  color: var(--ink);
+}
+
+.abilityRow {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.abilityCard {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--teal) 12%, var(--line));
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--paper-lift) 94%, white);
+}
+
+.abilityName {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.abilityMeta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.abilityControls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.abilityValue {
+  min-width: 2.2rem;
+  text-align: center;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.finalScore {
+  min-width: 4.5rem;
+  text-align: right;
+  font-weight: 700;
+  color: var(--teal);
+  font-variant-numeric: tabular-nums;
+}
+
+.hint {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.error {
+  color: var(--danger);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent, var(--moss-mist) 28%, var(--paper) 55%);
+  padding-bottom: 0.25rem;
+}
+
+.footerRight {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-left: auto;
+}
+
+.spellList {
+  display: grid;
+  gap: 0.45rem;
+  max-height: 22rem;
+  overflow: auto;
+  padding-right: 0.2rem;
+}
+
+.spellItem {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.65rem;
+  align-items: start;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--paper-lift) 94%, white);
+}
+
+.spellItem[data-selected='true'] {
+  border-color: var(--teal);
+  background: color-mix(in srgb, var(--teal) 8%, var(--paper-lift));
+}
+
+.spellName {
+  font-weight: 600;
+}
+
+.spellMeta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.summary {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.summaryBlock {
+  padding: 0.85rem 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--brass) 22%, var(--line));
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--paper-lift) 94%, white);
+}
+
+.summaryBlock h3 {
+  font-size: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.summaryBlock p {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .progress {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: 0.55rem;
+  }
+
+  .abilityCard {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .finalScore {
+    text-align: left;
+  }
+}

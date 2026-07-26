@@ -1,0 +1,440 @@
+.page {
+  min-height: 100svh;
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+
+.rulesHint {
+  margin: 0 0 0.75rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px dashed color-mix(in srgb, var(--brass) 40%, var(--line));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--brass) 10%, var(--paper-lift));
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid color-mix(in srgb, var(--brass) 28%, var(--line-strong));
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--paper-lift) 96%, white),
+      color-mix(in srgb, var(--moss-mist) 70%, var(--paper))
+    );
+  backdrop-filter: blur(8px);
+}
+
+.identity {
+  display: grid;
+  gap: 0.2rem;
+  text-align: left;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 4vw, 1.9rem);
+  font-weight: 700;
+}
+
+.name::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 3px;
+  margin-top: 0.3rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brass), color-mix(in srgb, var(--teal) 50%, transparent), transparent);
+}
+
+.meta {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.xpRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.layout {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.abilities {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.inspireRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.listItem {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--teal) 12%, var(--line));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--paper-lift) 88%, white);
+  text-align: left;
+}
+
+.listItemHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.listItemTitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.listItemMeta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.listItemBody {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+.conditionList {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: 0.55rem;
+}
+
+.listItem > :first-child {
+  margin: -0.15rem -0.2rem 0.15rem;
+}
+
+.notesGrid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.combatBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-sticky);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.35rem;
+  padding: 0.55rem 0.65rem calc(0.55rem + env(safe-area-inset-bottom));
+  border-top: 1px solid color-mix(in srgb, var(--brass) 30%, var(--line-strong));
+  background: color-mix(in srgb, var(--moss-mist) 55%, var(--paper-lift));
+  box-shadow: 0 -6px 22px color-mix(in srgb, var(--ink) 10%, transparent);
+}
+
+.combatStat {
+  display: grid;
+  justify-items: center;
+  gap: 0.1rem;
+  padding: 0.35rem 0.2rem;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--teal) 8%, var(--paper-lift));
+}
+
+.combatLabel {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.combatValue {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.empty {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.badge {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.12rem 0.45rem;
+  border: 1px solid color-mix(in srgb, var(--brass) 45%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--brass) 14%, var(--paper-lift));
+  color: var(--ink);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.badgeWarn {
+  border-color: color-mix(in srgb, var(--danger) 40%, var(--line));
+  background: color-mix(in srgb, var(--danger) 10%, var(--paper-lift));
+  color: var(--danger);
+}
+
+.spellSection {
+  margin-top: 1rem;
+}
+
+.spellSection h3 {
+  font-size: 0.95rem;
+  margin: 0 0 0.6rem;
+}
+
+.prepareBudget {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.75rem;
+}
+
+.prepareBudget[data-over='true'] {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.langChip {
+  padding: 0.25rem 0.6rem;
+  border: 1px solid color-mix(in srgb, var(--teal) 18%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--teal) 8%, var(--paper-lift));
+  font-size: 0.82rem;
+}
+
+.currencyRow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-bottom: 0.75rem;
+}
+
+.currencyField span {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.currencyField input {
+  padding: 0.35rem 0.4rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.weightLine {
+  margin: 0 0 0.85rem;
+  font-size: 0.9rem;
+}
+
+.quickAdd {
+  display: grid;
+  grid-template-columns: 1fr 5rem auto;
+  gap: var(--space-2);
+  align-items: end;
+  margin-bottom: 0.9rem;
+}
+
+.itemControls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: 0.35rem;
+}
+
+.qtyControls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.qtyInput {
+  width: 3.25rem;
+  padding: 0.3rem 0.35rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.campaignBlock {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.campaignBlock + .campaignBlock {
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+}
+
+.campaignBlock h3 {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.journalForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  align-items: end;
+}
+
+.conditionList {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.conditionItem {
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--paper-lift) 90%, white);
+}
+
+.conditionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.conditionDesc {
+  margin: 0.45rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.panelDelay1 { animation-delay: 40ms; }
+.panelDelay2 { animation-delay: 90ms; }
+.panelDelay3 { animation-delay: 140ms; }
+.panelDelay4 { animation-delay: 190ms; }
+.panelDelay5 { animation-delay: 240ms; }
+
+@media (min-width: 720px) {
+  .header {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .abilities {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .notesGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .currencyRow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .quickAdd {
+    grid-template-columns: 1fr 5rem;
+  }
+
+  .quickAdd > button {
+    grid-column: 1 / -1;
+  }
+
+  .journalForm {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 980px) {
+  .page {
+    padding-bottom: var(--space-6);
+  }
+
+  .layout {
+    grid-template-columns: 220px minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-areas:
+      'abilities combat skills'
+      'abilities features features'
+      'spells spells equipment'
+      'feats campaign campaign'
+      'notes notes notes';
+    align-items: start;
+  }
+
+  .areaAbilities { grid-area: abilities; }
+  .areaCombat { grid-area: combat; }
+  .areaSkills { grid-area: skills; }
+  .areaFeatures { grid-area: features; }
+  .areaSpells { grid-area: spells; }
+  .areaEquipment { grid-area: equipment; }
+  .areaFeats { grid-area: feats; }
+  .areaCampaign { grid-area: campaign; }
+  .areaNotes { grid-area: notes; }
+
+  .abilities {
+    grid-template-columns: 1fr;
+  }
+
+  .combatBar {
+    display: none;
+  }
+}

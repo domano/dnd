@@ -1,0 +1,5 @@
+/* App-level tweaks on top of theme.css — keep minimal. */
+
+#root {
+  min-height: 100svh;
+}

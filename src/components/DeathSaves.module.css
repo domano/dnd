@@ -1,0 +1,48 @@
+.wrap {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.pips {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.pip {
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--line-strong);
+  background: transparent;
+  padding: 0;
+  transition: background 140ms ease, border-color 140ms ease;
+}
+
+.pipSuccessActive {
+  background: var(--ok);
+  border-color: var(--ok);
+}
+
+.pipFailActive {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+.reset {
+  align-self: start;
+}
