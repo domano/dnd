@@ -1,5 +1,10 @@
 import { useMemo, useState } from 'react';
-import type { Character, CharacterFeatRef, CharacterFeature } from '../types/character';
+import type {
+  Character,
+  CharacterFeatRef,
+  CharacterFeature,
+  CharacterUpdate,
+} from '../types/character';
 import { slotsUsedToState } from '../types/character';
 import { ABILITY_SCORES } from '../types/dnd';
 import {
@@ -39,25 +44,44 @@ import { FeatBrowser } from './FeatBrowser';
 import styles from './CharacterSheet.module.css';
 
 export interface CharacterSheetProps {
-  /** Optional override; defaults to the active character from the store. */
+  /** When provided with onChange, sheet is controlled. Otherwise uses the store. */
   character?: Character;
+  onChange?: (update: CharacterUpdate) => void;
   onHome?: () => void;
   onEdit?: () => void;
+  onLevelUp?: () => void;
+  onShortRest?: () => void;
+  onLongRest?: () => void;
 }
 
-export function CharacterSheet({ character: characterProp, onHome, onEdit }: CharacterSheetProps) {
+function applyUpdate(character: Character, update: CharacterUpdate): Character {
+  return typeof update === 'function'
+    ? update(character)
+    : { ...character, ...update, updatedAt: new Date().toISOString() };
+}
+
+export function CharacterSheet({
+  character: characterProp,
+  onChange,
+  onHome,
+  onEdit,
+  onLevelUp,
+  onShortRest,
+  onLongRest,
+}: CharacterSheetProps) {
   const storeCharacter = useCharacterStore((s) =>
     s.characters.find((c) => c.id === s.activeId),
   );
   const setAbility = useCharacterStore((s) => s.setAbility);
   const toggleSkill = useCharacterStore((s) => s.toggleSkill);
   const updateCharacter = useCharacterStore((s) => s.updateCharacter);
-  const addSpell = useCharacterStore((s) => s.addSpell);
-  const removeSpell = useCharacterStore((s) => s.removeSpell);
-  const prepareSpell = useCharacterStore((s) => s.prepareSpell);
-  const rest = useCharacterStore((s) => s.rest);
-  const levelUp = useCharacterStore((s) => s.levelUp);
+  const addSpellStore = useCharacterStore((s) => s.addSpell);
+  const removeSpellStore = useCharacterStore((s) => s.removeSpell);
+  const prepareSpellStore = useCharacterStore((s) => s.prepareSpell);
+  const restStore = useCharacterStore((s) => s.rest);
+  const levelUpStore = useCharacterStore((s) => s.levelUp);
 
+  const controlled = Boolean(characterProp && onChange);
   const character = characterProp ?? storeCharacter;
 
   const [spellBrowserOpen, setSpellBrowserOpen] = useState(false);
@@ -153,6 +177,8 @@ export function CharacterSheet({ character: characterProp, onHome, onEdit }: Cha
     );
   }
 
+  const active = character;
+
   const {
     level,
     scores,
@@ -172,19 +198,83 @@ export function CharacterSheet({ character: characterProp, onHome, onEdit }: Cha
     backgroundName,
   } = derived;
 
-  const raceLine = [race?.name ?? character.raceId, character.subraceId]
+  const raceLine = [race?.name ?? active.raceId, active.subraceId]
     .filter(Boolean)
     .join(' · ');
   const classLine = [
-    klass?.name ?? character.classLevels[0]?.classId,
+    klass?.name ?? active.classLevels[0]?.classId,
     subclass?.name,
     `Level ${level}`,
   ]
     .filter(Boolean)
     .join(' · ');
 
-  function patch(partial: Partial<Character>) {
-    updateCharacter(character!.id, partial);
+  function patch(update: CharacterUpdate) {
+    if (controlled && onChange) {
+      onChange(update);
+      return;
+    }
+    const next = applyUpdate(active, update);
+    updateCharacter(active.id, next);
+  }
+
+  function handleLevelUp() {
+    if (onLevelUp) {
+      onLevelUp();
+      return;
+    }
+    levelUpStore();
+  }
+
+  function handleShortRest() {
+    if (onShortRest) {
+      onShortRest();
+      return;
+    }
+    restStore('short');
+  }
+
+  function handleLongRest() {
+    if (onLongRest) {
+      onLongRest();
+      return;
+    }
+    restStore('long');
+  }
+
+  function handleAbilityChange(ability: (typeof ABILITY_SCORES)[number], nextFinal: number) {
+    const delta = nextFinal - scores[ability];
+    const nextBase = active.abilities[ability] + delta;
+    if (controlled && onChange) {
+      onChange({
+        abilities: { ...active.abilities, [ability]: nextBase },
+      });
+      return;
+    }
+    setAbility(ability, nextBase);
+  }
+
+  function handleToggleSkill(skillName: string) {
+    if (controlled && onChange) {
+      onChange((prev) => {
+        const has = prev.skillProficiencies.some(
+          (s) => s.toLowerCase() === skillName.toLowerCase(),
+        );
+        return {
+          ...prev,
+          skillProficiencies: has
+            ? prev.skillProficiencies.filter(
+                (s) => s.toLowerCase() !== skillName.toLowerCase(),
+              )
+            : [...prev.skillProficiencies, skillName],
+          expertise: has
+            ? prev.expertise.filter((s) => s.toLowerCase() !== skillName.toLowerCase())
+            : prev.expertise,
+        };
+      });
+      return;
+    }
+    toggleSkill(skillName);
   }
 
   return (
@@ -206,13 +296,13 @@ export function CharacterSheet({ character: characterProp, onHome, onEdit }: Cha
           </div>
         </div>
         <div className={styles.actions}>
-          <button type="button" className="btn btn-brass btn-sm" onClick={() => levelUp()}>
+          <button type="button" className="btn btn-brass btn-sm" onClick={handleLevelUp}>
             Level Up
           </button>
-          <button type="button" className="btn btn-sm" onClick={() => rest('short')}>
+          <button type="button" className="btn btn-sm" onClick={handleShortRest}>
             Short Rest
           </button>
-          <button type="button" className="btn btn-sm" onClick={() => rest('long')}>
+          <button type="button" className="btn btn-sm" onClick={handleLongRest}>
             Long Rest
           </button>
           <button type="button" className="btn btn-sm btn-ghost" onClick={onEdit}>
@@ -236,10 +326,7 @@ export function CharacterSheet({ character: characterProp, onHome, onEdit }: Cha
                   key={ability}
                   ability={ability}
                   score={scores[ability]}
-                  onChange={(nextFinal) => {
-                    const delta = nextFinal - scores[ability];
-                    setAbility(ability, character.abilities[ability] + delta);
-                  }}
+                  onChange={(nextFinal) => handleAbilityChange(ability, nextFinal)}
                 />
               ))}
             </div>
@@ -294,7 +381,11 @@ export function CharacterSheet({ character: characterProp, onHome, onEdit }: Cha
             <h2>Saves & skills</h2>
           </div>
           <div className="panel-body">
-            <SkillList character={character} skills={skills} onToggleSkill={toggleSkill} />
+            <SkillList
+              character={character}
+              skills={skills}
+              onToggleSkill={handleToggleSkill}
+            />
           </div>
         </section>
 
@@ -345,7 +436,25 @@ export function CharacterSheet({ character: characterProp, onHome, onEdit }: Cha
                         <button
                           type="button"
                           className="btn btn-sm btn-ghost"
-                          onClick={() => removeSpell(spell.index)}
+                          onClick={() => {
+                            if (controlled && onChange) {
+                              onChange((prev) => ({
+                                ...prev,
+                                spells: {
+                                  ...prev.spells,
+                                  known: prev.spells.known.filter((s) => s !== spell.index),
+                                  prepared: prev.spells.prepared.filter(
+                                    (s) => s !== spell.index,
+                                  ),
+                                  alwaysPrepared: (prev.spells.alwaysPrepared ?? []).filter(
+                                    (s) => s !== spell.index,
+                                  ),
+                                },
+                              }));
+                            } else {
+                              removeSpellStore(spell.index);
+                            }
+                          }}
                         >
                           Remove
                         </button>
@@ -358,7 +467,28 @@ export function CharacterSheet({ character: characterProp, onHome, onEdit }: Cha
                           <input
                             type="checkbox"
                             checked={prepared}
-                            onChange={(e) => prepareSpell(spell.index, e.target.checked)}
+                            onChange={(e) => {
+                              if (controlled && onChange) {
+                                const checked = e.target.checked;
+                                onChange((prev) => {
+                                  const isPrepared = prev.spells.prepared.includes(spell.index);
+                                  let preparedList = prev.spells.prepared;
+                                  if (checked && !isPrepared) {
+                                    preparedList = [...prev.spells.prepared, spell.index];
+                                  } else if (!checked && isPrepared) {
+                                    preparedList = prev.spells.prepared.filter(
+                                      (s) => s !== spell.index,
+                                    );
+                                  }
+                                  return {
+                                    ...prev,
+                                    spells: { ...prev.spells, prepared: preparedList },
+                                  };
+                                });
+                              } else {
+                                prepareSpellStore(spell.index, e.target.checked);
+                              }
+                            }}
                           />
                           Prepared
                         </label>
@@ -588,31 +718,50 @@ export function CharacterSheet({ character: characterProp, onHome, onEdit }: Cha
         open={spellBrowserOpen}
         onClose={() => setSpellBrowserOpen(false)}
         knownIndexes={character.spells.known}
-        onSelect={(spell) => addSpell(spell.index)}
+        onSelect={(spell) => {
+          if (controlled && onChange) {
+            onChange((prev) => {
+              if (prev.spells.known.includes(spell.index)) return prev;
+              return {
+                ...prev,
+                spells: {
+                  ...prev.spells,
+                  known: [...prev.spells.known, spell.index],
+                },
+              };
+            });
+          } else {
+            addSpellStore(spell.index);
+          }
+        }}
       />
       <EquipmentBrowser
         open={equipmentBrowserOpen}
         onClose={() => setEquipmentBrowserOpen(false)}
         ownedIndexes={character.inventory.map((e) => e.index).filter(Boolean) as string[]}
         onSelect={(item) => {
-          const existingIdx = character.inventory.findIndex((e) => e.index === item.index);
-          if (existingIdx >= 0) {
-            const inventory = character.inventory.map((e, i) =>
-              i === existingIdx ? { ...e, quantity: e.quantity + 1 } : e,
-            );
-            patch({ inventory });
-            return;
-          }
-          patch({
-            inventory: [
-              ...character.inventory,
-              {
-                index: item.index,
-                name: item.name,
-                quantity: item.bundle_quantity ?? 1,
-                equipped: false,
-              },
-            ],
+          patch((prev) => {
+            const existingIdx = prev.inventory.findIndex((e) => e.index === item.index);
+            if (existingIdx >= 0) {
+              return {
+                ...prev,
+                inventory: prev.inventory.map((e, i) =>
+                  i === existingIdx ? { ...e, quantity: e.quantity + 1 } : e,
+                ),
+              };
+            }
+            return {
+              ...prev,
+              inventory: [
+                ...prev.inventory,
+                {
+                  index: item.index,
+                  name: item.name,
+                  quantity: item.bundle_quantity ?? 1,
+                  equipped: false,
+                },
+              ],
+            };
           });
         }}
       />
