@@ -1,12 +1,20 @@
-import { getBackground, getClass, getRace, getSkill } from "../data";
+import {
+  getBackground,
+  getClass,
+  getEquipment,
+  getRace,
+  getSkill,
+} from "../data";
 import type {
   AbilityScores,
   Character,
   ClassLevel,
   CustomBackground,
+  InventoryItem,
   OtherChoices,
   Personality,
 } from "../types/character";
+import { emptyCurrency } from "../types/character";
 import type { AbilityScore, DnDRace, RacialTrait } from "../types/dnd";
 import { ABILITY_SCORES } from "../types/dnd";
 import {
@@ -18,6 +26,29 @@ import {
   validatePointBuy,
   xpForLevel,
 } from "./rules";
+
+function newItemId(): string {
+  return typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID()
+    : `item-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+}
+
+function enrichInventoryItem(
+  item: Partial<InventoryItem> & { name: string; quantity: number },
+): InventoryItem {
+  const catalog = item.index ? getEquipment(item.index) : undefined;
+  return {
+    id: item.id && item.id.length > 0 ? item.id : newItemId(),
+    index: item.index ?? catalog?.index,
+    name: item.name || catalog?.name || "Unknown item",
+    quantity: item.quantity,
+    equipped: item.equipped,
+    notes: item.notes,
+    weight: item.weight ?? catalog?.weight ?? null,
+    cost: item.cost ?? catalog?.cost ?? null,
+    category: item.category ?? catalog?.category,
+  };
+}
 
 export type AbilityMethod = "standard" | "pointBuy" | "manual";
 
@@ -126,33 +157,46 @@ function backgroundTools(draft: CharacterDraft): string[] {
   return [];
 }
 
-function backgroundEquipmentItems(
-  draft: CharacterDraft,
-): Character["inventory"] {
+function backgroundEquipmentItems(draft: CharacterDraft): InventoryItem[] {
   if (draft.customBackground) return [];
   if (!draft.backgroundId) return [];
   const bg = getBackground(draft.backgroundId);
   if (!bg) return [];
-  return bg.equipment.map((e) => ({
-    name: e.name,
-    quantity: e.quantity,
-  }));
+  return bg.equipment.map((e) =>
+    enrichInventoryItem({
+      name: e.name,
+      quantity: e.quantity,
+    }),
+  );
 }
 
-function mergeInventoryByName(
-  ...lists: Character["inventory"][]
-): Character["inventory"] {
+function mergeInventoryByName(...lists: InventoryItem[][]): InventoryItem[] {
   const seen = new Set<string>();
-  const out: Character["inventory"] = [];
+  const out: InventoryItem[] = [];
   for (const list of lists) {
     for (const item of list) {
-      const key = item.name.toLowerCase();
+      const key = (item.index ?? item.name).toLowerCase();
       if (seen.has(key)) continue;
       seen.add(key);
-      out.push(item);
+      out.push(enrichInventoryItem(item));
     }
   }
   return out;
+}
+
+function backgroundStartingGold(draft: CharacterDraft): number {
+  if (draft.customBackground) return 0;
+  if (!draft.backgroundId) return 0;
+  const bg = getBackground(draft.backgroundId);
+  if (!bg?.starting_gold) return 0;
+  if (typeof bg.starting_gold === "number") return bg.starting_gold;
+  if (
+    typeof bg.starting_gold === "object" &&
+    "quantity" in bg.starting_gold
+  ) {
+    return Number(bg.starting_gold.quantity) || 0;
+  }
+  return 0;
 }
 
 /** Assign standard-array (or equivalent point-buy baseline) with class primaries highest. */
@@ -277,32 +321,21 @@ export function createCharacter(draft: CharacterDraft): Character {
       : undefined;
   const knownSpells = mergeUnique(draft.knownSpells, racialCantrip ? [racialCantrip] : []);
 
-  const extras: Character["inventory"] = [];
+  const extras: InventoryItem[] = [];
   if (draft.classId === "wizard") {
-    extras.push({ name: "Spellbook", quantity: 1 });
-  }
-  const bg = draft.customBackground
-    ? null
-    : draft.backgroundId
-      ? getBackground(draft.backgroundId)
-      : null;
-  const goldQty =
-    typeof bg?.starting_gold === "number"
-      ? bg.starting_gold
-      : bg?.starting_gold &&
-          typeof bg.starting_gold === "object" &&
-          "quantity" in bg.starting_gold
-        ? Number((bg.starting_gold as { quantity: number }).quantity)
-        : 0;
-  if (goldQty > 0) {
-    extras.push({ name: `${goldQty} gp`, quantity: 1 });
+    extras.push(enrichInventoryItem({ name: "Spellbook", quantity: 1 }));
   }
 
   const inventory = mergeInventoryByName(
     backgroundEquipmentItems(draft),
-    draft.inventory ?? [],
+    (draft.inventory ?? []).map((item) => enrichInventoryItem(item)),
     extras,
   );
+
+  const currency = {
+    ...emptyCurrency(),
+    gp: backgroundStartingGold(draft),
+  };
 
   const now = new Date().toISOString();
   const id =
@@ -338,6 +371,7 @@ export function createCharacter(draft: CharacterDraft): Character {
     shieldEquipped: draft.shieldEquipped,
     weapons: draft.weapons ?? [],
     inventory,
+    currency,
     spells: {
       known: knownSpells,
       prepared: draft.preparedSpells ?? [],
@@ -351,6 +385,9 @@ export function createCharacter(draft: CharacterDraft): Character {
       bonds: draft.personality?.bonds ?? "",
       flaws: draft.personality?.flaws ?? "",
     },
+    journal: [],
+    quests: [],
+    activeConditions: [],
     asiHistory: [],
     createdAt: now,
     updatedAt: now,

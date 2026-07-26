@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import type { CharacterFeature } from '../types/character';
+import { Explainable } from './Explainable';
 import styles from './FeatureList.module.css';
 
 export interface FeatureListProps {
@@ -14,7 +14,7 @@ export function FeatureList({
   defaultOpenIds = [],
   emptyMessage = 'No features yet.',
 }: FeatureListProps) {
-  const [open, setOpen] = useState<Set<string>>(() => new Set(defaultOpenIds));
+  const openDefaults = new Set(defaultOpenIds);
 
   if (features.length === 0) {
     return <p className={styles.empty}>{emptyMessage}</p>;
@@ -22,35 +22,15 @@ export function FeatureList({
 
   return (
     <div className={styles.list}>
-      {features.map((feature) => {
-        const isOpen = open.has(feature.id);
-        return (
-          <div key={feature.id} className={styles.item}>
-            <button
-              type="button"
-              className={styles.summary}
-              aria-expanded={isOpen}
-              onClick={() => {
-                setOpen((prev) => {
-                  const next = new Set(prev);
-                  if (next.has(feature.id)) next.delete(feature.id);
-                  else next.add(feature.id);
-                  return next;
-                });
-              }}
-            >
-              <span className={styles.titleWrap}>
-                <span className={styles.title}>{feature.name}</span>
-                {feature.source ? <span className={styles.source}>{feature.source}</span> : null}
-              </span>
-              <span className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ''}`} aria-hidden="true">
-                ▸
-              </span>
-            </button>
-            {isOpen ? <div className={styles.body}>{feature.summary}</div> : null}
-          </div>
-        );
-      })}
+      {features.map((feature) => (
+        <Explainable
+          key={feature.id}
+          name={feature.name}
+          badge={feature.source}
+          explanation={feature.summary}
+          defaultOpen={openDefaults.has(feature.id)}
+        />
+      ))}
     </div>
   );
 }

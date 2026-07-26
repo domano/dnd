@@ -96,7 +96,11 @@ export function EquipmentBrowser({
             item.cost,
             item.weight != null ? `${item.weight} lb` : null,
             item.damage ? `${item.damage.dice} ${item.damage.type}` : null,
-            item.armor_class?.formula,
+            item.two_handed_damage
+              ? `2H ${item.two_handed_damage.dice} ${item.two_handed_damage.type}`
+              : null,
+            item.armor_class ? `AC ${item.armor_class.formula}` : null,
+            item.properties?.length ? item.properties.join(', ') : null,
           ].filter(Boolean);
 
           return (
@@ -118,6 +122,9 @@ export function EquipmentBrowser({
                 {detailBits.length ? ` · ${detailBits.join(' · ')}` : ''}
               </div>
               {item.description ? <p className={styles.desc}>{item.description}</p> : null}
+              {item.special && !item.description ? (
+                <p className={styles.desc}>{item.special}</p>
+              ) : null}
             </button>
           );
         })

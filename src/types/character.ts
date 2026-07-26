@@ -61,11 +61,47 @@ export interface HitDiceState {
   max: number;
 }
 
+export interface Currency {
+  cp: number;
+  sp: number;
+  ep: number;
+  gp: number;
+  pp: number;
+}
+
 export interface InventoryItem {
+  id: string;
+  /** Equipment catalog index */
   index?: string;
   name: string;
   quantity: number;
   equipped?: boolean;
+  notes?: string;
+  weight?: number | null;
+  cost?: string | null;
+  category?: string;
+}
+
+export interface JournalEntry {
+  id: string;
+  createdAt: string;
+  title: string;
+  body: string;
+  sessionLabel?: string;
+  xpGained?: number;
+  tags?: string[];
+}
+
+export interface QuestEntry {
+  id: string;
+  title: string;
+  status: "active" | "completed" | "failed";
+  notes: string;
+  updatedAt: string;
+}
+
+export function emptyCurrency(): Currency {
+  return { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 };
 }
 
 export interface CharacterSpells {
@@ -150,10 +186,16 @@ export interface Character {
   weapons: string[];
 
   inventory: InventoryItem[];
+  currency: Currency;
   spells: CharacterSpells;
 
   notes: string;
   personality: Personality;
+
+  journal: JournalEntry[];
+  quests: QuestEntry[];
+  /** Condition catalog indexes */
+  activeConditions: string[];
 
   asiHistory: AsiHistoryEntry[];
 
@@ -277,6 +319,7 @@ export function createEmptyCharacter(partial?: Partial<Character>): Character {
     shieldEquipped: partial?.shieldEquipped,
     weapons: partial?.weapons ?? [],
     inventory: partial?.inventory ?? [],
+    currency: partial?.currency ?? emptyCurrency(),
     spells: partial?.spells ?? {
       known: [],
       prepared: [],
@@ -290,6 +333,9 @@ export function createEmptyCharacter(partial?: Partial<Character>): Character {
       bonds: "",
       flaws: "",
     },
+    journal: partial?.journal ?? [],
+    quests: partial?.quests ?? [],
+    activeConditions: partial?.activeConditions ?? [],
     asiHistory: partial?.asiHistory ?? [],
     createdAt: partial?.createdAt ?? now,
     updatedAt: partial?.updatedAt ?? now,

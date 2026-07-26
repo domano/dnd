@@ -130,6 +130,16 @@
   line-height: 1.45;
 }
 
+.conditionList {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: 0.55rem;
+}
+
+.listItem > :first-child {
+  margin: -0.15rem -0.2rem 0.15rem;
+}
+
 .notesGrid {
   display: grid;
   gap: var(--space-3);
@@ -238,6 +248,108 @@
   font-size: 0.82rem;
 }
 
+.currencyRow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-bottom: 0.75rem;
+}
+
+.currencyField span {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.currencyField input {
+  padding: 0.35rem 0.4rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.weightLine {
+  margin: 0 0 0.85rem;
+  font-size: 0.9rem;
+}
+
+.quickAdd {
+  display: grid;
+  grid-template-columns: 1fr 5rem auto;
+  gap: var(--space-2);
+  align-items: end;
+  margin-bottom: 0.9rem;
+}
+
+.itemControls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: 0.35rem;
+}
+
+.qtyControls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.qtyInput {
+  width: 3.25rem;
+  padding: 0.3rem 0.35rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.campaignBlock {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.campaignBlock + .campaignBlock {
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+}
+
+.campaignBlock h3 {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.journalForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  align-items: end;
+}
+
+.conditionList {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.conditionItem {
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--paper-lift) 90%, white);
+}
+
+.conditionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.conditionDesc {
+  margin: 0.45rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
 .panelDelay1 { animation-delay: 40ms; }
 .panelDelay2 { animation-delay: 90ms; }
 .panelDelay3 { animation-delay: 140ms; }
@@ -263,6 +375,24 @@
   }
 }
 
+@media (max-width: 520px) {
+  .currencyRow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .quickAdd {
+    grid-template-columns: 1fr 5rem;
+  }
+
+  .quickAdd > button {
+    grid-column: 1 / -1;
+  }
+
+  .journalForm {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (min-width: 980px) {
   .page {
     padding-bottom: var(--space-6);
@@ -274,7 +404,8 @@
       'abilities combat skills'
       'abilities features features'
       'spells spells equipment'
-      'feats notes notes';
+      'feats campaign campaign'
+      'notes notes notes';
     align-items: start;
   }
 
@@ -285,6 +416,7 @@
   .areaSpells { grid-area: spells; }
   .areaEquipment { grid-area: equipment; }
   .areaFeats { grid-area: feats; }
+  .areaCampaign { grid-area: campaign; }
   .areaNotes { grid-area: notes; }
 
   .abilities {

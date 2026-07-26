@@ -25,6 +25,9 @@ export type { FeatBrowserProps } from './FeatBrowser';
 export { FeatureList } from './FeatureList';
 export type { FeatureListProps } from './FeatureList';
 
+export { Explainable } from './Explainable';
+export type { ExplainableProps } from './Explainable';
+
 export { AbilityBlock } from './AbilityBlock';
 export type { AbilityBlockProps } from './AbilityBlock';
 

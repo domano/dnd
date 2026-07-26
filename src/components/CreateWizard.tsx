@@ -619,15 +619,20 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
     const gearInventory = selectedGear.map((index) => {
       const item = equipment.find((e) => e.index === index)!;
       return {
+        id: crypto.randomUUID(),
         index: item.index,
         name: item.name,
         quantity: item.bundle_quantity ?? 1,
         equipped: item.kind === "armor" || item.kind === "weapon",
+        weight: item.weight ?? null,
+        cost: item.cost ?? null,
+        category: item.category,
       };
     });
     const bgKit =
       backgroundMode === "acolyte"
         ? (background?.equipment ?? []).map((e) => ({
+            id: crypto.randomUUID(),
             name: e.name,
             quantity: e.quantity,
           }))

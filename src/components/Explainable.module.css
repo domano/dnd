@@ -1,0 +1,177 @@
+/* Fantasy disclosure: amber (brass) accents + moss (teal) body tint */
+.root {
+  --amber: var(--brass);
+  --moss: var(--teal);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--paper-lift) 92%, white);
+  overflow: hidden;
+}
+
+.root.open,
+.root[data-open='true'] {
+  border-color: color-mix(in srgb, var(--amber) 40%, var(--line));
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--moss) 55%, transparent);
+}
+
+.dense,
+.root[data-dense='true'] {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.dense.open,
+.root[data-dense='true'].open {
+  border: none;
+  box-shadow: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+  min-width: 0;
+  padding: 0.65rem 0.8rem;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.toggle:disabled {
+  cursor: default;
+}
+
+.toggle:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--amber) 9%, transparent);
+}
+
+.dense .toggle,
+.root[data-dense='true'] .toggle {
+  padding: 0.1rem 0;
+  gap: 0.3rem;
+}
+
+.dense .toggle:hover:not(:disabled),
+.root[data-dense='true'] .toggle:hover:not(:disabled) {
+  background: transparent;
+  color: var(--moss);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dense .name,
+.root[data-dense='true'] .name {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+
+.badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.08rem 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--amber) 45%, var(--line));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--amber) 12%, var(--paper-lift));
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.chevron {
+  flex-shrink: 0;
+  margin-left: auto;
+  color: var(--amber);
+  font-size: 0.85rem;
+  transition: transform 160ms ease;
+}
+
+.chevronOpen {
+  transform: rotate(90deg);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  padding-right: 0.55rem;
+}
+
+.dense .actions,
+.root[data-dense='true'] .actions {
+  padding-right: 0;
+}
+
+.body {
+  padding: 0 0.85rem 0.85rem;
+  border-top: 1px solid color-mix(in srgb, var(--moss) 22%, var(--line));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--moss) 6%, transparent),
+    transparent 2.2rem
+  );
+}
+
+.dense .body,
+.root[data-dense='true'] .body {
+  margin: 0.2rem 0 0.35rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--moss) 20%, var(--line));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--moss) 5%, var(--paper-lift));
+}
+
+.paragraph,
+.line {
+  margin: 0.65rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  max-width: 65ch;
+  white-space: pre-wrap;
+}
+
+.paragraph:first-child,
+.line:first-child {
+  margin-top: 0.7rem;
+}
+
+.dense .paragraph,
+.dense .line,
+.root[data-dense='true'] .paragraph,
+.root[data-dense='true'] .line {
+  margin-top: 0.45rem;
+  font-size: 0.84rem;
+}
+
+.dense .paragraph:first-child,
+.dense .line:first-child,
+.root[data-dense='true'] .paragraph:first-child,
+.root[data-dense='true'] .line:first-child {
+  margin-top: 0;
+}

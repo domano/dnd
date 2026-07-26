@@ -11,8 +11,14 @@ import {
   totalLevel,
   xpForLevel,
 } from "../lib/rules";
-import { loadSheetState, saveSheetState } from "../lib/storage";
+import { hydrateCharacter, loadSheetState, saveSheetState } from "../lib/storage";
 import { getClass } from "../data";
+
+function newId(): string {
+  return typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID()
+    : `id-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+}
 
 function touch(character: Character, patch: Partial<Character>): Character {
   return {
@@ -82,14 +88,14 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
   hydrate: () => {
     const state = loadSheetState();
     set({
-      characters: state.characters,
+      characters: state.characters.map((c) => hydrateCharacter(c)),
       activeId: state.activeId,
       hydrated: true,
     });
   },
 
   createCharacter: (draft) => {
-    const character = createCharacter(draft);
+    const character = hydrateCharacter(createCharacter(draft));
     set((state) => {
       const characters = [...state.characters, character];
       const activeId = character.id;
@@ -187,7 +193,9 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
 
   importCharacters: (incoming, mode = "merge") => {
     set((state) => {
-      const cleaned = incoming.filter((c) => c && typeof c.id === "string");
+      const cleaned = incoming
+        .filter((c) => c && typeof c.id === "string")
+        .map((c) => hydrateCharacter(c));
       let characters: Character[];
       if (mode === "replace") {
         characters = cleaned;
@@ -386,6 +394,14 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
           }
         }
 
+        const journalEntry = {
+          id: newId(),
+          createdAt: new Date().toISOString(),
+          title: `Reached level ${newLevel}`,
+          body: `Advanced to level ${newLevel}.`,
+          tags: ["level-up"],
+        };
+
         return touch(c, {
           classLevels,
           xp: Math.max(c.xp, xpForLevel(totalLevel({ ...c, classLevels }))),
@@ -397,6 +413,7 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
           asiHistory,
           feats,
           customFeats,
+          journal: [journalEntry, ...(c.journal ?? [])],
         });
       });
       persist(characters, state.activeId);
