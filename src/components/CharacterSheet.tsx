@@ -17,6 +17,8 @@ import {
   skills,
 } from '../data';
 import {
+  abilityModifier,
+  characterHasExpertise,
   computeAC,
   computeInitiative,
   computeSpeed,
@@ -27,11 +29,16 @@ import {
   getSpellAttackBonus,
   getSpellSaveDC,
   getSpellSlots,
+  passivePerception,
   primaryClass,
   proficiencyBonus,
   totalLevel,
   xpForLevel,
 } from '../lib/rules';
+import {
+  classSpellList,
+  preparedSpellCapacity,
+} from '../lib/spellcasting';
 import { useCharacterStore } from '../store/characterStore';
 import { AbilityBlock } from './AbilityBlock';
 import { StatChip } from './StatChip';
@@ -138,6 +145,27 @@ export function CharacterSheet({
     const hitDiceMax = level;
     const hitDiceCurrent = Math.max(0, hitDiceMax - character.hitDiceUsed);
 
+    const castingAbility = klass?.spellcasting?.ability;
+    const castingScore = castingAbility ? scores[castingAbility] : 10;
+    const classLevel = primary?.level ?? level;
+    const prepareMax =
+      klass?.spellcasting?.preparation === 'prepared'
+        ? preparedSpellCapacity(klass, classLevel, castingScore)
+        : 0;
+    const preparedCount = character.spells.prepared.filter((index) => {
+      const spell = getSpell(index);
+      return spell != null && spell.level > 0;
+    }).length;
+    const classListIndexes = new Set(
+      klass ? classSpellList(klass).map((s) => s.index) : [],
+    );
+    const cantrips = knownSpells.filter((s) => s.level === 0);
+    const leveledKnown = knownSpells.filter((s) => s.level > 0);
+    const preparedSpells = character.spells.prepared
+      .map((index) => getSpell(index))
+      .filter((s): s is NonNullable<typeof s> => s != null && s.level > 0)
+      .sort((a, b) => a.level - b.level || a.name.localeCompare(b.name));
+
     return {
       level,
       scores,
@@ -148,12 +176,23 @@ export function CharacterSheet({
       ac: computeAC(character),
       initiative: computeInitiative(character),
       speed: computeSpeed(character),
+      passivePerception: passivePerception(character),
+      hasExpertise: characterHasExpertise(character),
       slotState: slotsUsedToState(slotInfo.slots, character.spells.slotsUsed),
       spellAttack: getSpellAttackBonus(character),
       spellSaveDC: getSpellSaveDC(character),
       features,
       featRows,
       knownSpells,
+      cantrips,
+      leveledKnown,
+      preparedSpells,
+      prepareMax,
+      preparedCount,
+      classListIndexes,
+      hasSpellbook: Boolean(klass?.spellcasting?.spellbook),
+      isPreparedCaster: klass?.spellcasting?.preparation === 'prepared',
+      castingMod: castingAbility ? abilityModifier(castingScore) : null,
       hitDice: { die: hitDie, current: hitDiceCurrent, max: hitDiceMax },
       nextLevelXp: level < 20 ? xpForLevel(level + 1) : null,
       backgroundName:
@@ -194,12 +233,22 @@ export function CharacterSheet({
     ac,
     initiative,
     speed,
+    passivePerception: pp,
+    hasExpertise,
     slotState,
     spellAttack,
     spellSaveDC,
     features,
     featRows,
-    knownSpells,
+    cantrips,
+    leveledKnown,
+    preparedSpells,
+    prepareMax,
+    preparedCount,
+    classListIndexes,
+    hasSpellbook,
+    isPreparedCaster,
+    castingMod,
     hitDice,
     nextLevelXp,
     backgroundName,
@@ -306,6 +355,130 @@ export function CharacterSheet({
     toggleExpertise(skillName);
   }
 
+  function removeSpell(index: string) {
+    if (controlled && onChange) {
+      onChange((prev) => ({
+        ...prev,
+        spells: {
+          ...prev.spells,
+          known: prev.spells.known.filter((s) => s !== index),
+          prepared: prev.spells.prepared.filter((s) => s !== index),
+          alwaysPrepared: (prev.spells.alwaysPrepared ?? []).filter(
+            (s) => s !== index,
+          ),
+        },
+      }));
+    } else {
+      removeSpellStore(index);
+    }
+  }
+
+  function setPrepared(index: string, checked: boolean) {
+    if (controlled && onChange) {
+      onChange((prev) => {
+        const isPrepared = prev.spells.prepared.includes(index);
+        let preparedList = prev.spells.prepared;
+        if (checked && !isPrepared) {
+          preparedList = [...prev.spells.prepared, index];
+        } else if (!checked && isPrepared) {
+          preparedList = prev.spells.prepared.filter((s) => s !== index);
+        }
+        return {
+          ...prev,
+          spells: { ...prev.spells, prepared: preparedList },
+        };
+      });
+    } else {
+      prepareSpellStore(index, checked);
+    }
+  }
+
+  function renderSpellGroup(
+    title: string,
+    list: NonNullable<ReturnType<typeof getSpell>>[],
+    opts: { showPrepare: boolean; prepareOnlyIfKnown?: boolean },
+  ) {
+    if (list.length === 0) return null;
+    const atBudget = preparedCount >= prepareMax && prepareMax > 0;
+    return (
+      <div className={styles.spellSection}>
+        <h3>{title}</h3>
+        <div className={styles.list}>
+          {list.map((spell) => {
+            const alwaysOn = (active.spells.alwaysPrepared ?? []).includes(
+              spell.index,
+            );
+            const prepared =
+              active.spells.prepared.includes(spell.index) || alwaysOn;
+            const inBook = active.spells.known.includes(spell.index);
+            const offList = !classListIndexes.has(spell.index);
+            const canPrepare =
+              opts.showPrepare &&
+              spell.level > 0 &&
+              (!opts.prepareOnlyIfKnown || inBook);
+            const prepareDisabled =
+              alwaysOn || (!prepared && atBudget);
+
+            return (
+              <div key={`${title}-${spell.index}`} className={styles.listItem}>
+                <div className={styles.listItemHeader}>
+                  <span className={styles.listItemTitle}>
+                    {spell.name}
+                    {spell.ritual ? (
+                      <span className={styles.badge}>Ritual</span>
+                    ) : null}
+                    {offList ? (
+                      <span className={`${styles.badge} ${styles.badgeWarn}`}>
+                        Off-list
+                      </span>
+                    ) : null}
+                  </span>
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-ghost"
+                    onClick={() => removeSpell(spell.index)}
+                  >
+                    Remove
+                  </button>
+                </div>
+                <div className={styles.listItemMeta}>
+                  {spell.level === 0 ? 'Cantrip' : `Level ${spell.level}`} ·{' '}
+                  {spell.school}
+                </div>
+                {canPrepare ? (
+                  <label className="checkbox">
+                    <input
+                      type="checkbox"
+                      checked={prepared}
+                      disabled={prepareDisabled}
+                      title={
+                        !prepared && atBudget
+                          ? `Prepare budget full (${prepareMax})`
+                          : alwaysOn
+                            ? 'Always prepared'
+                            : undefined
+                      }
+                      onChange={(e) => {
+                        if (!e.target.checked) {
+                          setPrepared(spell.index, false);
+                          return;
+                        }
+                        if (atBudget) return;
+                        setPrepared(spell.index, true);
+                      }}
+                    />
+                    Prepared
+                    {!prepared && atBudget ? ' (budget full)' : ''}
+                  </label>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`${styles.page} anim-fade-rise`}>
       <header className={styles.header}>
@@ -382,6 +555,7 @@ export function CharacterSheet({
               <StatChip label="Armor class" value={ac} accent />
               <StatChip label="Initiative" value={formatModifier(initiative)} accent />
               <StatChip label="Speed" value={`${speed} ft.`} />
+              <StatChip label="Passive Perception" value={pp} />
             </div>
             <div style={{ marginTop: '1rem' }}>
               <h3 style={{ fontSize: '0.95rem', marginBottom: '0.6rem' }}>Hit points</h3>
@@ -414,8 +588,26 @@ export function CharacterSheet({
               character={character}
               skills={skills}
               onToggleSkill={handleToggleSkill}
-              onToggleExpertise={handleToggleExpertise}
+              onToggleExpertise={
+                hasExpertise ? handleToggleExpertise : undefined
+              }
             />
+            <div style={{ marginTop: '1rem' }}>
+              <h3 style={{ fontSize: '0.95rem', marginBottom: '0.6rem' }}>
+                Languages
+              </h3>
+              {character.languageChoices.length === 0 ? (
+                <p className={styles.empty}>No languages recorded.</p>
+              ) : (
+                <ul className={styles.languages}>
+                  {character.languageChoices.map((lang) => (
+                    <li key={lang} className={styles.langChip}>
+                      {lang}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
         </section>
 
@@ -460,84 +652,40 @@ export function CharacterSheet({
                 });
               }}
             />
-            <h3 style={{ fontSize: '0.95rem', margin: '1rem 0 0.6rem' }}>Known / prepared</h3>
-            {knownSpells.length === 0 ? (
+
+            {isPreparedCaster && prepareMax > 0 ? (
+              <p
+                className={styles.prepareBudget}
+                data-over={preparedCount > prepareMax}
+              >
+                Prepared {preparedCount} / {prepareMax}
+                {castingMod != null
+                  ? ` (${klass?.name ?? 'Caster'} level + ${klass?.spellcasting?.ability?.slice(0, 3).toUpperCase()} mod)`
+                  : ''}
+                {preparedCount > prepareMax
+                  ? ' — over prepare budget; unprepare spells before resting.'
+                  : ''}
+              </p>
+            ) : null}
+
+            {renderSpellGroup('Cantrips', cantrips, { showPrepare: false })}
+            {hasSpellbook
+              ? renderSpellGroup('Spellbook', leveledKnown, {
+                  showPrepare: isPreparedCaster,
+                  prepareOnlyIfKnown: true,
+                })
+              : isPreparedCaster
+                ? renderSpellGroup(
+                    'Prepared',
+                    leveledKnown.length > 0 ? leveledKnown : preparedSpells,
+                    { showPrepare: true },
+                  )
+                : renderSpellGroup('Known', leveledKnown, {
+                    showPrepare: false,
+                  })}
+            {cantrips.length === 0 && leveledKnown.length === 0 ? (
               <p className={styles.empty}>No spells yet.</p>
-            ) : (
-              <div className={styles.list}>
-                {knownSpells.map((spell) => {
-                  const prepared =
-                    character.spells.prepared.includes(spell.index) ||
-                    (character.spells.alwaysPrepared ?? []).includes(spell.index);
-                  return (
-                    <div key={spell.index} className={styles.listItem}>
-                      <div className={styles.listItemHeader}>
-                        <span className={styles.listItemTitle}>{spell.name}</span>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-ghost"
-                          onClick={() => {
-                            if (controlled && onChange) {
-                              onChange((prev) => ({
-                                ...prev,
-                                spells: {
-                                  ...prev.spells,
-                                  known: prev.spells.known.filter((s) => s !== spell.index),
-                                  prepared: prev.spells.prepared.filter(
-                                    (s) => s !== spell.index,
-                                  ),
-                                  alwaysPrepared: (prev.spells.alwaysPrepared ?? []).filter(
-                                    (s) => s !== spell.index,
-                                  ),
-                                },
-                              }));
-                            } else {
-                              removeSpellStore(spell.index);
-                            }
-                          }}
-                        >
-                          Remove
-                        </button>
-                      </div>
-                      <div className={styles.listItemMeta}>
-                        {spell.level === 0 ? 'Cantrip' : `Level ${spell.level}`} · {spell.school}
-                      </div>
-                      {spell.level > 0 ? (
-                        <label className="checkbox">
-                          <input
-                            type="checkbox"
-                            checked={prepared}
-                            onChange={(e) => {
-                              if (controlled && onChange) {
-                                const checked = e.target.checked;
-                                onChange((prev) => {
-                                  const isPrepared = prev.spells.prepared.includes(spell.index);
-                                  let preparedList = prev.spells.prepared;
-                                  if (checked && !isPrepared) {
-                                    preparedList = [...prev.spells.prepared, spell.index];
-                                  } else if (!checked && isPrepared) {
-                                    preparedList = prev.spells.prepared.filter(
-                                      (s) => s !== spell.index,
-                                    );
-                                  }
-                                  return {
-                                    ...prev,
-                                    spells: { ...prev.spells, prepared: preparedList },
-                                  };
-                                });
-                              } else {
-                                prepareSpellStore(spell.index, e.target.checked);
-                              }
-                            }}
-                          />
-                          Prepared
-                        </label>
-                      ) : null}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+            ) : null}
           </div>
         </section>
 
@@ -758,6 +906,7 @@ export function CharacterSheet({
         open={spellBrowserOpen}
         onClose={() => setSpellBrowserOpen(false)}
         knownIndexes={character.spells.known}
+        defaultClass={klass?.name}
         onSelect={(spell) => {
           if (controlled && onChange) {
             onChange((prev) => {

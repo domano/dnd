@@ -138,6 +138,23 @@
   line-height: 1.4;
 }
 
+.optionFeatures {
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.optionFuture {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  line-height: 1.35;
+}
+
+.option[data-selected='true'] .optionTitle {
+  color: var(--teal);
+}
+
 .methodToggle {
   display: inline-flex;
   flex-wrap: wrap;

@@ -1,4 +1,4 @@
-import { getBackground, getClass, getRace } from "../data";
+import { getBackground, getClass, getRace, getSkill } from "../data";
 import type {
   AbilityScores,
   Character,
@@ -7,7 +7,7 @@ import type {
   OtherChoices,
   Personality,
 } from "../types/character";
-import type { AbilityScore } from "../types/dnd";
+import type { AbilityScore, DnDRace, RacialTrait } from "../types/dnd";
 import { ABILITY_SCORES } from "../types/dnd";
 import {
   abilityModifier,
@@ -36,6 +36,7 @@ export interface CharacterDraft {
   skillProficiencies: string[];
   expertise?: string[];
   toolProficiencies?: string[];
+  weaponProficiencies?: string[];
   languageChoices?: string[];
   otherChoices?: OtherChoices;
   knownSpells?: string[];
@@ -74,9 +75,41 @@ function mergeUnique(...lists: (string[] | undefined)[]): string[] {
   return out;
 }
 
-function backgroundSkills(
-  draft: CharacterDraft,
-): string[] {
+function isToolProficiency(name: string): boolean {
+  return /tools?|supplies|kit|instruments?/i.test(name);
+}
+
+function collectTraitProficiencies(
+  race: DnDRace,
+  subraceId?: string,
+): { skills: string[]; weapons: string[]; tools: string[] } {
+  const traits: RacialTrait[] = [...race.traits];
+  const subrace = subraceId
+    ? race.subraces.find((s) => s.id === subraceId)
+    : undefined;
+  if (subrace) traits.push(...subrace.traits);
+
+  const skills: string[] = [];
+  const weapons: string[] = [];
+  const tools: string[] = [];
+
+  for (const trait of traits) {
+    for (const prof of trait.proficiencies ?? []) {
+      const skill = getSkill(prof);
+      if (skill) {
+        skills.push(skill.name);
+      } else if (isToolProficiency(prof)) {
+        tools.push(prof);
+      } else {
+        weapons.push(prof);
+      }
+    }
+  }
+
+  return { skills, weapons, tools };
+}
+
+function backgroundSkills(draft: CharacterDraft): string[] {
   if (draft.customBackground) return draft.customBackground.skills ?? [];
   if (draft.backgroundId) {
     return getBackground(draft.backgroundId)?.skills ?? [];
@@ -92,10 +125,9 @@ function backgroundTools(draft: CharacterDraft): string[] {
   return [];
 }
 
-function backgroundInventory(
+function backgroundEquipmentItems(
   draft: CharacterDraft,
 ): Character["inventory"] {
-  if (draft.inventory) return draft.inventory;
   if (draft.customBackground) return [];
   if (!draft.backgroundId) return [];
   const bg = getBackground(draft.backgroundId);
@@ -104,6 +136,65 @@ function backgroundInventory(
     name: e.name,
     quantity: e.quantity,
   }));
+}
+
+function mergeInventoryByName(
+  ...lists: Character["inventory"][]
+): Character["inventory"] {
+  const seen = new Set<string>();
+  const out: Character["inventory"] = [];
+  for (const list of lists) {
+    for (const item of list) {
+      const key = item.name.toLowerCase();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(item);
+    }
+  }
+  return out;
+}
+
+/** Assign standard-array (or equivalent point-buy baseline) with class primaries highest. */
+export function abilitiesForClass(
+  classId: string,
+  method: AbilityMethod,
+): AbilityScores {
+  if (method === "manual") {
+    return emptyAbilities(8);
+  }
+
+  const klass = getClass(classId);
+  const scores = [...STANDARD_ARRAY].sort((a, b) => b - a);
+  const result = emptyAbilities(8);
+  if (!klass) {
+    ABILITY_SCORES.forEach((ability, i) => {
+      result[ability] = scores[i]!;
+    });
+    return result;
+  }
+
+  const assigned = new Set<AbilityScore>();
+  const priority: AbilityScore[] = [];
+  for (const primary of klass.primary_abilities) {
+    if (!assigned.has(primary)) {
+      priority.push(primary);
+      assigned.add(primary);
+    }
+  }
+  if (!assigned.has("constitution")) {
+    priority.push("constitution");
+    assigned.add("constitution");
+  }
+  for (const ability of ABILITY_SCORES) {
+    if (!assigned.has(ability)) {
+      priority.push(ability);
+      assigned.add(ability);
+    }
+  }
+  priority.forEach((ability, i) => {
+    result[ability] = scores[i]!;
+  });
+  return result;
 }
 
 export function createCharacter(draft: CharacterDraft): Character {
@@ -152,21 +243,42 @@ export function createCharacter(draft: CharacterDraft): Character {
     },
   ];
 
+  const racialTraits = collectTraitProficiencies(race, draft.subraceId);
+
   const skillProficiencies = mergeUnique(
     draft.skillProficiencies,
     backgroundSkills(draft),
+    racialTraits.skills,
   );
 
   const toolProficiencies = mergeUnique(
     draft.toolProficiencies,
     klass.proficiencies.tools,
     backgroundTools(draft),
+    racialTraits.tools,
+  );
+
+  const weaponProficiencies = mergeUnique(
+    draft.weaponProficiencies,
+    klass.proficiencies.weapons,
+    racialTraits.weapons,
   );
 
   const languageChoices = mergeUnique(
     race.languages,
     draft.languageChoices,
     draft.customBackground?.languages,
+  );
+
+  const racialCantrip =
+    typeof draft.otherChoices?.racialCantrip === "string"
+      ? draft.otherChoices.racialCantrip
+      : undefined;
+  const knownSpells = mergeUnique(draft.knownSpells, racialCantrip ? [racialCantrip] : []);
+
+  const inventory = mergeInventoryByName(
+    backgroundEquipmentItems(draft),
+    draft.inventory ?? [],
   );
 
   const now = new Date().toISOString();
@@ -190,6 +302,7 @@ export function createCharacter(draft: CharacterDraft): Character {
     skillProficiencies,
     expertise: draft.expertise ?? [],
     toolProficiencies,
+    weaponProficiencies,
     languageChoices,
     otherChoices: draft.otherChoices ?? {},
     feats: [],
@@ -201,9 +314,9 @@ export function createCharacter(draft: CharacterDraft): Character {
     armorEquipped: draft.armorEquipped,
     shieldEquipped: draft.shieldEquipped,
     weapons: draft.weapons ?? [],
-    inventory: backgroundInventory(draft),
+    inventory,
     spells: {
-      known: draft.knownSpells ?? [],
+      known: knownSpells,
       prepared: draft.preparedSpells ?? [],
       alwaysPrepared: [],
       slotsUsed: [0, 0, 0, 0, 0, 0, 0, 0, 0],

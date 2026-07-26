@@ -246,7 +246,7 @@
           {
             "id": "high-elf-cantrip",
             "name": "High Elf Cantrip",
-            "summary": "You know one cantrip of your choice form the wizard spell list. Intelligence is your spellcasting ability for it."
+            "summary": "You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it."
           },
           {
             "id": "extra-language",
@@ -254,6 +254,15 @@
             "summary": "You can speak, read, and write one extra language of your choice."
           }
         ],
+        "language_options": {
+          "choose": 1,
+          "options": "any"
+        },
+        "cantrip_options": {
+          "choose": 1,
+          "spell_list": "wizard",
+          "level": 0
+        },
         "source": "SRD 5.1 (2014)"
       }
     ],

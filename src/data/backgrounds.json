@@ -17,20 +17,31 @@
     },
     "equipment": [
       {
+        "name": "Prayer book (or prayer wheel)",
+        "quantity": 1
+      },
+      {
+        "name": "Incense",
+        "quantity": 5
+      },
+      {
+        "name": "Vestments",
+        "quantity": 1
+      },
+      {
         "name": "Clothes, common",
         "quantity": 1
       },
       {
-        "name": "Pouch",
+        "name": "Belt pouch",
+        "quantity": 1
+      },
+      {
+        "name": "Holy symbol",
         "quantity": 1
       }
     ],
-    "equipment_choices": [
-      {
-        "choose": 1,
-        "from_category": "Holy Symbols"
-      }
-    ],
+    "equipment_choices": null,
     "starting_gold": {
       "quantity": 15,
       "unit": "gp"

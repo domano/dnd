@@ -166,6 +166,64 @@
   font-size: 0.92rem;
 }
 
+.badge {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--brass) 45%, var(--line));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--brass) 12%, var(--paper-lift));
+  color: var(--ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.badgeWarn {
+  border-color: color-mix(in srgb, var(--danger) 40%, var(--line));
+  background: color-mix(in srgb, var(--danger) 10%, var(--paper-lift));
+  color: var(--danger);
+}
+
+.spellSection {
+  margin-top: 1rem;
+}
+
+.spellSection h3 {
+  font-size: 0.95rem;
+  margin: 0 0 0.6rem;
+}
+
+.prepareBudget {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.75rem;
+}
+
+.prepareBudget[data-over='true'] {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.langChip {
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--paper-deep) 40%, transparent);
+  font-size: 0.82rem;
+}
+
 .panelDelay1 { animation-delay: 40ms; }
 .panelDelay2 { animation-delay: 90ms; }
 .panelDelay3 { animation-delay: 140ms; }

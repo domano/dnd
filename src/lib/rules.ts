@@ -1,4 +1,11 @@
-import { getClass, getEquipment, getRace, getSubrace, reference } from "../data";
+import {
+  getClass,
+  getEquipment,
+  getRace,
+  getSubrace,
+  reference,
+  skills as allSkills,
+} from "../data";
 import type { AbilityKey, Character } from "../types/character";
 import {
   ABILITY_KEY_TO_SCORE,
@@ -688,4 +695,46 @@ export function abilityKeyToScore(key: AbilityKey): AbilityScore {
 
 export function abilityScoreToKey(score: AbilityScore): AbilityKey {
   return ABILITY_SCORE_TO_KEY[score];
+}
+
+/** Passive Perception = 10 + Wisdom (Perception) bonus. */
+export function passivePerception(character: Character): number {
+  const perception =
+    allSkills.find(
+      (s) =>
+        s.index === "perception" ||
+        s.name.toLowerCase() === "perception",
+    ) ?? null;
+  if (!perception) {
+    const scores = getFinalAbilityScores(character);
+    return 10 + abilityModifier(scores.wisdom);
+  }
+  return 10 + skillBonus(character, perception);
+}
+
+/**
+ * True when the character can gain Expertise (Rogue/Bard class features)
+ * or already has Expertise recorded.
+ */
+export function characterHasExpertise(character: Character): boolean {
+  if (character.expertise.length > 0) return true;
+  for (const cl of character.classLevels) {
+    if (cl.classId === "rogue" || cl.classId === "bard") return true;
+    const klass = getClass(cl.classId);
+    if (!klass) continue;
+    for (let lvl = 1; lvl <= cl.level; lvl++) {
+      const list = klass.features_by_level[String(lvl)] ?? [];
+      if (list.some((f) => f.name.toLowerCase() === "expertise")) {
+        return true;
+      }
+      if (cl.subclassId) {
+        const sub = klass.subclasses.find((s) => s.id === cl.subclassId);
+        const subList = sub?.features_by_level[String(lvl)] ?? [];
+        if (subList.some((f) => f.name.toLowerCase() === "expertise")) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
 }

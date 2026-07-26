@@ -104,6 +104,8 @@ export interface OtherChoices {
   draconicAncestry?: string;
   /** Half-elf (and similar) +1 choices beyond fixed racial bonuses */
   racialAbilityBonuses?: AbilityScore[];
+  /** High Elf (and similar) racial cantrip spell index */
+  racialCantrip?: string;
   [key: string]: unknown;
 }
 
@@ -128,6 +130,7 @@ export interface Character {
   skillProficiencies: string[];
   expertise: string[];
   toolProficiencies: string[];
+  weaponProficiencies: string[];
   languageChoices: string[];
   otherChoices: OtherChoices;
 
@@ -259,6 +262,7 @@ export function createEmptyCharacter(partial?: Partial<Character>): Character {
     skillProficiencies: partial?.skillProficiencies ?? [],
     expertise: partial?.expertise ?? [],
     toolProficiencies: partial?.toolProficiencies ?? [],
+    weaponProficiencies: partial?.weaponProficiencies ?? [],
     languageChoices: partial?.languageChoices ?? [],
     otherChoices: partial?.otherChoices ?? {},
     feats: partial?.feats ?? [],

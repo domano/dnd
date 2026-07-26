@@ -1,4 +1,4 @@
-import { useDeferredValue, useMemo, useState } from 'react';
+import { useDeferredValue, useEffect, useMemo, useState } from 'react';
 import type { Spell } from '../types/dnd';
 import { SPELL_CLASSES, SPELL_SCHOOLS, spells as defaultSpells } from '../data';
 import { BrowserShell } from './BrowserShell';
@@ -12,10 +12,20 @@ export interface SpellBrowserProps {
   /** Already-known spell indexes to mark / optionally hide. */
   knownIndexes?: string[];
   excludeKnown?: boolean;
+  /** Prefill the class filter (e.g. "Wizard"). */
+  defaultClass?: string;
 }
 
 function levelLabel(level: number): string {
   return level === 0 ? 'Cantrip' : `Level ${level}`;
+}
+
+function resolveClassFilter(value?: string): string {
+  if (!value) return 'any';
+  const match = SPELL_CLASSES.find(
+    (c) => c.toLowerCase() === value.toLowerCase(),
+  );
+  return match ?? 'any';
 }
 
 export function SpellBrowser({
@@ -25,13 +35,19 @@ export function SpellBrowser({
   spells = defaultSpells,
   knownIndexes = [],
   excludeKnown = false,
+  defaultClass,
 }: SpellBrowserProps) {
   const [query, setQuery] = useState('');
   const [level, setLevel] = useState<string>('any');
   const [school, setSchool] = useState('any');
-  const [klass, setKlass] = useState('any');
+  const [klass, setKlass] = useState(() => resolveClassFilter(defaultClass));
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
   const known = useMemo(() => new Set(knownIndexes), [knownIndexes]);
+
+  useEffect(() => {
+    if (!open) return;
+    setKlass(resolveClassFilter(defaultClass));
+  }, [open, defaultClass]);
 
   const filtered = useMemo(() => {
     return spells.filter((spell) => {
@@ -106,6 +122,11 @@ export function SpellBrowser({
       ) : (
         filtered.map((spell) => {
           const owned = known.has(spell.index);
+          const offList =
+            defaultClass != null &&
+            !spell.classes.some(
+              (c) => c.toLowerCase() === defaultClass.toLowerCase(),
+            );
           return (
             <button
               key={spell.index}
@@ -118,10 +139,15 @@ export function SpellBrowser({
             >
               <div className={styles.cardTitle}>
                 <span>{spell.name}</span>
-                <span className={styles.meta}>{owned ? 'Known' : 'Add'}</span>
+                <span className={styles.meta}>
+                  {owned ? 'Known' : 'Add'}
+                  {offList ? ' · Off-list' : ''}
+                </span>
               </div>
               <div className={styles.meta}>
-                {levelLabel(spell.level)} · {spell.school} · {spell.classes.join(', ')}
+                {levelLabel(spell.level)} · {spell.school}
+                {spell.ritual ? ' · Ritual' : ''} · {spell.classes.join(', ')}
+                {offList ? ' · Not on class list' : ''}
               </div>
               <p className={styles.desc}>{spell.description}</p>
             </button>

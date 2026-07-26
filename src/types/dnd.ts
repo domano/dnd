@@ -178,6 +178,12 @@ export interface LanguageOptions {
   options: string[] | "any";
 }
 
+export interface CantripOptions {
+  choose: number;
+  spell_list: string;
+  level: number;
+}
+
 export interface StringChoiceList {
   choose: number;
   options: string[];
@@ -262,6 +268,8 @@ export interface Subrace {
   summary: string;
   ability_bonuses: AbilityBonus[];
   traits: RacialTrait[];
+  language_options?: LanguageOptions;
+  cantrip_options?: CantripOptions;
   source: string;
 }
 

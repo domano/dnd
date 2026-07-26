@@ -177,7 +177,16 @@ export function LevelUpWizard({
     if (!open) return;
     setStepIndex(0);
     setError(null);
-    setSubclassId(primary?.subclassId);
+    let initialSubclass = primary?.subclassId;
+    if (
+      !initialSubclass &&
+      klass &&
+      needsSubclass &&
+      klass.subclasses.length === 1
+    ) {
+      initialSubclass = klass.subclasses[0]?.id;
+    }
+    setSubclassId(initialSubclass);
     setAsiMode("asi");
     setAsiSplit("plus2");
     setAsiA("strength");
@@ -189,7 +198,7 @@ export function LevelUpWizard({
     setNewPrepared([]);
     setHpMode("average");
     setHpRoll(null);
-  }, [open, character.id, primary?.subclassId]);
+  }, [open, character.id, primary?.subclassId, klass, needsSubclass]);
 
   useEffect(() => {
     if (!open) return;
@@ -204,6 +213,17 @@ export function LevelUpWizard({
       document.body.style.overflow = prev;
     };
   }, [open, onClose]);
+
+  const step = flowSteps[stepIndex] ?? "confirm";
+
+  useEffect(() => {
+    if (!open || !klass || !needsSubclass) return;
+    if (step !== "subclass") return;
+    if (subclassId) return;
+    if (klass.subclasses.length === 1) {
+      setSubclassId(klass.subclasses[0]?.id);
+    }
+  }, [open, step, klass, needsSubclass, subclassId]);
 
   if (!open || !primary || !klass) return null;
 
@@ -244,7 +264,6 @@ export function LevelUpWizard({
     );
   }
 
-  const step = flowSteps[stepIndex] ?? "confirm";
   const classFeatures = featuresAtLevel(klass.features_by_level, newLevel);
   const subclass =
     subclassId != null
@@ -253,6 +272,15 @@ export function LevelUpWizard({
   const subclassFeatures = subclass
     ? featuresAtLevel(subclass.features_by_level, newLevel)
     : [];
+
+  function futureSubclassLevels(sub: {
+    features_by_level: Record<string, FeatureSummary[]>;
+  }): number[] {
+    return Object.keys(sub.features_by_level)
+      .map(Number)
+      .filter((lvl) => lvl > newLevel)
+      .sort((a, b) => a - b);
+  }
 
   const scores = getFinalAbilityScores(character);
   const conMod = abilityModifier(scores.constitution);
@@ -514,24 +542,55 @@ export function LevelUpWizard({
             <>
               <p className={styles.lede}>
                 Level {klass.subclass_unlock_level} unlocks your subclass. Choose
-                one SRD option.
+                one SRD option
+                {klass.subclasses.length === 1
+                  ? " (pre-selected — only one SRD choice)."
+                  : "."}
               </p>
               <div className={styles.optionGrid}>
-                {klass.subclasses.map((sub) => (
-                  <button
-                    key={sub.id}
-                    type="button"
-                    className={styles.option}
-                    data-selected={subclassId === sub.id}
-                    onClick={() => setSubclassId(sub.id)}
-                  >
-                    <span className={styles.optionTitle}>
-                      {sub.flavor ? `${sub.flavor}: ` : ""}
-                      {sub.name}
-                    </span>
-                    <span className={styles.optionDesc}>{sub.summary}</span>
-                  </button>
-                ))}
+                {klass.subclasses.map((sub) => {
+                  const unlocks = featuresAtLevel(
+                    sub.features_by_level,
+                    newLevel,
+                  );
+                  const later = futureSubclassLevels(sub);
+                  const selected = subclassId === sub.id;
+                  return (
+                    <button
+                      key={sub.id}
+                      type="button"
+                      className={styles.option}
+                      data-selected={selected}
+                      aria-pressed={selected}
+                      onClick={() => {
+                        setSubclassId(sub.id);
+                        setError(null);
+                      }}
+                    >
+                      <span className={styles.optionTitle}>
+                        {sub.flavor ? `${sub.flavor}: ` : ""}
+                        {sub.name}
+                        {selected ? " ✓" : ""}
+                      </span>
+                      <span className={styles.optionDesc}>{sub.summary}</span>
+                      {unlocks.length > 0 ? (
+                        <span className={styles.optionFeatures}>
+                          <strong>At level {newLevel}:</strong>{" "}
+                          {unlocks.map((f) => f.name).join(" · ")}
+                        </span>
+                      ) : (
+                        <span className={styles.optionFeatures}>
+                          No named features unlock at level {newLevel}.
+                        </span>
+                      )}
+                      {later.length > 0 ? (
+                        <span className={styles.optionFuture}>
+                          Later features at levels {later.join(", ")}.
+                        </span>
+                      ) : null}
+                    </button>
+                  );
+                })}
               </div>
             </>
           )}
@@ -816,7 +875,12 @@ export function LevelUpWizard({
             <button type="button" className="btn btn-ghost" onClick={onClose}>
               Cancel
             </button>
-            <button type="button" className="btn btn-primary" onClick={goNext}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={goNext}
+              disabled={Boolean(validate())}
+            >
               {stepIndex >= flowSteps.length - 1 ? "Apply level up" : "Next"}
             </button>
           </div>

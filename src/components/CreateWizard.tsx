@@ -1,15 +1,17 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   classes,
   equipment,
   getBackground,
   getClass,
   getRace,
+  getSkill,
+  getSpellsForClass,
   races,
   skills,
 } from "../data";
 import {
-  defaultAbilitiesForMethod,
+  abilitiesForClass,
   type AbilityMethod,
   type CharacterDraft,
 } from "../lib/createCharacter";
@@ -30,7 +32,13 @@ import {
 } from "../lib/spellcasting";
 import { useCharacterStore } from "../store/characterStore";
 import type { AbilityScores, CustomBackground } from "../types/character";
-import type { AbilityScore, DnDClass, Spell } from "../types/dnd";
+import type {
+  AbilityScore,
+  DnDClass,
+  DnDRace,
+  LanguageOptions,
+  Spell,
+} from "../types/dnd";
 import { ABILITY_SCORES } from "../types/dnd";
 import styles from "./CreateWizard.module.css";
 
@@ -141,6 +149,61 @@ function classRelevantGear(klass: DnDClass) {
   return [...packs, ...armor.slice(0, 8), ...weapons.slice(0, 14)];
 }
 
+function defaultGearForClass(classId: string): string[] {
+  const picks: Record<string, string[]> = {
+    wizard: ["dagger", "component-pouch", "scholars-pack"],
+    fighter: ["chain-mail", "shield", "longsword", "explorers-pack"],
+  };
+  return (picks[classId] ?? []).filter((index) =>
+    equipment.some((e) => e.index === index),
+  );
+}
+
+function combinedLanguageOptions(
+  race: DnDRace | undefined,
+  subraceId?: string,
+): LanguageOptions | null {
+  if (!race) return null;
+  const subrace = subraceId
+    ? race.subraces.find((s) => s.id === subraceId)
+    : undefined;
+  const parts = [race.language_options, subrace?.language_options].filter(
+    (p): p is LanguageOptions => Boolean(p),
+  );
+  if (parts.length === 0) return null;
+  const choose = parts.reduce((sum, p) => sum + p.choose, 0);
+  if (parts.some((p) => p.options === "any")) {
+    return { choose, options: "any" };
+  }
+  const options = Array.from(
+    new Set(parts.flatMap((p) => (p.options === "any" ? [] : p.options))),
+  );
+  return { choose, options };
+}
+
+function racialTraitSkillNames(
+  race: DnDRace | undefined,
+  subraceId?: string,
+): string[] {
+  if (!race) return [];
+  const traits = [
+    ...race.traits,
+    ...(subraceId
+      ? (race.subraces.find((s) => s.id === subraceId)?.traits ?? [])
+      : []),
+  ];
+  const out: string[] = [];
+  for (const trait of traits) {
+    for (const prof of trait.proficiencies ?? []) {
+      const skill = getSkill(prof);
+      if (skill && !out.some((n) => n.toLowerCase() === skill.name.toLowerCase())) {
+        out.push(skill.name);
+      }
+    }
+  }
+  return out;
+}
+
 export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
   const create = useCharacterStore((s) => s.createCharacter);
 
@@ -160,6 +223,7 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
   >([]);
   const [racialSkills, setRacialSkills] = useState<string[]>([]);
   const [racialLanguages, setRacialLanguages] = useState<string[]>([]);
+  const [racialCantrip, setRacialCantrip] = useState<string | undefined>();
 
   // Class
   const [classId, setClassId] = useState(classes[0]?.id ?? "fighter");
@@ -180,8 +244,8 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
 
   // Abilities
   const [abilityMethod, setAbilityMethod] = useState<AbilityMethod>("standard");
-  const [abilities, setAbilities] = useState<AbilityScores>(
-    defaultAbilitiesForMethod("standard"),
+  const [abilities, setAbilities] = useState<AbilityScores>(() =>
+    abilitiesForClass(classes[0]?.id ?? "fighter", "standard"),
   );
 
   // Details
@@ -201,6 +265,31 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
   const race = getRace(raceId);
   const klass = getClass(classId);
   const background = getBackground("acolyte");
+  const selectedSubrace = race?.subraces.find((s) => s.id === subraceId);
+  const languageOptions = useMemo(
+    () => combinedLanguageOptions(race, subraceId),
+    [race, subraceId],
+  );
+  const traitSkills = useMemo(
+    () => racialTraitSkillNames(race, subraceId),
+    [race, subraceId],
+  );
+  const knownRaceLanguages = useMemo(() => {
+    const set = new Set(
+      [...(race?.languages ?? []), ...racialLanguages].map((l) =>
+        l.toLowerCase(),
+      ),
+    );
+    return set;
+  }, [race, racialLanguages]);
+
+  const racialCantripSpellOptions = useMemo(() => {
+    const opts = selectedSubrace?.cantrip_options;
+    if (!opts) return [] as Spell[];
+    return getSpellsForClass(opts.spell_list).filter(
+      (s) => s.level === opts.level,
+    );
+  }, [selectedSubrace]);
 
   const racialBonuses = useMemo(
     () => getRaceBonuses(raceId, subraceId),
@@ -227,6 +316,13 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
   }, [casterAtOne]);
 
   const currentStep = visibleSteps[stepIndex] ?? "identity";
+
+  useEffect(() => {
+    if (currentStep !== "details") return;
+    setSelectedGear((prev) =>
+      prev.length > 0 ? prev : defaultGearForClass(classId),
+    );
+  }, [currentStep, classId]);
 
   const spellLimits = useMemo(() => {
     if (!klass || !casterAtOne) {
@@ -287,6 +383,7 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
     setRacialAbilityBonuses([]);
     setRacialSkills([]);
     setRacialLanguages([]);
+    setRacialCantrip(undefined);
   }
 
   function resetClassExtras(nextClassId: string) {
@@ -301,11 +398,14 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
     setCantrips([]);
     setLevelSpells([]);
     setPreparedSpells([]);
+    if (abilityMethod === "standard" || abilityMethod === "pointBuy") {
+      setAbilities(abilitiesForClass(nextClassId, abilityMethod));
+    }
   }
 
   function setMethod(method: AbilityMethod) {
     setAbilityMethod(method);
-    setAbilities(defaultAbilitiesForMethod(method));
+    setAbilities(abilitiesForClass(classId, method));
   }
 
   function setAbility(ability: AbilityScore, value: number) {
@@ -358,10 +458,16 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
           return `Choose ${race.skill_choices.choose} racial skills.`;
         }
       }
-      if (race.language_options) {
-        const n = race.language_options.choose;
+      if (languageOptions) {
+        const n = languageOptions.choose;
         if (racialLanguages.length !== n) {
           return `Choose ${n} additional language${n === 1 ? "" : "s"}.`;
+        }
+      }
+      if (selectedSubrace?.cantrip_options) {
+        const n = selectedSubrace.cantrip_options.choose;
+        if (!racialCantrip) {
+          return `Choose ${n} racial cantrip${n === 1 ? "" : "s"}.`;
         }
       }
       return null;
@@ -537,8 +643,11 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
         ...(racialAbilityBonuses.length
           ? { racialAbilityBonuses }
           : {}),
+        ...(racialCantrip ? { racialCantrip } : {}),
       },
-      knownSpells,
+      knownSpells: racialCantrip
+        ? Array.from(new Set([...knownSpells, racialCantrip]))
+        : knownSpells,
       preparedSpells: prepared,
       inventory,
       armorEquipped,
@@ -726,7 +835,11 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
                           type="button"
                           className={styles.option}
                           data-selected={subraceId === s.id}
-                          onClick={() => setSubraceId(s.id)}
+                          onClick={() => {
+                            setSubraceId(s.id);
+                            setRacialLanguages([]);
+                            setRacialCantrip(undefined);
+                          }}
                         >
                           <span className={styles.optionTitle}>{s.name}</span>
                           <span className={styles.optionDesc}>{s.summary}</span>
@@ -827,38 +940,86 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
                   </div>
                 )}
 
-                {race.language_options && (
+                {languageOptions && (
                   <div>
                     <h3>
-                      Extra languages — choose {race.language_options.choose}
+                      Extra languages — choose {languageOptions.choose}
                     </h3>
                     <div className={styles.checkGrid} style={{ marginTop: "0.55rem" }}>
-                      {(race.language_options.options === "any"
+                      {(languageOptions.options === "any"
                         ? COMMON_LANGUAGES
-                        : race.language_options.options
-                      ).map((lang) => {
-                        const on = racialLanguages.includes(lang);
+                        : languageOptions.options
+                      )
+                        .filter(
+                          (lang) =>
+                            !(race.languages ?? []).some(
+                              (known) =>
+                                known.toLowerCase() === lang.toLowerCase(),
+                            ),
+                        )
+                        .map((lang) => {
+                          const on = racialLanguages.includes(lang);
+                          return (
+                            <label key={lang} className="checkbox">
+                              <input
+                                type="checkbox"
+                                checked={on}
+                                disabled={
+                                  !on &&
+                                  racialLanguages.length >=
+                                    languageOptions.choose
+                                }
+                                onChange={() =>
+                                  setRacialLanguages((prev) =>
+                                    toggleInList(
+                                      prev,
+                                      lang,
+                                      languageOptions.choose,
+                                    ),
+                                  )
+                                }
+                              />
+                              {lang}
+                            </label>
+                          );
+                        })}
+                    </div>
+                  </div>
+                )}
+
+                {selectedSubrace?.cantrip_options && (
+                  <div>
+                    <h3>
+                      Racial cantrip — choose{" "}
+                      {selectedSubrace.cantrip_options.choose}
+                    </h3>
+                    <p className={styles.hint} style={{ margin: "0.35rem 0 0.55rem" }}>
+                      From the {selectedSubrace.cantrip_options.spell_list}{" "}
+                      spell list. Intelligence is your spellcasting ability.
+                    </p>
+                    <div className={styles.spellList}>
+                      {racialCantripSpellOptions.map((spell) => {
+                        const on = racialCantrip === spell.index;
                         return (
-                          <label key={lang} className="checkbox">
+                          <label
+                            key={spell.index}
+                            className={styles.spellItem}
+                            data-selected={on}
+                          >
                             <input
-                              type="checkbox"
+                              type="radio"
+                              name="racial-cantrip"
                               checked={on}
-                              disabled={
-                                !on &&
-                                racialLanguages.length >=
-                                  race.language_options!.choose
-                              }
-                              onChange={() =>
-                                setRacialLanguages((prev) =>
-                                  toggleInList(
-                                    prev,
-                                    lang,
-                                    race.language_options!.choose,
-                                  ),
-                                )
-                              }
+                              onChange={() => setRacialCantrip(spell.index)}
                             />
-                            {lang}
+                            <span>
+                              <span className={styles.spellName}>
+                                {spell.name}
+                              </span>
+                              <div className={styles.spellMeta}>
+                                Cantrip · {spell.school}
+                              </div>
+                            </span>
                           </label>
                         );
                       })}
@@ -1069,27 +1230,29 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
                         {background.language_options?.choose ?? 2}
                       </h3>
                       <div className={styles.checkGrid} style={{ marginTop: "0.55rem" }}>
-                        {COMMON_LANGUAGES.filter((l) => l !== "Common").map(
-                          (lang) => {
-                            const on = bgLanguages.includes(lang);
-                            const max = background.language_options?.choose ?? 2;
-                            return (
-                              <label key={lang} className="checkbox">
-                                <input
-                                  type="checkbox"
-                                  checked={on}
-                                  disabled={!on && bgLanguages.length >= max}
-                                  onChange={() =>
-                                    setBgLanguages((prev) =>
-                                      toggleInList(prev, lang, max),
-                                    )
-                                  }
-                                />
-                                {lang}
-                              </label>
-                            );
-                          },
-                        )}
+                        {COMMON_LANGUAGES.filter(
+                          (l) =>
+                            l !== "Common" &&
+                            !knownRaceLanguages.has(l.toLowerCase()),
+                        ).map((lang) => {
+                          const on = bgLanguages.includes(lang);
+                          const max = background.language_options?.choose ?? 2;
+                          return (
+                            <label key={lang} className="checkbox">
+                              <input
+                                type="checkbox"
+                                checked={on}
+                                disabled={!on && bgLanguages.length >= max}
+                                onChange={() =>
+                                  setBgLanguages((prev) =>
+                                    toggleInList(prev, lang, max),
+                                  )
+                                }
+                              />
+                              {lang}
+                            </label>
+                          );
+                        })}
                       </div>
                     </div>
                   </>
@@ -1503,17 +1666,27 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
                       {[
                         ...classSkills,
                         ...racialSkills,
+                        ...traitSkills,
                         ...(backgroundMode === "acolyte"
                           ? (background?.skills ?? [])
                           : customBg.skills),
                       ].join(", ") || "—"}
                     </p>
                   </div>
-                  {casterAtOne && (
+                  {(casterAtOne || racialCantrip) && (
                     <div className={styles.summaryBlock}>
                       <h3>Spells</h3>
                       <p>
-                        Cantrips: {cantrips.length}
+                        {casterAtOne
+                          ? `Cantrips: ${cantrips.length}`
+                          : null}
+                        {racialCantrip
+                          ? `${casterAtOne ? " · " : ""}Racial: ${
+                              racialCantripSpellOptions.find(
+                                (s) => s.index === racialCantrip,
+                              )?.name ?? racialCantrip
+                            }`
+                          : ""}
                         {levelSpells.length
                           ? ` · Known/book: ${levelSpells.length}`
                           : ""}
