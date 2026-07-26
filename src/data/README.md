@@ -43,3 +43,4 @@ Types: `src/types/dnd.ts`.
 - Spellcasting preparation/ritual/list metadata is derived from SRD class rules.
 - Non-SRD classes, races, backgrounds, subclasses, and feats are excluded.
 - Magic items listed under equipment-category endpoints are filtered out.
+- Warlock `spell_slots` use `{ slot_level, slot_count }` (pact magic); other casters use `[L1…Ln]` counts per class level.
