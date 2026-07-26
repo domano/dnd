@@ -1768,7 +1768,16 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
                   ) : null}
                   <div className={styles.summaryBlock}>
                     <h3>Languages</h3>
-                    <p>{languageChoices.join(", ") || "—"}</p>
+                    <p>
+                      {[
+                        ...(race?.languages ?? []),
+                        ...racialLanguages,
+                        ...(backgroundMode === "acolyte" ? bgLanguages : []),
+                        ...(backgroundMode === "custom"
+                          ? (customBg.languages ?? [])
+                          : []),
+                      ].join(", ") || "—"}
+                    </p>
                   </div>
                   {(casterAtOne || racialCantrip) && (
                     <div className={styles.summaryBlock}>
