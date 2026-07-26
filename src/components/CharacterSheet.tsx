@@ -694,6 +694,10 @@ export function CharacterSheet({
             <h2>Saves & skills</h2>
           </div>
           <div className="panel-body">
+            <p className={styles.rulesHint}>
+              Tap a skill name or <strong>?</strong> to peek at what it is used for — no handbook
+              required.
+            </p>
             <SkillList
               character={character}
               skills={skills}
@@ -723,7 +727,7 @@ export function CharacterSheet({
 
         <section className={`panel anim-panel-slide ${styles.areaFeatures} ${styles.panelDelay4}`}>
           <div className="panel-header">
-            <h2>Features & traits</h2>
+            <h2>Boons & secrets</h2>
           </div>
           <div className="panel-body">
             <FeatureList features={features} />
@@ -801,7 +805,7 @@ export function CharacterSheet({
 
         <section className={`panel anim-panel-slide ${styles.areaEquipment}`}>
           <div className="panel-header">
-            <h2>Inventory</h2>
+            <h2>Satchel & spoils</h2>
             <button
               type="button"
               className="btn btn-sm btn-primary"
@@ -1130,7 +1134,7 @@ export function CharacterSheet({
 
         <section className={`panel anim-panel-slide ${styles.areaCampaign}`}>
           <div className="panel-header">
-            <h2>Campaign</h2>
+            <h2>Camp journal</h2>
           </div>
           <div className="panel-body">
             {(() => {
@@ -1479,7 +1483,7 @@ export function CharacterSheet({
 
         <section className={`panel anim-panel-slide ${styles.areaNotes}`}>
           <div className="panel-header">
-            <h2>Notes & personality</h2>
+            <h2>Heart & hearth</h2>
           </div>
           <div className="panel-body">
             <div className={styles.notesGrid}>

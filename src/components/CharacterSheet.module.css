@@ -3,6 +3,17 @@
   padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
 }
 
+.rulesHint {
+  margin: 0 0 0.75rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px dashed color-mix(in srgb, var(--brass) 40%, var(--line));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--brass) 10%, var(--paper-lift));
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
 .header {
   position: sticky;
   top: 0;

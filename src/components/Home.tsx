@@ -29,7 +29,8 @@ export function Home({
           <span className="flourish flourish-shimmer" aria-hidden="true" />
           <p className={styles.headline}>Ink your legend among the leaves.</p>
           <p className={styles.lede}>
-            Build, level, and play SRD 5.1 characters with spells, skills, and gear at hand.
+            A playful expedition ledger for SRD 5.1 — brew heroes, peek rules without the
+            handbook, and track loot, quests, and campfire tales all campaign long.
           </p>
           <div className={styles.ctaRow}>
             <button type="button" className="btn btn-primary" onClick={onCreateCharacter}>

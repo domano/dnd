@@ -275,15 +275,42 @@ img {
 }
 
 .panel {
+  position: relative;
   background:
     linear-gradient(
       165deg,
       color-mix(in srgb, var(--paper-lift) 96%, white) 0%,
       color-mix(in srgb, var(--moss-mist) 55%, var(--paper-lift)) 100%
     );
-  border: 1px solid color-mix(in srgb, var(--teal) 14%, var(--line));
+  border: 2px solid color-mix(in srgb, var(--brass) 34%, var(--line));
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-panel);
+  box-shadow:
+    var(--shadow-panel),
+    inset 0 0 0 1px color-mix(in srgb, var(--teal) 16%, transparent);
+  overflow: hidden;
+}
+
+.panel::before,
+.panel::after {
+  content: '❧';
+  position: absolute;
+  z-index: 1;
+  font-size: 0.85rem;
+  line-height: 1;
+  color: color-mix(in srgb, var(--brass) 72%, var(--ink));
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.panel::before {
+  top: 0.35rem;
+  left: 0.45rem;
+}
+
+.panel::after {
+  bottom: 0.35rem;
+  right: 0.45rem;
+  transform: rotate(180deg);
 }
 
 .panel-header {
@@ -292,19 +319,20 @@ img {
   justify-content: space-between;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
-  border-bottom: 1px solid color-mix(in srgb, var(--brass) 22%, var(--line));
+  border-bottom: 1px dashed color-mix(in srgb, var(--brass) 36%, var(--line));
   background:
     linear-gradient(
       90deg,
-      color-mix(in srgb, var(--brass) 8%, transparent),
-      transparent 55%
+      color-mix(in srgb, var(--brass) 14%, transparent),
+      color-mix(in srgb, var(--teal) 6%, transparent) 45%,
+      transparent 70%
     );
 }
 
 .panel-header h2,
 .panel-header h3 {
-  font-size: 1.05rem;
-  letter-spacing: 0.01em;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
   position: relative;
 }
 
@@ -312,7 +340,7 @@ img {
 .panel-header h3::after {
   content: '';
   display: block;
-  width: 2.4rem;
+  width: 2.8rem;
   height: 3px;
   margin-top: 0.28rem;
   border-radius: 999px;

@@ -93,8 +93,9 @@ export function SkillList({
                     aria-label={`Explain ${ABILITY_SCORE_SHORT[row.ability]} saving throw`}
                     aria-expanded={isOpen}
                     onClick={() => toggle(key)}
+                    title="Show rules"
                   >
-                    i
+                    ?
                   </button>
                   <span className={styles.bonus}>{formatModifier(row.modifier)}</span>
                 </div>
@@ -167,8 +168,9 @@ export function SkillList({
                   aria-label={`Explain ${row.name}`}
                   aria-expanded={isOpen}
                   onClick={() => toggle(key)}
+                  title="Show rules"
                 >
-                  i
+                  ?
                 </button>
               ) : (
                 <span />
