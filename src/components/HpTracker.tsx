@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import type { HitDiceState, HpState } from '../types/character';
 import styles from './HpTracker.module.css';
 
@@ -15,6 +16,19 @@ function clamp(n: number, min: number, max: number) {
 export function HpTracker({ hp, hitDice, onHpChange, onHitDiceChange }: HpTrackerProps) {
   const ratio = hp.max > 0 ? clamp(hp.current / hp.max, 0, 1) : 0;
   const low = ratio <= 0.25;
+  const mid = ratio <= 0.5;
+  const [flash, setFlash] = useState<'damage' | 'heal' | null>(null);
+  const currentHp = hp.current;
+  const prevHp = useRef(currentHp);
+
+  useEffect(() => {
+    if (prevHp.current === currentHp) return;
+    const nextFlash = currentHp < prevHp.current ? 'damage' : 'heal';
+    prevHp.current = currentHp;
+    setFlash(nextFlash);
+    const t = window.setTimeout(() => setFlash(null), 560);
+    return () => window.clearTimeout(t);
+  }, [currentHp]);
 
   return (
     <div className={styles.wrap}>
@@ -64,7 +78,8 @@ export function HpTracker({ hp, hitDice, onHpChange, onHitDiceChange }: HpTracke
 
       <div className={styles.barTrack} aria-hidden="true">
         <div
-          className={`${styles.barFill} ${low ? styles.barFillLow : ''}`}
+          className={`${styles.barFill} ${low ? styles.barFillLow : mid ? styles.barFillMid : ''}`}
+          data-flash={flash ?? undefined}
           style={{ width: `${ratio * 100}%` }}
         />
       </div>

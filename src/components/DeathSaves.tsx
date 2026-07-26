@@ -29,6 +29,7 @@ function PipRow({
               type="button"
               className={[
                 styles.pip,
+                'touch-target',
                 kind === 'success' ? styles.pipSuccess : styles.pipFail,
                 on
                   ? kind === 'success'

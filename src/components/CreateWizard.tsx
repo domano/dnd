@@ -247,6 +247,7 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
   const create = useCharacterStore((s) => s.createCharacter);
 
   const [stepIndex, setStepIndex] = useState(0);
+  const [stepDir, setStepDir] = useState<"forward" | "back">("forward");
   const [error, setError] = useState<string | null>(null);
 
   // Identity
@@ -602,11 +603,13 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
       return;
     }
     setError(null);
+    setStepDir("forward");
     setStepIndex((i) => Math.min(visibleSteps.length - 1, i + 1));
   }
 
   function goBack() {
     setError(null);
+    setStepDir("back");
     setStepIndex((i) => Math.max(0, i - 1));
   }
 
@@ -794,26 +797,35 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
           ) : null}
         </header>
 
-        <ol className={styles.progress} aria-label="Creation progress">
-          {visibleSteps.map((id, i) => (
-            <li
-              key={id}
-              className={styles.progressItem}
-              data-done={i < stepIndex}
-              data-current={i === stepIndex}
-            >
-              <div className={styles.progressBar}>
-                <div className={styles.progressBarFill} />
-              </div>
-              <span className={styles.progressLabel}>
-                {STEP_LABELS[STEP_IDS.indexOf(id)]}
-              </span>
-            </li>
-          ))}
-        </ol>
+        <div className={styles.progressWrap}>
+          <span className={styles.progressCounter}>
+            Step {stepIndex + 1} of {visibleSteps.length}
+          </span>
+          <ol className={styles.progress} aria-label="Creation progress">
+            {visibleSteps.map((id, i) => (
+              <li
+                key={id}
+                className={styles.progressItem}
+                data-done={i < stepIndex}
+                data-current={i === stepIndex}
+              >
+                <div className={styles.progressBar}>
+                  <div className={styles.progressBarFill} />
+                </div>
+                <span className={styles.progressLabel}>
+                  {STEP_LABELS[STEP_IDS.indexOf(id)]}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
 
         <section className={`panel ${styles.panel}`}>
-          <div className={`panel-body ${styles.panelBody}`}>
+          <div
+            key={`${currentStep}-${stepDir}`}
+            className={`panel-body ${styles.panelBody}`}
+            data-dir={stepDir}
+          >
             {currentStep === "identity" && (
               <>
                 <div>

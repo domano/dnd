@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type {
   Character,
   CharacterFeatRef,
@@ -58,6 +58,7 @@ import { SpellBrowser } from './SpellBrowser';
 import { EquipmentBrowser } from './EquipmentBrowser';
 import { FeatBrowser } from './FeatBrowser';
 import { Explainable } from './Explainable';
+import { useToast } from './Toast';
 import styles from './CharacterSheet.module.css';
 
 export interface CharacterSheetProps {
@@ -65,6 +66,7 @@ export interface CharacterSheetProps {
   character?: Character;
   onChange?: (update: CharacterUpdate) => void;
   onHome?: () => void;
+  /** @deprecated Unused — sheet edits happen in-place. Kept for call-site compatibility. */
   onEdit?: () => void;
   onLevelUp?: () => void;
   onShortRest?: () => void;
@@ -170,7 +172,7 @@ export function CharacterSheet({
   character: characterProp,
   onChange,
   onHome,
-  onEdit,
+  onEdit: _onEdit,
   onLevelUp,
   onShortRest,
   onLongRest,
@@ -191,9 +193,14 @@ export function CharacterSheet({
   const controlled = Boolean(characterProp && onChange);
   const character = characterProp ?? storeCharacter;
 
+  const toast = useToast();
+  const combatTrayRef = useRef<HTMLDivElement>(null);
+  const combatTriggerRef = useRef<HTMLButtonElement>(null);
   const [spellBrowserOpen, setSpellBrowserOpen] = useState(false);
   const [equipmentBrowserOpen, setEquipmentBrowserOpen] = useState(false);
   const [featBrowserOpen, setFeatBrowserOpen] = useState(false);
+  const [combatTrayOpen, setCombatTrayOpen] = useState(false);
+  const [restPulse, setRestPulse] = useState(false);
   const [expandedItemNotes, setExpandedItemNotes] = useState<string | null>(null);
   const [customItemName, setCustomItemName] = useState('');
   const [customItemQty, setCustomItemQty] = useState(1);
@@ -208,6 +215,48 @@ export function CharacterSheet({
     notes: '',
     status: 'active' as QuestEntry['status'],
   });
+
+  useEffect(() => {
+    if (!restPulse) return;
+    const t = window.setTimeout(() => setRestPulse(false), 920);
+    return () => window.clearTimeout(t);
+  }, [restPulse]);
+
+  useEffect(() => {
+    if (!combatTrayOpen) return;
+    const trayEl = combatTrayRef.current;
+    const triggerEl = combatTriggerRef.current;
+    const focusableSelector =
+      'button:not(:disabled), [href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])';
+    const first = trayEl?.querySelector<HTMLElement>(focusableSelector);
+    first?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setCombatTrayOpen(false);
+        return;
+      }
+      if (e.key !== 'Tab' || !trayEl) return;
+      const focusable = Array.from(
+        trayEl.querySelectorAll<HTMLElement>(focusableSelector),
+      ).filter((el) => !el.closest('[hidden]'));
+      if (focusable.length === 0) return;
+      const head = focusable[0];
+      const tail = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === head) {
+        e.preventDefault();
+        tail?.focus();
+      } else if (!e.shiftKey && document.activeElement === tail) {
+        e.preventDefault();
+        head?.focus();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      triggerEl?.focus();
+    };
+  }, [combatTrayOpen]);
 
   const derived = useMemo(() => {
     if (!character) return null;
@@ -399,6 +448,8 @@ export function CharacterSheet({
       return;
     }
     restStore('short');
+    setRestPulse(true);
+    toast.success('Short rest taken — pact slots refreshed');
   }
 
   function handleLongRest() {
@@ -407,6 +458,8 @@ export function CharacterSheet({
       return;
     }
     restStore('long');
+    setRestPulse(true);
+    toast.success('Long rest complete — HP and slots restored');
   }
 
   function handleAbilityChange(ability: (typeof ABILITY_SCORES)[number], nextFinal: number) {
@@ -612,13 +665,10 @@ export function CharacterSheet({
             Level Up
           </button>
           <button type="button" className="btn btn-sm" onClick={handleShortRest}>
-            Short Rest
+            Short
           </button>
           <button type="button" className="btn btn-sm" onClick={handleLongRest}>
-            Long Rest
-          </button>
-          <button type="button" className="btn btn-sm btn-ghost" onClick={onEdit}>
-            Edit
+            Long
           </button>
           <button type="button" className="btn btn-sm btn-ghost" onClick={onHome}>
             Home
@@ -1549,17 +1599,182 @@ export function CharacterSheet({
         </section>
       </div>
 
-      <div className={styles.combatBar} aria-label="Combat quick stats">
+      <button
+        type="button"
+        className={`${styles.combatTrayScrim} ${combatTrayOpen ? styles.combatTrayScrimOpen : ''}`}
+        aria-label="Close combat tray"
+        tabIndex={combatTrayOpen ? 0 : -1}
+        onClick={() => setCombatTrayOpen(false)}
+      />
+
+      <div
+        ref={combatTrayRef}
+        id="combat-tray"
+        className={`${styles.combatTray} ${combatTrayOpen ? styles.combatTrayOpen : ''}`}
+        role="dialog"
+        aria-modal={combatTrayOpen}
+        aria-label="Combat controls"
+        aria-hidden={!combatTrayOpen}
+      >
+        <div className={styles.combatTrayHandle} aria-hidden="true" />
+        <div className={styles.combatTrayHeader}>
+          <h2>Combat</h2>
+          <button
+            type="button"
+            className="btn btn-ghost btn-sm"
+            onClick={() => setCombatTrayOpen(false)}
+          >
+            Close
+          </button>
+        </div>
+        <div className={styles.combatTraySection}>
+          <h3>Hit points</h3>
+          <HpTracker
+            hp={character.hp}
+            hitDice={hitDice}
+            onHpChange={(hp) => patch({ hp })}
+            onHitDiceChange={(next) => {
+              const used = Math.max(0, next.max - next.current);
+              patch({ hitDiceUsed: used });
+            }}
+          />
+          <div className={styles.combatQuickHp}>
+            <button
+              type="button"
+              className="btn btn-sm btn-ghost"
+              onClick={() =>
+                patch({
+                  hp: {
+                    ...character.hp,
+                    current: Math.max(-999, character.hp.current - 5),
+                  },
+                })
+              }
+            >
+              −5
+            </button>
+            <button
+              type="button"
+              className="btn btn-sm btn-ghost"
+              onClick={() =>
+                patch({
+                  hp: {
+                    ...character.hp,
+                    current: Math.max(-999, character.hp.current - 1),
+                  },
+                })
+              }
+            >
+              −1
+            </button>
+            <button
+              type="button"
+              className="btn btn-sm btn-ghost"
+              onClick={() =>
+                patch({
+                  hp: {
+                    ...character.hp,
+                    current: Math.min(
+                      character.hp.max + character.hp.temp,
+                      character.hp.current + 1,
+                    ),
+                  },
+                })
+              }
+            >
+              +1
+            </button>
+            <button
+              type="button"
+              className="btn btn-sm btn-ghost"
+              onClick={() =>
+                patch({
+                  hp: {
+                    ...character.hp,
+                    current: Math.min(
+                      character.hp.max + character.hp.temp,
+                      character.hp.current + 5,
+                    ),
+                  },
+                })
+              }
+            >
+              +5
+            </button>
+            <button
+              type="button"
+              className="btn btn-sm"
+              onClick={() =>
+                patch({ hp: { ...character.hp, current: character.hp.max } })
+              }
+            >
+              Full heal
+            </button>
+          </div>
+        </div>
+        <div className={styles.combatTraySection}>
+          <h3>Death saves</h3>
+          <DeathSaves
+            value={character.deathSaves}
+            onChange={(deathSaves) => patch({ deathSaves })}
+          />
+        </div>
+        <div className={styles.combatTraySection}>
+          <h3>Spell slots</h3>
+          <SpellSlots
+            slots={slotState}
+            onChange={(next) => {
+              const slotsUsed = Array.from({ length: 9 }, (_, i) => next[i + 1]?.used ?? 0);
+              patch({
+                spells: { ...character.spells, slotsUsed },
+              });
+            }}
+          />
+        </div>
+      </div>
+
+      <div
+        className={`${styles.combatBar} ${restPulse ? 'anim-vine-pulse' : ''}`}
+        aria-label="Combat quick stats"
+      >
         <div className={styles.combatStat}>
           <span className={styles.combatLabel}>AC</span>
           <span className={styles.combatValue}>{ac}</span>
         </div>
-        <div className={styles.combatStat}>
-          <span className={styles.combatLabel}>HP</span>
+        <button
+          ref={combatTriggerRef}
+          type="button"
+          className={styles.combatHpCell}
+          aria-expanded={combatTrayOpen}
+          aria-controls="combat-tray"
+          onClick={() => setCombatTrayOpen((open) => !open)}
+        >
+          <span className={styles.combatLabel}>
+            HP <span className={styles.combatChevron} aria-hidden="true">▲</span>
+          </span>
           <span className={styles.combatValue}>
             {character.hp.current}/{character.hp.max}
           </span>
-        </div>
+          <span className={styles.combatHpBar} aria-hidden="true">
+            <span
+              className={styles.combatHpBarFill}
+              data-tier={
+                character.hp.max > 0 && character.hp.current / character.hp.max <= 0.25
+                  ? 'low'
+                  : character.hp.max > 0 && character.hp.current / character.hp.max <= 0.5
+                    ? 'mid'
+                    : 'ok'
+              }
+              style={{
+                width: `${
+                  character.hp.max > 0
+                    ? Math.min(100, Math.max(0, (character.hp.current / character.hp.max) * 100))
+                    : 0
+                }%`,
+              }}
+            />
+          </span>
+        </button>
         <div className={styles.combatStat}>
           <span className={styles.combatLabel}>Init</span>
           <span className={styles.combatValue}>{formatModifier(initiative)}</span>

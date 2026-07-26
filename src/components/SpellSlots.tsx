@@ -31,7 +31,7 @@ export function SpellSlots({ slots, onChange }: SpellSlotsProps) {
                   <button
                     key={i}
                     type="button"
-                    className={`${styles.pip} ${used ? styles.pipUsed : ''}`}
+                    className={`touch-target ${styles.pip} ${used ? styles.pipUsed : ''}`}
                     aria-pressed={used}
                     aria-label={`Slot ${i + 1}${used ? ' used' : ' available'}`}
                     onClick={() => {

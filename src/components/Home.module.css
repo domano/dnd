@@ -121,10 +121,29 @@
 }
 
 .ctaRow .btn {
-  min-width: 10.5rem;
+  min-width: min(10.5rem, 100%);
+  flex: 1 1 9rem;
 }
 
-@media (min-width: 900px) {
+@media (max-width: 479px) {
+  .ctaRow {
+    flex-direction: column;
+  }
+
+  .ctaRow .btn {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 599px) {
+  .ctaRow .btn {
+    min-width: 0;
+    flex: 1 1 7.5rem;
+  }
+}
+
+@media (min-width: 720px) {
   .hero {
     align-items: center;
     padding-left: clamp(2rem, 8vw, 6rem);
@@ -132,5 +151,9 @@
 
   .content {
     transform: translateY(-4vh);
+  }
+
+  .ctaRow .btn {
+    flex: 0 1 auto;
   }
 }

@@ -89,7 +89,7 @@ export function SkillList({
                   <span />
                   <button
                     type="button"
-                    className={styles.infoBtn}
+                    className={`${styles.infoBtn} touch-target`}
                     aria-label={`Explain ${ABILITY_SCORE_SHORT[row.ability]} saving throw`}
                     aria-expanded={isOpen}
                     onClick={() => toggle(key)}
@@ -164,7 +164,7 @@ export function SkillList({
               {description ? (
                 <button
                   type="button"
-                  className={styles.infoBtn}
+                  className={`${styles.infoBtn} touch-target`}
                   aria-label={`Explain ${row.name}`}
                   aria-expanded={isOpen}
                   onClick={() => toggle(key)}
