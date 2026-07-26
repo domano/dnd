@@ -294,9 +294,19 @@ export function Compendium({ onBack }: CompendiumProps) {
             </li>
           ))}
         </ul>
-        <article className={`panel ${styles.detail}`}>
+        <article
+          className={`panel ${styles.detail}`}
+          data-open={detail ? 'true' : undefined}
+        >
           {detail ? (
             <>
+              <button
+                type="button"
+                className={`btn btn-ghost btn-sm ${styles.detailBack}`}
+                onClick={() => setSelectedId(null)}
+              >
+                ← Back to list
+              </button>
               <div className="panel-header">
                 <h2>{detail.title}</h2>
               </div>

@@ -9,10 +9,10 @@
 
 .row {
   display: grid;
-  grid-template-columns: 1.1rem 2.4rem 1fr auto auto auto;
+  grid-template-columns: 1.25rem 2.4rem 1fr auto auto auto;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.28rem 0.15rem;
+  padding: 0.44rem 0.2rem;
   border-radius: var(--radius-sm);
 }
 
@@ -29,7 +29,9 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 0.15rem 0.35rem;
+  min-height: 2.2rem;
+  min-width: 2.2rem;
+  padding: 0.25rem 0.4rem;
   cursor: pointer;
   background: transparent;
   color: var(--ink-soft);
@@ -136,4 +138,36 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
+}
+
+@media (max-width: 479px) {
+  .row {
+    grid-template-columns: 1.25rem 1fr 2.75rem auto;
+  }
+
+  .ability {
+    display: none;
+  }
+
+  .infoBtn {
+    display: none;
+  }
+
+  .expOn,
+  .expOff {
+    font-size: 0;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border-radius: 50%;
+  }
+
+  .expOn::before {
+    content: '★';
+    font-size: 0.85rem;
+  }
+
+  .expOff::before {
+    content: '☆';
+    font-size: 0.85rem;
+  }
 }

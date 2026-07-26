@@ -1,4 +1,4 @@
-import { useEffect, useId, type ReactNode } from 'react';
+import { useEffect, useId, useRef, type ReactNode } from 'react';
 import styles from './BrowserShell.module.css';
 
 export interface BrowserShellProps {
@@ -11,6 +11,9 @@ export interface BrowserShellProps {
   children: ReactNode;
 }
 
+const FOCUSABLE =
+  'button:not(:disabled), [href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])';
+
 export function BrowserShell({
   title,
   subtitle,
@@ -21,18 +24,46 @@ export function BrowserShell({
   children,
 }: BrowserShellProps) {
   const titleId = useId();
+  const dialogId = `${titleId}-dialog`;
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!open) return;
+
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
+    const drawerEl = drawerRef.current;
+    const firstFocusable = drawerEl?.querySelector<HTMLElement>(FOCUSABLE);
+    firstFocusable?.focus();
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (e.key !== 'Tab' || !drawerEl) return;
+      const focusable = Array.from(drawerEl.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
+        (el) => !el.closest('[hidden]'),
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
     };
+
     window.addEventListener('keydown', onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => {
       window.removeEventListener('keydown', onKey);
       document.body.style.overflow = prev;
+      previouslyFocused.current?.focus?.();
     };
   }, [open, onClose]);
 
@@ -47,6 +78,8 @@ export function BrowserShell({
       }}
     >
       <div
+        ref={drawerRef}
+        id={dialogId}
         className={`${styles.drawer} anim-drawer-in`}
         role="dialog"
         aria-modal="true"

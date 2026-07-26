@@ -15,21 +15,28 @@ export interface AbilityBlockProps {
 export function AbilityBlock({ ability, score, onChange, readOnly }: AbilityBlockProps) {
   const mod = abilityModifier(score);
   const [pulse, setPulse] = useState(false);
+  const [modAnim, setModAnim] = useState<'bump' | 'dip' | null>(null);
   const prev = useRef(score);
 
   useEffect(() => {
-    if (prev.current !== score) {
-      prev.current = score;
-      setPulse(true);
-      const t = window.setTimeout(() => setPulse(false), 420);
-      return () => window.clearTimeout(t);
-    }
+    if (prev.current === score) return;
+    const nextAnim = score > prev.current ? 'bump' : 'dip';
+    prev.current = score;
+    setPulse(true);
+    setModAnim(nextAnim);
+    const t = window.setTimeout(() => setPulse(false), 420);
+    return () => window.clearTimeout(t);
   }, [score]);
 
   return (
     <div className={`${styles.block} ${pulse ? 'anim-score-pulse' : ''}`}>
       <span className={styles.label}>{ABILITY_SCORE_SHORT[ability]}</span>
-      <span className={styles.mod} aria-label={`${ABILITY_SCORE_SHORT[ability]} modifier`}>
+      <span
+        className={styles.mod}
+        data-anim={modAnim ?? undefined}
+        aria-label={`${ABILITY_SCORE_SHORT[ability]} modifier`}
+        onAnimationEnd={() => setModAnim(null)}
+      >
         {formatModifier(mod)}
       </span>
       {readOnly || !onChange ? (
