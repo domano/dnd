@@ -1,4 +1,5 @@
 import {
+  getBackground,
   getClass,
   getEquipment,
   getRace,
@@ -256,6 +257,14 @@ export function computeAC(
     if (!(hasUnarmoredDefense(character, "monk") && !wearingArmor)) {
       ac += 2;
     }
+  }
+
+  if (
+    wearingArmor &&
+    typeof character.otherChoices.fightingStyle === "string" &&
+    character.otherChoices.fightingStyle.toLowerCase() === "defense"
+  ) {
+    ac += 1;
   }
 
   return ac;
@@ -548,13 +557,24 @@ export function getFeaturesForCharacter(
   for (const cl of character.classLevels) {
     const klass = getClass(cl.classId);
     if (!klass) continue;
-    features.push(
-      ...featuresUpToLevel(
-        klass.features_by_level,
-        cl.level,
-        klass.name,
-      ),
-    );
+    const classFeatures = featuresUpToLevel(
+      klass.features_by_level,
+      cl.level,
+      klass.name,
+    ).map((f) => {
+      if (
+        f.name === "Fighting Style" &&
+        typeof character.otherChoices.fightingStyle === "string"
+      ) {
+        return {
+          ...f,
+          name: `Fighting Style: ${character.otherChoices.fightingStyle}`,
+          summary: `${f.summary} Chosen style: ${character.otherChoices.fightingStyle}.`,
+        };
+      }
+      return f;
+    });
+    features.push(...classFeatures);
     if (cl.subclassId) {
       const sub = klass.subclasses.find((s) => s.id === cl.subclassId);
       if (sub) {
@@ -569,22 +589,61 @@ export function getFeaturesForCharacter(
     }
   }
 
+  if (character.customBackground?.feature) {
+    features.push({
+      name: character.customBackground.feature.name,
+      summary: character.customBackground.feature.summary,
+      source: character.customBackground.name || "Background",
+      level: 1,
+    });
+  } else if (character.backgroundId) {
+    const bg = getBackground(character.backgroundId);
+    if (bg?.feature) {
+      features.push({
+        name: bg.feature.name,
+        summary: bg.feature.summary,
+        source: bg.name,
+        level: 1,
+      });
+    }
+  }
+
   return features;
+}
+
+/** Extra max HP per character level from racial traits (e.g. Dwarven Toughness). */
+export function racialHitPointBonusPerLevel(character: {
+  raceId: string;
+  subraceId?: string;
+}): number {
+  const race = getRace(character.raceId);
+  if (!race) return 0;
+  const traits = [
+    ...race.traits,
+    ...(character.subraceId
+      ? (getSubrace(character.raceId, character.subraceId)?.traits ?? [])
+      : []),
+  ];
+  if (traits.some((t) => t.id === "dwarven-toughness")) return 1;
+  return 0;
 }
 
 /**
  * Average HP for new characters:
  * 1st level = hit_die + CON
  * each additional level = (hit_die/2 + 1) + CON
+ * plus racial per-level bonuses (Dwarven Toughness, etc.)
  */
 export function getHitPointsAverage(
   classLevels: { classId: string; level: number }[],
   conMod: number,
+  racialPerLevel = 0,
 ): number {
   if (classLevels.length === 0) return 0;
 
   let hp = 0;
   let isFirstLevel = true;
+  let levelsCounted = 0;
 
   for (const cl of classLevels) {
     const klass = getClass(cl.classId);
@@ -599,10 +658,22 @@ export function getHitPointsAverage(
       } else {
         hp += avgPerLevel + conMod;
       }
+      levelsCounted += 1;
     }
   }
 
+  hp += racialPerLevel * levelsCounted;
   return Math.max(1, hp);
+}
+
+export function getCharacterMaxHp(character: Character): number {
+  const scores = getFinalAbilityScores(character);
+  const conMod = abilityModifier(scores.constitution);
+  return getHitPointsAverage(
+    character.classLevels,
+    conMod,
+    racialHitPointBonusPerLevel(character),
+  );
 }
 
 export function pointBuyCost(score: number): number {

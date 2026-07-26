@@ -13,6 +13,7 @@ import {
   abilityModifier,
   getFinalAbilityScores,
   getHitPointsAverage,
+  racialHitPointBonusPerLevel,
   STANDARD_ARRAY,
   validatePointBuy,
   xpForLevel,
@@ -276,9 +277,31 @@ export function createCharacter(draft: CharacterDraft): Character {
       : undefined;
   const knownSpells = mergeUnique(draft.knownSpells, racialCantrip ? [racialCantrip] : []);
 
+  const extras: Character["inventory"] = [];
+  if (draft.classId === "wizard") {
+    extras.push({ name: "Spellbook", quantity: 1 });
+  }
+  const bg = draft.customBackground
+    ? null
+    : draft.backgroundId
+      ? getBackground(draft.backgroundId)
+      : null;
+  const goldQty =
+    typeof bg?.starting_gold === "number"
+      ? bg.starting_gold
+      : bg?.starting_gold &&
+          typeof bg.starting_gold === "object" &&
+          "quantity" in bg.starting_gold
+        ? Number((bg.starting_gold as { quantity: number }).quantity)
+        : 0;
+  if (goldQty > 0) {
+    extras.push({ name: `${goldQty} gp`, quantity: 1 });
+  }
+
   const inventory = mergeInventoryByName(
     backgroundEquipmentItems(draft),
     draft.inventory ?? [],
+    extras,
   );
 
   const now = new Date().toISOString();
@@ -335,7 +358,14 @@ export function createCharacter(draft: CharacterDraft): Character {
 
   const scores = getFinalAbilityScores(character);
   const conMod = abilityModifier(scores.constitution);
-  const hpMax = getHitPointsAverage(classLevels, conMod);
+  const hpMax = getHitPointsAverage(
+    classLevels,
+    conMod,
+    racialHitPointBonusPerLevel({
+      raceId: draft.raceId,
+      subraceId: draft.subraceId,
+    }),
+  );
   character.hp = { max: hpMax, current: hpMax, temp: 0 };
 
   return character;

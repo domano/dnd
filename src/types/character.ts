@@ -106,6 +106,8 @@ export interface OtherChoices {
   racialAbilityBonuses?: AbilityScore[];
   /** High Elf (and similar) racial cantrip spell index */
   racialCantrip?: string;
+  /** Fighter / Paladin / Ranger fighting style choice */
+  fightingStyle?: string;
   [key: string]: unknown;
 }
 

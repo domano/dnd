@@ -73,6 +73,45 @@ const COMMON_LANGUAGES = [
   "Undercommon",
 ] as const;
 
+const FIGHTING_STYLES: { id: string; name: string; summary: string }[] = [
+  {
+    id: "archery",
+    name: "Archery",
+    summary: "You gain a +2 bonus to attack rolls you make with ranged weapons.",
+  },
+  {
+    id: "defense",
+    name: "Defense",
+    summary: "While you are wearing armor, you gain a +1 bonus to AC.",
+  },
+  {
+    id: "dueling",
+    name: "Dueling",
+    summary:
+      "When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.",
+  },
+  {
+    id: "great-weapon-fighting",
+    name: "Great Weapon Fighting",
+    summary:
+      "When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll.",
+  },
+  {
+    id: "protection",
+    name: "Protection",
+    summary:
+      "When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.",
+  },
+  {
+    id: "two-weapon-fighting",
+    name: "Two-Weapon Fighting",
+    summary:
+      "When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.",
+  },
+];
+
+const FIGHTING_STYLE_CLASSES = new Set(["fighter", "paladin", "ranger"]);
+
 const STEP_IDS = [
   "identity",
   "race",
@@ -229,6 +268,7 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
   const [classId, setClassId] = useState(classes[0]?.id ?? "fighter");
   const [subclassId, setSubclassId] = useState<string | undefined>();
   const [classSkills, setClassSkills] = useState<string[]>([]);
+  const [fightingStyle, setFightingStyle] = useState<string | undefined>();
 
   // Background
   const [backgroundMode, setBackgroundMode] = useState<"acolyte" | "custom">(
@@ -373,7 +413,10 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
     () => (klass ? classSpellList(klass) : []),
     [klass],
   );
-  const cantripOptions = classSpells.filter((s) => s.level === 0);
+  // Racial cantrips (e.g. High Elf) are granted in addition to class cantrips.
+  const cantripOptions = classSpells.filter(
+    (s) => s.level === 0 && s.index !== racialCantrip,
+  );
   const firstLevelOptions = classSpells.filter((s) => s.level === 1);
 
   function resetRaceExtras(nextRaceId: string) {
@@ -394,6 +437,7 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
         : undefined,
     );
     setClassSkills([]);
+    setFightingStyle(undefined);
     setSelectedGear([]);
     setCantrips([]);
     setLevelSpells([]);
@@ -481,6 +525,9 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
       if (klass.subclass_unlock_level <= 1 && !subclassId) {
         return "Choose a subclass.";
       }
+      if (FIGHTING_STYLE_CLASSES.has(klass.id) && !fightingStyle) {
+        return "Choose a Fighting Style.";
+      }
       return null;
     }
     if (step === "background") {
@@ -525,8 +572,11 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
       return null;
     }
     if (step === "spells" && klass && casterAtOne) {
-      if (cantrips.length !== spellLimits.cantrips) {
-        return `Choose ${spellLimits.cantrips} cantrips.`;
+      const classCantrips = cantrips.filter((c) => c !== racialCantrip);
+      if (classCantrips.length !== spellLimits.cantrips) {
+        return racialCantrip
+          ? `Choose ${spellLimits.cantrips} class cantrips (racial cantrip is separate).`
+          : `Choose ${spellLimits.cantrips} cantrips.`;
       }
       if (spellLimits.mode === "known" || spellLimits.mode === "spellbook") {
         if (levelSpells.length !== spellLimits.known) {
@@ -644,6 +694,7 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
           ? { racialAbilityBonuses }
           : {}),
         ...(racialCantrip ? { racialCantrip } : {}),
+        ...(fightingStyle ? { fightingStyle } : {}),
       },
       knownSpells: racialCantrip
         ? Array.from(new Set([...knownSpells, racialCantrip]))
@@ -1167,6 +1218,26 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
                   </div>
                 )}
 
+                {FIGHTING_STYLE_CLASSES.has(klass.id) && (
+                  <div>
+                    <h3>Fighting Style — choose 1</h3>
+                    <div className={styles.optionGrid} style={{ marginTop: "0.55rem" }}>
+                      {FIGHTING_STYLES.map((style) => (
+                        <button
+                          key={style.id}
+                          type="button"
+                          className={styles.option}
+                          data-selected={fightingStyle === style.name}
+                          onClick={() => setFightingStyle(style.name)}
+                        >
+                          <span className={styles.optionTitle}>{style.name}</span>
+                          <span className={styles.optionDesc}>{style.summary}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {(klass.features_by_level["1"] ?? []).length > 0 && (
                   <div className={styles.traitList}>
                     {(klass.features_by_level["1"] ?? []).map((f) => (
@@ -1554,16 +1625,32 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
                   </p>
                 </div>
 
+                {racialCantrip ? (
+                  <p className={styles.hint}>
+                    Racial cantrip already granted:{" "}
+                    <strong>
+                      {racialCantripSpellOptions.find(
+                        (s) => s.index === racialCantrip,
+                      )?.name ?? racialCantrip}
+                    </strong>
+                    . Pick {spellLimits.cantrips} additional class cantrips below.
+                  </p>
+                ) : null}
+
                 {spellLimits.cantrips > 0 &&
                   renderSpellPicker(
                     cantripOptions,
-                    cantrips,
+                    cantrips.filter((c) => c !== racialCantrip),
                     (index) =>
                       setCantrips((prev) =>
-                        toggleInList(prev, index, spellLimits.cantrips),
+                        toggleInList(
+                          prev.filter((c) => c !== racialCantrip),
+                          index,
+                          spellLimits.cantrips,
+                        ),
                       ),
                     spellLimits.cantrips,
-                    "Cantrips",
+                    racialCantrip ? "Class cantrips" : "Cantrips",
                   )}
 
                 {(spellLimits.mode === "known" ||
@@ -1672,6 +1759,16 @@ export function CreateWizard({ onCancel, onCreated }: CreateWizardProps) {
                           : customBg.skills),
                       ].join(", ") || "—"}
                     </p>
+                  </div>
+                  {fightingStyle ? (
+                    <div className={styles.summaryBlock}>
+                      <h3>Fighting Style</h3>
+                      <p>{fightingStyle}</p>
+                    </div>
+                  ) : null}
+                  <div className={styles.summaryBlock}>
+                    <h3>Languages</h3>
+                    <p>{languageChoices.join(", ") || "—"}</p>
                   </div>
                   {(casterAtOne || racialCantrip) && (
                     <div className={styles.summaryBlock}>

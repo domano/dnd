@@ -7,6 +7,7 @@ import {
   getFinalAbilityScores,
   getHitPointsAverage,
   getSpellSlots,
+  racialHitPointBonusPerLevel,
   totalLevel,
   xpForLevel,
 } from "../lib/rules";
@@ -343,14 +344,15 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
         const scores = getFinalAbilityScores({ ...c, classLevels });
         const conMod = abilityModifier(scores.constitution);
 
+        const racialHp = racialHitPointBonusPerLevel(c);
         let hpMax = c.hp.max;
         if (typeof patch?.hpRoll === "number") {
-          hpMax += patch.hpRoll + conMod;
+          hpMax += patch.hpRoll + conMod + racialHp;
         } else if (klass) {
           const avg = Math.floor(klass.hit_die / 2) + 1;
-          hpMax += avg + conMod;
+          hpMax += avg + conMod + racialHp;
         } else {
-          hpMax = getHitPointsAverage(classLevels, conMod);
+          hpMax = getHitPointsAverage(classLevels, conMod, racialHp);
         }
 
         let asiHistory = c.asiHistory;
