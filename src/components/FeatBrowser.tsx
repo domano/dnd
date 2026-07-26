@@ -2,7 +2,8 @@ import { useDeferredValue, useMemo, useState, type FormEvent } from 'react';
 import type { Feat } from '../types/dnd';
 import type { CharacterFeatRef } from '../types/character';
 import { feats as defaultFeats } from '../data';
-import { BrowserShell, browserStyles as styles } from './BrowserShell';
+import { BrowserShell } from './BrowserShell';
+import styles from './BrowserShell.module.css';
 
 export interface FeatBrowserProps {
   open: boolean;

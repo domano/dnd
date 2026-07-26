@@ -69,5 +69,4 @@ export function BrowserShell({
   );
 }
 
-export { styles as browserStyles };
 export default BrowserShell;

@@ -61,7 +61,7 @@ export function SkillList({
           <span className={styles.ability}>{ABILITY_SCORE_SHORT[row.ability]}</span>
           <span className={styles.name}>
             {row.name}
-            {row.expertise ? ' ★' : ''}
+            {row.expertise ? ' (expertise)' : ''}
           </span>
           <span className={styles.bonus}>{formatModifier(row.modifier)}</span>
         </label>

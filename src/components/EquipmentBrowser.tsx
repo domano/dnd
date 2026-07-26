@@ -5,7 +5,8 @@ import {
   EQUIPMENT_KINDS,
   equipment as defaultEquipment,
 } from '../data';
-import { BrowserShell, browserStyles as styles } from './BrowserShell';
+import { BrowserShell } from './BrowserShell';
+import styles from './BrowserShell.module.css';
 
 export interface EquipmentBrowserProps {
   open: boolean;

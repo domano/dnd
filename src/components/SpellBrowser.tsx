@@ -1,7 +1,8 @@
 import { useDeferredValue, useMemo, useState } from 'react';
 import type { Spell } from '../types/dnd';
 import { SPELL_CLASSES, SPELL_SCHOOLS, spells as defaultSpells } from '../data';
-import { BrowserShell, browserStyles as styles } from './BrowserShell';
+import { BrowserShell } from './BrowserShell';
+import styles from './BrowserShell.module.css';
 
 export interface SpellBrowserProps {
   open: boolean;
