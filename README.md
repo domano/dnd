@@ -1,32 +1,65 @@
-# React + TypeScript + Vite
+# SRD Ledger — D&D 5e 2014
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Ink-and-brass character sheet for the **D&D 5e SRD 5.1 (2014)** ruleset. Create adventurers, track combat and spells, level up, and keep expedition notes — all in the browser with local persistence.
 
-Currently, two official plugins are available:
+## SRD 5.1 scope
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This app uses **SRD 5.1 only** (the 2014 System Reference Document). That means:
 
-## React Compiler
+- **12 classes** with SRD subclasses (e.g. Berserker, Life Domain, Evocation)
+- **9 races** (+ subraces) from the SRD
+- **1 background** in the SRD (Acolyte), plus a custom-background path in the creation wizard
+- **1 feat** in the SRD (Grappler), plus custom feats when leveling
+- Spells, skills, conditions, and common equipment from the SRD
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Non-SRD subclasses, races, backgrounds, feats, and magic items are out of scope.
 
-## Expanding the Oxlint configuration
+## How to run
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Open the URL Vite prints (usually `http://localhost:5173`).
+
+| Script | Purpose |
+|--------|---------|
+| `npm run dev` | Local development server |
+| `npm run build` | Typecheck + production build |
+| `npm run preview` | Serve the production build |
+| `npm run lint` | Oxlint |
+
+Characters are saved in **localStorage** on this device.
+
+## Features
+
+- **Home** — Create Character or Open Saved
+- **Creation wizard** — Identity → Race → Class → Background → Abilities → Details → Spells (casters) → Review
+  - Ability methods: Standard Array, Point Buy (27), Manual
+  - Spell step respects known / prepared / spellbook rules at level 1
+- **Character sheet** — abilities, combat (AC, HP, death saves), skills, features, spells, equipment, feats, notes
+- **Level-up wizard** — new features, subclass unlock, ASI or feat, spell progression, average or rolled HP
+- **Rests** — short rest (pact slots) and long rest (HP, slots, hit dice recovery)
+
+## Data sources
+
+Compact JSON under `src/data/`, typed in `src/types/dnd.ts`.
+
+| Source | Role |
+|--------|------|
+| [dnd5eapi.co `/api/2014/`](https://www.dnd5eapi.co/api/2014/) | Primary SRD content |
+| [Open5e](https://api.open5e.com/) (SRD 2014 filters) | Cross-check for classes/races/backgrounds |
+
+Rebuild helpers (optional):
+
+```bash
+python3 scripts/build-srd-data.py
+python3 scripts/fetch_srd_data.py
+```
+
+See `src/data/README.md` for file-by-file notes.
+
+## Stack
+
+React 19 · TypeScript · Vite · Zustand · CSS modules (Fraunces + Figtree, ink/brass/teal theme)

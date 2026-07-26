@@ -9,7 +9,7 @@ export interface HomeProps {
 export function Home({
   onCreateCharacter,
   onOpenSaved,
-  brandName = 'AETHER LEDGER',
+  brandName = 'SRD LEDGER',
 }: HomeProps) {
   const [lead, ...rest] = brandName.split(' ');
   const trail = rest.join(' ');
